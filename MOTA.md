@@ -1,8 +1,9 @@
 # 📚 Hệ Thống Thời Khóa Biểu Tự Động
 ## Trường Tiểu Học Nguyễn An Khương — Năm Học 2026-2027
 
-> **Phiên bản:** V2.7 — Ngày cập nhật: 22/08/2026  
-> **Artifact:** https://claude.ai/code/artifact/8552c45d-c843-4f04-aa02-ac0ed341b2b6
+> **Phiên bản:** V2.8 — Ngày cập nhật: 22/08/2026  
+> **Artifact:** https://claude.ai/code/artifact/8552c45d-c843-4f04-aa02-ac0ed341b2b6  
+> **GitHub:** https://github.com/hcmtranle/tkb20262027hoanchinh
 
 ---
 
@@ -10,10 +11,11 @@
 
 ```
 Dự án TKB mới/
+├── index.html             ← Bản sao của tkb-full-v2.html, dùng cho GitHub Pages
 ├── tkb-full-v2.html       ← File chính — mở trình duyệt là dùng ngay (~160KB)
 ├── initial_schedule.json  ← Dữ liệu TKB gốc 29 lớp (nhúng sẵn trong HTML)
 ├── MOTA.md                ← Tài liệu mô tả dự án (file này)
-├── .gitignore             ← Chuẩn bị đồng bộ GitHub
+├── .gitignore             ← Loại trừ desktop.ini, .claude/ khỏi git
 └── link.txt               ← Link artifact Claude
 ```
 
@@ -68,6 +70,17 @@ https://claude.ai/code/artifact/8552c45d-c843-4f04-aa02-ac0ed341b2b6
 | Tổng quan | 29 lớp × 40 tiết/tuần |
 | Lọc khối | Xem từng khối riêng |
 | Tìm kiếm | Tìm theo lớp/GVCN |
+
+### 🛡️ Kiểm Định Quy Tắc (mới — v2.8)
+| Tính năng | Mô tả |
+|-----------|-------|
+| Phát hiện trùng tiết | Tự động quét toàn trường tìm GV bị xếp dạy ≥2 lớp cùng lúc |
+| Loại trừ hợp lệ | Chào cờ (HĐTN(CC)) — TPT phụ trách 29 lớp cùng lúc → **không** tính là lỗi |
+| Banner cảnh báo | Hiện ở đầu bảng Tab 2 khi GV đang xem có tiết trùng, liệt kê rõ Thứ/Tiết/Lớp |
+| Ô trùng tiết | Viền đỏ + nhãn "⚠️ TRÙNG TIẾT!" ngay trên bảng lịch GV |
+| Kiểm tra khi Lưu | Mỗi lần Lưu/Xóa 1 tiết → tự chạy kiểm định toàn trường |
+| Bong bóng kết quả | ✅ Toast xanh "Dữ liệu ĐÚNG quy tắc" nếu sạch, hoặc modal đỏ liệt kê từng lỗi nếu có |
+| Đồng bộ GV bộ môn | Sửa 1 tiết ở Tab 1 → nếu đang mở Tab 2 sẽ tự render lại ngay, không cần F5 |
 
 ---
 
@@ -215,6 +228,7 @@ tkb-full-v2.html (~160KB, standalone — không cần CDN, npm, build)
 | v2.5 | 2026-08-22 | **Fix:** INITIAL_SCHEDULE load (`.schedule` → flat map) |
 | v2.6 | 2026-08-22 | **Fix:** Nút Sửa Nhanh luôn hiện, auto-open login |
 | v2.7 | 2026-08-22 | **Fix:** Header 2 cột căn giữa, rowspan SÁNG/CHIỀU đúng, colspan break đúng |
+| v2.8 | 2026-08-22 | **Thêm:** Phát hiện trùng tiết GV, Kiểm định quy tắc khi lưu (toast/modal), đồng bộ GV bộ môn tức thời. Đồng bộ GitHub lần đầu. |
 
 ---
 
