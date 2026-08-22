@@ -1426,64 +1426,34 @@ async function downloadFile(filename, content, mimeType) {
   }
 }
 
-// In / Xuất PDF bằng cách MỞ CỬA SỔ MỚI rồi in từ đó — không gọi window.print()
-// ngay trên trang Artifact, vì Artifact chạy trong iframe có thể chặn hộp thoại in
-// (bấm nút không có phản ứng gì). Mở cửa sổ mới đảm bảo lệnh in luôn hoạt động.
+// In / Xuất PDF — in TRỰC TIẾP trên trang hiện tại (không mở cửa sổ mới).
+// Đã thử cách mở cửa sổ mới (window.open) nhưng bị chặn ngay ở tầng khung
+// chứa Artifact (không phải do trình duyệt chặn pop-up) -> quay lại cách
+// gọi window.print() trực tiếp, dựa vào khối @media print đã tối ưu sẵn
+// (ẩn header/nav/nút bấm, gọn trong 1 trang A4 ngang, xem phần CSS phía trên).
+// Luôn hiển thị rõ hướng dẫn Ctrl+P làm phương án dự phòng chắc chắn hoạt
+// động — đây là phím tắt của trình duyệt, không trang web nào chặn được.
 function exportPDF() {
   const teacherPane = document.getElementById('view-teacher');
-  const classPane = document.getElementById('view-class');
   const isTeacherView = teacherPane && !teacherPane.classList.contains('hidden');
-  const activePane = isTeacherView ? teacherPane : classPane;
 
-  if (!activePane) { showToast('⚠️ Không tìm thấy nội dung để in!', 3000, 'warn'); return; }
-
+  const prevTitle = document.title;
   let suggestedName = 'TKB_Lop_' + selectedClass;
   if (isTeacherView) {
     const t = TEACHERS_CONFIG[selectedTeacherId];
     suggestedName = 'TKB_GV_' + (t ? t.name.replace(/\s+/g, '_') : 'GiaoVien');
   }
+  document.title = suggestedName; // gợi ý tên file khi chọn "Save as PDF"
 
-  // Sao chép toàn bộ CSS của trang hiện tại (kể cả khối @media print đã tối ưu
-  // gọn 1 trang A4 ngang) sang cửa sổ mới để giữ đúng màu sắc/định dạng.
-  const styleContent = document.querySelector('style')?.textContent || '';
-  const bodyHtml = activePane.outerHTML;
-
-  const printDoc = `<!DOCTYPE html>
-<html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>${suggestedName}</title>
-<style>
-body{background:#f1f5f9;margin:0;padding:16px;}
-${styleContent}
-.print-preview-notice{background:#eff6ff;color:#1d4ed8;padding:10px 16px;margin-bottom:12px;border-radius:8px;font-size:13px;font-weight:700;text-align:center;}
-@media print{ .print-preview-notice{display:none!important;} }
-</style>
-</head>
-<body>
-<div class="print-preview-notice">🖨️ Cửa sổ xem trước để In / Xuất PDF — hộp thoại in sẽ tự mở sau giây lát. Nếu không thấy, bấm Ctrl+P (hoặc Cmd+P trên Mac).</div>
-${bodyHtml}
-</body>
-</html>`;
-
-  const win = window.open('', '_blank');
-  if (!win) {
-    showToast('⚠️ Trình duyệt đã chặn cửa sổ In! Vui lòng cho phép Pop-up cho trang này rồi bấm lại nút In.', 5500, 'warn');
-    return;
-  }
-
-  win.document.open();
-  win.document.write(printDoc);
-  win.document.close();
-  win.document.title = suggestedName;
-
-  showToast('🖨️ Đang mở cửa sổ In / Xuất PDF (A4 ngang, gọn 1 trang)...', 3000, 'ok');
+  showToast('🖨️ Đang mở hộp thoại In... Nếu KHÔNG thấy hộp thoại, thầy bấm Ctrl+P (Cmd+P trên Mac) để in trang này nhé!', 5000, 'ok');
 
   setTimeout(() => {
-    try { win.focus(); win.print(); }
-    catch (e) { /* Nếu tự động in thất bại, người dùng vẫn có thể tự bấm Ctrl+P trong cửa sổ vừa mở */ }
-  }, 500);
+    try { window.print(); }
+    catch (e) {
+      showToast('⚠️ Không tự mở được hộp thoại in. Thầy bấm Ctrl+P (Cmd+P trên Mac) ngay trên trang này để in nhé!', 6000, 'warn');
+    }
+    setTimeout(() => { document.title = prevTitle; }, 1000);
+  }, 300);
 }
 
 function saveTKB() { saveSchedule(); }

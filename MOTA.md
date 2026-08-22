@@ -232,6 +232,7 @@ tkb-full-v2.html (~160KB, standalone — không cần CDN, npm, build)
 | v2.9 | 2026-08-22 | **Fix:** In/Xuất PDF gọn 1 trang A4 ngang, bỏ ghi chú chữ ký |
 | v3.0 | 2026-08-22 | **Fix nghiêm trọng:** Bảng "Xem Theo Giáo Viên" trống với **mọi** GV do so khớp sai `teacher_name` (dữ liệu lưu tên ngắn, code so tên đầy đủ) — sửa lại so khớp qua `teacher_id` (chính xác 1-1, 1100/1100 ô đã kiểm chứng). **Fix nút In:** chuyển từ `window.print()` gọi trực tiếp (bị chặn trong iframe Artifact, không phản ứng) sang mở cửa sổ mới rồi in — đảm bảo hoạt động ổn định. |
 | v3.1 | 2026-08-22 | **Fix:** Nút "Tải File Nén (.zip)" xuất JSON không tải được gì (Claude Artifact chặn tải file kiểu `<a download>` truyền thống). Chuyển sang dùng API `downloads` chính thức của Claude (`window.claude.use('downloads')`) khi chạy trong Artifact, tự động rơi về cách tải truyền thống khi chạy trên Netlify/local — hoạt động đúng ở cả 2 môi trường. |
+| v3.2 | 2026-08-22 | **Fix nút In (lần 2):** Cách "mở cửa sổ mới rồi in" (v3.0) bị chặn ngay ở tầng khung Artifact (`window.open()` trả về `null`) — không phải trình duyệt chặn pop-up. Quay lại gọi `window.print()` trực tiếp trên trang hiện tại (dựa vào `@media print` đã tối ưu sẵn từ v2.9), kèm hướng dẫn rõ ràng bấm **Ctrl+P / Cmd+P** làm phương án dự phòng luôn hoạt động (phím tắt trình duyệt, không trang web nào chặn được). |
 
 ---
 
