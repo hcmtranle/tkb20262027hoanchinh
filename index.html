@@ -211,6 +211,76 @@ footer strong{color:#475569;}
   .sched-header .class-meta{flex-direction:column;gap:4px;}
   .sigs{grid-template-columns:1fr 1fr;}
 }
+
+/* ============= PRINT / XUẤT PDF — gọn trong 1 mặt giấy A4 ngang ============= */
+@page{ size:A4 landscape; margin:8mm; }
+@media print{
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important;}
+  html,body{background:#fff!important;margin:0!important;padding:0!important;}
+
+  /* Ẩn toàn bộ khung điều hướng, nút bấm, thông báo — chỉ in nội dung TKB */
+  header,nav,footer,.ctrl-bar,.edit-hint,.toast,.modal-backdrop,
+  .toolbar,.teacher-filter-row,.teacher-sel-wrap,.master-search,
+  button,select{display:none!important;}
+  .conflict-banner{padding:4px 8px!important;margin:0 0 3mm!important;font-size:8px!important;}
+  .conflict-banner .cb-title{font-size:8.5px!important;margin-bottom:2px!important;}
+
+  main{margin:0!important;padding:0!important;max-width:100%!important;}
+
+  /* Bỏ khung/đổ bóng thẻ để tiết kiệm diện tích trang in */
+  .sched-wrap,.stats-wrap,.legend-wrap,.teacher-tbl-wrap,.master-tbl-wrap{
+    box-shadow:none!important;border:none!important;border-radius:0!important;
+    padding:0!important;margin:0 0 3mm 0!important;page-break-inside:avoid;
+  }
+
+  /* Header trường — thu gọn */
+  .sched-hdr-top{margin-bottom:4px!important;}
+  .sched-header .admin-header{font-size:8px!important;}
+  .sched-header .school-name{font-size:12px!important;margin:2px 0!important;}
+  .sched-header .school-meta{font-size:8px!important;}
+  .sched-hdr-right{font-size:8px!important;}
+  .sched-hdr-right .chxhcnvn{font-size:9px!important;}
+  .sched-header .class-title{font-size:14px!important;margin:4px 0 3px!important;}
+  .sched-header .class-meta{font-size:9px!important;gap:8px!important;}
+
+  /* Bảng TKB / bảng GV — font nhỏ, đệm mỏng để vừa 1 trang */
+  table{font-size:8px!important;}
+  th{padding:3px 2px!important;font-size:8px!important;}
+  .th-day .day-name{font-size:9px!important;}
+  .th-day .day-full{font-size:7px!important;}
+  td.td-period{font-size:8px!important;padding:2px!important;}
+  td.td-time{font-size:7px!important;padding:2px!important;}
+  td.td-break{font-size:7px!important;padding:2px!important;}
+  td.td-session .sess-text{font-size:8px!important;letter-spacing:1px!important;}
+  td.td-cell{padding:1px!important;}
+  .cell-inner{padding:2px 3px!important;min-height:auto!important;border-radius:4px!important;gap:2px!important;}
+  .cell-icon{font-size:9px!important;}
+  .cell-text{font-size:7.5px!important;line-height:1.15!important;}
+  .cell-text div{font-size:6.5px!important;}
+  .cell-custom-badge,.conflict-tag{display:none!important;}
+
+  /* Thống kê — dồn gọn thành hàng nhỏ
+     (các span này được JS render với inline style nên phải !important để ghi đè) */
+  .stats-wrap{padding:2mm 0!important;}
+  .stats-wrap h4{font-size:9px!important;margin-bottom:3px!important;}
+  #statsChips span{padding:1px 6px!important;font-size:7.5px!important;margin:1px!important;}
+  .stats-total{font-size:8px!important;margin-top:3px!important;}
+
+  /* Chỉ in ĐÚNG 1 trang thông tin của lớp/GV đang xem: Header + Bảng + Thống kê + Chữ ký.
+     Bảng Mã Màu (chú thích chung, không riêng lớp nào) KHÔNG in để tránh tràn trang. */
+  .legend-wrap{display:none!important;}
+
+  /* Chữ ký — thu gọn khoảng trắng ký tên */
+  .sigs{margin-top:6mm!important;gap:12px!important;}
+  .sig-title{font-size:9px!important;margin-bottom:14mm!important;}
+  .sig-name{font-size:11px!important;}
+
+  /* Bảng ma trận toàn trường / bảng GV báo giảng */
+  .master-tbl th,.master-tbl td{padding:2px!important;font-size:7px!important;}
+  .teacher-tbl-header{padding:4px 0!important;background:none!important;color:#1e293b!important;}
+  .teacher-tbl-header h3{font-size:12px!important;}
+  .teacher-tbl-header p{font-size:8px!important;color:#475569!important;}
+}
 </style>
 <!-- BODY HTML -->
 <header>
@@ -322,11 +392,11 @@ footer strong{color:#475569;}
     <div class="sched-wrap" style="margin-top:16px;">
       <div class="sigs">
         <div class="sig-box">
-          <div class="sig-title">HIỆU TRƯỞNG PHÊ DUYỆT<div class="sig-sub">(Ký và đóng dấu)</div></div>
+          <div class="sig-title">HIỆU TRƯỞNG</div>
           <div class="sig-name">Hồ Thị Ngọc Diễm</div>
         </div>
         <div class="sig-box">
-          <div class="sig-title">GIÁO VIÊN CHỦ NHIỆM<div class="sig-sub">(Ký và ghi rõ họ tên)</div></div>
+          <div class="sig-title">GIÁO VIÊN CHỦ NHIỆM</div>
           <div class="sig-name" id="sigGVCN">Trần Thị Diễm Linh</div>
         </div>
       </div>
@@ -1294,8 +1364,22 @@ function exportJSON() {
 }
 
 function exportPDF() {
-  showToast('🖨️ Đang chuẩn bị in...');
-  setTimeout(() => window.print(), 500);
+  // Đặt tên file gợi ý khi lưu "Save as PDF" từ hộp thoại in của trình duyệt
+  const prevTitle = document.title;
+  const teacherPane = document.getElementById('view-teacher');
+  const isTeacherView = teacherPane && !teacherPane.classList.contains('hidden');
+  let suggestedName = 'TKB_Lop_' + selectedClass;
+  if (isTeacherView) {
+    const t = TEACHERS_CONFIG[selectedTeacherId];
+    suggestedName = 'TKB_GV_' + (t ? t.name.replace(/\s+/g, '_') : 'GiaoVien');
+  }
+  document.title = suggestedName;
+
+  showToast('🖨️ Đang chuẩn bị in / xuất PDF (A4 ngang, gọn 1 trang)...');
+  setTimeout(() => {
+    window.print();
+    document.title = prevTitle;
+  }, 400);
 }
 
 function saveTKB() { saveSchedule(); }
