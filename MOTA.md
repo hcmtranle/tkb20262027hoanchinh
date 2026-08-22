@@ -232,6 +232,58 @@ tkb-full-v2.html (~160KB, standalone — không cần CDN, npm, build)
 
 ---
 
+## 🔄 Quy Trình Cập Nhật Dữ Liệu (sau khi Thầy sửa trên Artifact)
+
+Artifact chạy hoàn toàn phía trình duyệt (client-side) — mọi thay đổi qua
+**"✏️ Bật Sửa Nhanh Từng Tiết"** chỉ lưu vào `localStorage` của trình duyệt đó,
+**KHÔNG** tự động lên GitHub (vì lý do bảo mật, không thể nhúng token GitHub
+vào file HTML công khai).
+
+### ✅ Cách 1 — Nhờ Claude cập nhật (khuyên dùng)
+```
+1. Sửa TKB trên Artifact như bình thường (Sửa Nhanh Từng Tiết)
+2. Bấm nút "📦 Tải File Nén (.zip)" → trình duyệt tải về 1 file .json
+3. Gửi file .json đó cho Claude trong khung chat
+4. Claude sẽ:
+   a. Lấy phần "schedule" trong file gửi lên
+   b. Cập nhật vào initial_schedule.json (thư mục dự án)
+   c. Cập nhật vào biến INITIAL_SCHEDULE trong tkb-full-v2.html / index.html
+   d. git commit + git push lên GitHub
+   e. Publish lại Artifact với dữ liệu mới
+```
+
+### 🛠️ Cách 2 — Tự cập nhật thủ công
+```
+1. Xuất file .json như Cách 1 (bước 1-2)
+2. Mở file .json vừa tải, copy phần bên trong "schedule": { ... }
+3. Dán đè vào initial_schedule.json (thư mục dự án) — thay toàn bộ nội dung
+4. Nếu có Git cài sẵn trên máy:
+   cd "Dự án TKB mới"
+   git add . && git commit -m "Cập nhật TKB" && git push
+```
+
+### ⚠️ Nếu có lỗi / dữ liệu bị rối
+Gửi lại cho Claude **toàn bộ thư mục dự án** (hoặc file `tkb-full-v2.html`
++ `initial_schedule.json`) **kèm link GitHub** —
+`https://github.com/hcmtranle/tkb20262027hoanchinh` — Claude sẽ đối chiếu,
+sửa lại và đồng bộ lại từ đầu.
+
+### Định dạng file .json xuất ra từ Artifact
+```json
+{
+  "version": "2.0",
+  "school": "Trường TH Nguyễn An Khương",
+  "year": "2026-2027",
+  "schedule": { "1.1": { "T2": { "1": {...}, ... }, ... }, ... },
+  "exported_at": "2026-08-22T..."
+}
+```
+Lưu ý: `initial_schedule.json` trong dự án **chỉ chứa phần `schedule`**
+(không có wrapper `version/school/year`) — khi cập nhật thủ công nhớ chỉ
+lấy đúng nội dung bên trong `"schedule": { ... }`.
+
+---
+
 ## 🔗 Liên Kết
 
 - **Artifact:** https://claude.ai/code/artifact/8552c45d-c843-4f04-aa02-ac0ed341b2b6
