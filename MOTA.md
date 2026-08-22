@@ -229,15 +229,22 @@ tkb-full-v2.html (~160KB, standalone — không cần CDN, npm, build)
 | v2.6 | 2026-08-22 | **Fix:** Nút Sửa Nhanh luôn hiện, auto-open login |
 | v2.7 | 2026-08-22 | **Fix:** Header 2 cột căn giữa, rowspan SÁNG/CHIỀU đúng, colspan break đúng |
 | v2.8 | 2026-08-22 | **Thêm:** Phát hiện trùng tiết GV, Kiểm định quy tắc khi lưu (toast/modal), đồng bộ GV bộ môn tức thời. Đồng bộ GitHub lần đầu. |
+| v2.9 | 2026-08-22 | **Fix:** In/Xuất PDF gọn 1 trang A4 ngang, bỏ ghi chú chữ ký |
+| v3.0 | 2026-08-22 | **Fix nghiêm trọng:** Bảng "Xem Theo Giáo Viên" trống với **mọi** GV do so khớp sai `teacher_name` (dữ liệu lưu tên ngắn, code so tên đầy đủ) — sửa lại so khớp qua `teacher_id` (chính xác 1-1, 1100/1100 ô đã kiểm chứng). **Fix nút In:** chuyển từ `window.print()` gọi trực tiếp (bị chặn trong iframe Artifact, không phản ứng) sang mở cửa sổ mới rồi in — đảm bảo hoạt động ổn định. |
 
 ---
 
 ## 🔄 Quy Trình Cập Nhật Dữ Liệu (sau khi Thầy sửa trên Artifact)
 
+> **Lưu ý kiến trúc:** Thầy chỉ thao tác/chỉnh sửa trên **Claude Artifact**
+> (claude.ai). **Netlify chỉ là bản hiển thị tĩnh**, tự build lại từ GitHub —
+> không phải nơi để chỉnh sửa. 3 hệ thống này tách biệt hoàn toàn:
+> `Artifact (localStorage) → GitHub (khi Claude push) → Netlify (tự build lại)`.
+
 Artifact chạy hoàn toàn phía trình duyệt (client-side) — mọi thay đổi qua
 **"✏️ Bật Sửa Nhanh Từng Tiết"** chỉ lưu vào `localStorage` của trình duyệt đó,
 **KHÔNG** tự động lên GitHub (vì lý do bảo mật, không thể nhúng token GitHub
-vào file HTML công khai).
+vào file HTML công khai mà ai xem trang cũng đọc được mã nguồn).
 
 ### ✅ Cách 1 — Nhờ Claude cập nhật (khuyên dùng)
 ```

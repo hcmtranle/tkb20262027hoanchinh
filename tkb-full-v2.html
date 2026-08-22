@@ -923,7 +923,7 @@ function openEdit(classId, dayId, period) {
   });
   
   const sel = document.getElementById('teacherSelEdit');
-  if (sel) { fillTeacherDropdowns(); sel.value = cell.teacher_name || ''; }
+  if (sel) { fillTeacherDropdowns(); sel.value = cell.teacher_id || ''; }
   
   const sub = document.getElementById('editModalSub');
   const dayName = DAYS.find(d => d.id === dayId)?.fullName || dayId;
@@ -953,35 +953,39 @@ function pickSubject(code) {
     b.style.outline = b.dataset.subject === code ? '3px solid #2563eb' : 'none';
     b.classList.toggle('selected', b.dataset.subject === code);
   });
-  // Auto-suggest teacher
+  // Auto-suggest teacher (theo teacher_id — khớp chính xác 1-1 với TEACHERS_CONFIG)
   const cfg = CLASSES_CONFIG[editState.classId];
   if (!cfg) return;
-  let suggested = '';
-  if (code === 'TA') suggested = TEACHERS_CONFIG[cfg.taTeacher]?.name || '';
-  else if (code === 'GDTC') suggested = TEACHERS_CONFIG[cfg.gdtcTeacher]?.name || '';
-  else if (code === 'NT(ÂN)') suggested = TEACHERS_CONFIG[cfg.anTeacher]?.name || '';
-  else if (code === 'TH') suggested = TEACHERS_CONFIG[cfg.thTeacher]?.name || '';
+  let suggestedId = '';
+  if (code === 'TA') suggestedId = cfg.taTeacher;
+  else if (code === 'GDTC') suggestedId = cfg.gdtcTeacher;
+  else if (code === 'NT(ÂN)') suggestedId = cfg.anTeacher;
+  else if (code === 'TH') suggestedId = cfg.thTeacher;
   else if (['TV','Toán','ĐĐ','TNXH','KH','LSĐL','HĐTN(CC)','HĐTN(CĐ)','HĐTN(SHL)','CN','Tự học'].includes(code)) {
-    suggested = cfg.gvcnName;
+    suggestedId = cfg.gvcn;
   }
   const sel = document.getElementById('teacherSelEdit');
-  if (sel && suggested) {
-    for (const opt of sel.options) { if (opt.value === suggested) { sel.value = suggested; break; } }
-  }
+  if (sel && suggestedId) sel.value = suggestedId;
 }
 
 function saveCell() {
   const {classId, dayId, period} = editState;
   const selBtn = document.querySelector('.subj-btn.selected');
   const subj = selBtn?.dataset?.subject;
-  const teacher = document.getElementById('teacherSelEdit')?.value || '';
+  const teacherId = document.getElementById('teacherSelEdit')?.value || '';
+  const teacherInfo = TEACHERS_CONFIG[teacherId];
   if (!subj) { showToast('⚠️ Vui lòng chọn môn học!'); return; }
   if (!schedule[classId]) schedule[classId] = {};
   if (!schedule[classId][dayId]) schedule[classId][dayId] = {};
-  // Tiết này được gán cho GV nào -> tự động đồng bộ ngay lập tức vào
-  // Tab "Xem Theo Giáo Viên" (renderTeacherTable đọc trực tiếp từ `schedule`
-  // nên không cần bước đồng bộ riêng — chỉ cần re-render lại nếu đang mở tab đó).
-  schedule[classId][dayId][period] = { subject: subj, teacher_name: teacher, isCustom: true };
+  // Lưu CẢ teacher_id (để so khớp chính xác 100% với GV bộ môn/trung tâm ở Tab 2)
+  // LẪN teacher_name dạng ngắn gọn (để hiển thị vừa trong ô lịch nhỏ) — tự động
+  // đồng bộ ngay lập tức, không cần bước riêng nào khác.
+  schedule[classId][dayId][period] = {
+    subject: subj,
+    teacher_id: teacherId,
+    teacher_name: teacherInfo ? teacherInfo.short : '',
+    isCustom: true
+  };
   closeEdit();
   renderScheduleTable();
   renderStats();       // Bộ đếm số tiết của lớp đang chỉnh sửa cập nhật lại ngay
@@ -1014,8 +1018,9 @@ function fillTeacherDropdowns() {
   const sel = document.getElementById('teacherSelEdit');
   if (!sel) return;
   const teachers = Object.values(TEACHERS_CONFIG).sort((a,b) => a.name.localeCompare(b.name, 'vi'));
+  // value = teacher_id (khớp chính xác với TEACHERS_CONFIG, tránh trùng tên/lệch tên ngắn-dài)
   sel.innerHTML = '<option value="">-- Chọn giáo viên --</option>' +
-    teachers.map(t => `<option value="${t.name}">${t.name}</option>`).join('');
+    teachers.map(t => `<option value="${t.id}">${t.name}</option>`).join('');
 }
 
 // ============= STATS =============
@@ -1113,10 +1118,11 @@ function renderTeacherTable() {
 
     const dayCells = DAYS.map(d => {
       // Tìm TẤT CẢ các lớp mà GV này dạy cùng lúc slot này (để phát hiện trùng tiết)
+      // So khớp qua teacher_id — không còn phụ thuộc tên ngắn/dài hiển thị.
       const matches = [];
       for (const [cId, cls] of Object.entries(schedule)) {
         const cell = cls[d.id]?.[slot.period];
-        if (cell && cell.teacher_name === teacher.name) matches.push({classId: cId, subject: cell.subject});
+        if (cellMatchesTeacher(cell, teacher)) matches.push({classId: cId, subject: cell.subject});
       }
       if (matches.length === 0) {
         return `<td style="padding:6px;border:1px solid #e2e8f0;text-align:center;color:#cbd5e1;min-width:90px;">—</td>`;
@@ -1156,18 +1162,40 @@ function renderTeacherTable() {
 // HĐTN(CC) = Chào cờ đầu tuần — TPT phụ trách chung cho cả 29 lớp cùng lúc.
 const WHOLE_SCHOOL_SUBJECTS = ['HĐTN(CC)'];
 
+// So khớp 1 ô lịch với 1 giáo viên — ƯU TIÊN teacher_id (khớp chính xác 1-1,
+// không phụ thuộc tên hiển thị dài/ngắn). teacher_name chỉ dùng làm phương án
+// dự phòng cho dữ liệu cũ/thiếu id.
+function cellMatchesTeacher(cell, teacher) {
+  if (!cell || !teacher) return false;
+  if (cell.teacher_id && teacher.id) return cell.teacher_id === teacher.id;
+  if (cell.teacher_name) return cell.teacher_name === teacher.name || cell.teacher_name === teacher.short;
+  return false;
+}
+
+// Khoá nhóm dùng khi quét trùng tiết: ưu tiên teacher_id, dự phòng teacher_name
+function teacherGroupKey(cell) {
+  if (cell.teacher_id) return 'id:' + cell.teacher_id;
+  if (cell.teacher_name) return 'name:' + cell.teacher_name;
+  return null;
+}
+
 // Quét toàn bộ schedule tìm các GV bị xếp dạy 2 lớp trở lên cùng lúc
 function findAllConflicts() {
-  const map = {}; // key: dayId|period|teacherName -> {day, period, teacherName, classes:[]}
+  const map = {}; // key: dayId|period|teacherKey -> {day, period, teacherName, classes:[]}
   for (const [cId, cls] of Object.entries(schedule)) {
     for (const d of DAYS) {
       const dayObj = cls[d.id];
       if (!dayObj) continue;
       for (const [period, cell] of Object.entries(dayObj)) {
-        if (!cell || !cell.teacher_name) continue;
+        if (!cell) continue;
         if (WHOLE_SCHOOL_SUBJECTS.includes(cell.subject)) continue;
-        const key = d.id + '|' + period + '|' + cell.teacher_name;
-        if (!map[key]) map[key] = { day: d.id, period, teacherName: cell.teacher_name, classes: [] };
+        const tKey = teacherGroupKey(cell);
+        if (!tKey) continue;
+        const key = d.id + '|' + period + '|' + tKey;
+        if (!map[key]) {
+          const displayName = (cell.teacher_id && TEACHERS_CONFIG[cell.teacher_id]?.name) || cell.teacher_name;
+          map[key] = { day: d.id, period, teacherName: displayName, classes: [] };
+        }
         if (!map[key].classes.includes(cId)) map[key].classes.push(cId);
       }
     }
@@ -1363,23 +1391,64 @@ function exportJSON() {
   showToast('💾 Đã xuất JSON!');
 }
 
+// In / Xuất PDF bằng cách MỞ CỬA SỔ MỚI rồi in từ đó — không gọi window.print()
+// ngay trên trang Artifact, vì Artifact chạy trong iframe có thể chặn hộp thoại in
+// (bấm nút không có phản ứng gì). Mở cửa sổ mới đảm bảo lệnh in luôn hoạt động.
 function exportPDF() {
-  // Đặt tên file gợi ý khi lưu "Save as PDF" từ hộp thoại in của trình duyệt
-  const prevTitle = document.title;
   const teacherPane = document.getElementById('view-teacher');
+  const classPane = document.getElementById('view-class');
   const isTeacherView = teacherPane && !teacherPane.classList.contains('hidden');
+  const activePane = isTeacherView ? teacherPane : classPane;
+
+  if (!activePane) { showToast('⚠️ Không tìm thấy nội dung để in!', 3000, 'warn'); return; }
+
   let suggestedName = 'TKB_Lop_' + selectedClass;
   if (isTeacherView) {
     const t = TEACHERS_CONFIG[selectedTeacherId];
     suggestedName = 'TKB_GV_' + (t ? t.name.replace(/\s+/g, '_') : 'GiaoVien');
   }
-  document.title = suggestedName;
 
-  showToast('🖨️ Đang chuẩn bị in / xuất PDF (A4 ngang, gọn 1 trang)...');
+  // Sao chép toàn bộ CSS của trang hiện tại (kể cả khối @media print đã tối ưu
+  // gọn 1 trang A4 ngang) sang cửa sổ mới để giữ đúng màu sắc/định dạng.
+  const styleContent = document.querySelector('style')?.textContent || '';
+  const bodyHtml = activePane.outerHTML;
+
+  const printDoc = `<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${suggestedName}</title>
+<style>
+body{background:#f1f5f9;margin:0;padding:16px;}
+${styleContent}
+.print-preview-notice{background:#eff6ff;color:#1d4ed8;padding:10px 16px;margin-bottom:12px;border-radius:8px;font-size:13px;font-weight:700;text-align:center;}
+@media print{ .print-preview-notice{display:none!important;} }
+</style>
+</head>
+<body>
+<div class="print-preview-notice">🖨️ Cửa sổ xem trước để In / Xuất PDF — hộp thoại in sẽ tự mở sau giây lát. Nếu không thấy, bấm Ctrl+P (hoặc Cmd+P trên Mac).</div>
+${bodyHtml}
+</body>
+</html>`;
+
+  const win = window.open('', '_blank');
+  if (!win) {
+    showToast('⚠️ Trình duyệt đã chặn cửa sổ In! Vui lòng cho phép Pop-up cho trang này rồi bấm lại nút In.', 5500, 'warn');
+    return;
+  }
+
+  win.document.open();
+  win.document.write(printDoc);
+  win.document.close();
+  win.document.title = suggestedName;
+
+  showToast('🖨️ Đang mở cửa sổ In / Xuất PDF (A4 ngang, gọn 1 trang)...', 3000, 'ok');
+
   setTimeout(() => {
-    window.print();
-    document.title = prevTitle;
-  }, 400);
+    try { win.focus(); win.print(); }
+    catch (e) { /* Nếu tự động in thất bại, người dùng vẫn có thể tự bấm Ctrl+P trong cửa sổ vừa mở */ }
+  }, 500);
 }
 
 function saveTKB() { saveSchedule(); }
