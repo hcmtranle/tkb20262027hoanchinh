@@ -1384,11 +1384,46 @@ let pendingActivateEditMode = false;
 // ============= EXPORT =============
 function exportJSON() {
   const data = { version:"2.0", school:"Trường TH Nguyễn An Khương", year:"2026-2027", schedule, exported_at: new Date().toISOString() };
-  const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a'); a.href=url; a.download='tkb_nak_2026-2027.json'; a.click();
-  URL.revokeObjectURL(url);
-  showToast('💾 Đã xuất JSON!');
+  downloadFile('tkb_nak_2026-2027.json', JSON.stringify(data, null, 2), 'application/json');
+}
+
+// Tải file xuống — hoạt động đúng ở CẢ 2 môi trường:
+//  1) Claude Artifact: trang chạy trong khung bị chặn tải kiểu <a download> truyền
+//     thống (bấm nút không có phản ứng gì) -> BẮT BUỘC dùng API downloads chính thức
+//     của Claude (window.claude.use('downloads')), hiện hộp xác nhận cho người xem.
+//  2) Netlify / mở file cục bộ: window.claude không tồn tại -> dùng cách tải file
+//     kiểu Blob + thẻ <a> truyền thống như bình thường.
+async function downloadFile(filename, content, mimeType) {
+  mimeType = mimeType || 'application/json';
+
+  if (window.claude && typeof window.claude.use === 'function') {
+    try {
+      const downloads = await window.claude.use('downloads');
+      if (downloads) {
+        await downloads.save({ filename, data: content });
+        showToast('💾 Đã lưu file: ' + filename, 3000, 'ok');
+        return;
+      }
+      // downloads === null -> capability không khả dụng trên view này, rơi xuống dự phòng bên dưới
+    } catch (err) {
+      const code = err && err.code;
+      if (code === 'declined') { showToast('❌ Đã hủy tải file.', 3000, 'warn'); return; }
+      if (code === 'too_large') { showToast('⚠️ File quá lớn (>16MB) để tải!', 4000, 'warn'); return; }
+      if (code === 'rate_limited') { showToast('⚠️ Đang có yêu cầu tải khác, thầy đợi rồi thử lại nhé!', 4000, 'warn'); return; }
+      // Các mã lỗi khác (unavailable, not_granted...) -> thử phương án dự phòng bên dưới
+    }
+  }
+
+  try {
+    const blob = new Blob([content], { type: mimeType });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = filename; a.click();
+    URL.revokeObjectURL(url);
+    showToast('💾 Đã tải file: ' + filename, 3000, 'ok');
+  } catch (e) {
+    showToast('⚠️ Không thể tải file trên môi trường này.', 4000, 'warn');
+  }
 }
 
 // In / Xuất PDF bằng cách MỞ CỬA SỔ MỚI rồi in từ đó — không gọi window.print()
