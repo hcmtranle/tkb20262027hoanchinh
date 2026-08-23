@@ -20,15 +20,35 @@ thêm chỗ khác dù "tiện thể".
 
 ## 1. TRẠNG THÁI HIỆN TẠI
 
-- **Phiên bản đang chạy chính thức:** v3.23
+- **Phiên bản đang chạy chính thức:** v3.25
 - **3 nơi đã đồng bộ khớp nhau:**
-  - GitHub: `github.com/hcmtranle/tkb20262027hoanchinh` — commit `aaa6a1b`
-  - Artifact chính: `https://claude.ai/code/artifact/8552c45d-c843-4f04-aa02-ac0ed341b2b6` — đã publish lại bản mới nhất (v3.23)
+  - GitHub: `github.com/hcmtranle/tkb20262027hoanchinh` — commit `a9b105a`
+  - Artifact chính: `https://claude.ai/code/artifact/8552c45d-c843-4f04-aa02-ac0ed341b2b6` — đã publish lại bản mới nhất (v3.25)
   - Netlify: tự build lại từ GitHub (không cần thao tác gì thêm)
 - **Dữ liệu:** 29 lớp, 57 giáo viên, 1100 ô tiết học (con số "1098" ghi ở bản cũ của file này đã
   lỗi thời — v3.19 đã điền đủ lại 2 ô thiếu ở lớp 5.1, về đúng 1100)
 
 ## 2. NHỮNG GÌ ĐÃ HOÀN THÀNH (tóm tắt các đợt lớn, mới nhất trước)
+
+00. **v3.24 → v3.25 (2026-08-23, máy #1, sau lệnh "cố định code"):**
+   - v3.24: GVCN lớp 2.6 và 3.6 tự đổi lịch dạy nội bộ (18 ô, chỉ trong cùng lớp/cùng GVCN,
+     không ảnh hưởng lớp khác) — merge theo JSON thầy gửi, kiểm định đủ 8 tiêu chí.
+   - v3.25 (SỬA CODE — có yêu cầu cụ thể từ thầy, không vi phạm chính sách cố định):
+     - Thêm hộp thoại chọn hình thức in mỗi khi bấm bất kỳ nút In/Xuất PDF nào (`exportPDF()` →
+       mở `#printChoiceModal` → `doPrint('bgh'|'class')`): "Nộp Ban Giám Hiệu" (ẩn tên GV dạy
+       dưới môn học, qua class CSS `body.print-mode-bgh` + `.cell-teacher-note{display:none}`
+       trong `@media print`) hoặc "In Cho Lớp" (giữ nguyên, hiện đủ tên GV).
+     - Đổi `document.title` lúc in từ dạng code `TKB_Lop_1.1` sang `Thời Khóa Biểu - Lớp 1.1`
+       (đẹp hơn nếu trình duyệt in kèm tiêu đề trang qua tùy chọn "Headers and footers") + thêm
+       hướng dẫn tắt tùy chọn đó trong toast nếu muốn trang in hoàn toàn sạch.
+     - `SUBJECT_DISPLAY` mở rộng thêm `TV→Tiếng Việt, TA→Tiếng Anh, CN→Công nghệ, ĐĐ→Đạo đức,
+       TH→Tin học` (giống cơ chế `KH→Khoa học`/`TA(BN)` đã có) — chỉ ảnh hưởng ô lịch Tab 1&2,
+       Ma Trận Toàn Trường vẫn giữ mã ngắn.
+     - Footer: bỏ dòng "Phiên bản V2.4 (Branch: tkbnak2627V2)", thêm dòng "© Bản quyền thuộc về
+       Trường Tiểu học Nguyễn An Khương" (thuần trình bày, không đụng logic sinh TKB).
+     - **Lưu ý quan trọng đã hỏi lại và làm rõ với thầy:** KHÔNG ẩn dòng "Khối/GVCN/Tổng tiết"
+       hay tiêu đề lớp ở đầu trang — thầy giữ nguyên. Vấn đề "dòng khó coi khi in" thực ra là do
+       trình duyệt tự thêm tiêu đề trang, không phải nội dung web sinh ra.
 
 0. **v3.20 → v3.23 (2026-08-23, máy #1):**
    - v3.21: Merge JSON thầy gửi (95 ô) — hết buổi lẻ Thầy Thái & Thầy Tạo, fix quota LSĐL lớp
@@ -62,9 +82,10 @@ thêm chỗ khác dù "tiện thể".
 2026-08-23) — thầy tự sửa thủ công rồi gửi JSON 2 lần, Claude merge + kiểm định đủ 8 tiêu chí
 cả 2 lần. Không còn GV nào bị buổi lẻ (Thầy Thái, Thầy Tạo, GV STEM(2)/(3), GV CDS(1) đều hết).
 
-Hiện tại **không có việc gì dang dở** — code đã được thầy yêu cầu cố định (xem mục 0). Việc kế
-tiếp sẽ là thầy gửi JSON dữ liệu mới (merge theo quy trình mục 5) hoặc yêu cầu sửa 1 phần hiển
-thị/tính năng cụ thể.
+Hiện tại **không có việc gì dang dở**. Code vẫn đang ở chính sách cố định (mục 0) — v3.25 là
+ngoại lệ hợp lệ vì thầy nêu yêu cầu cụ thể (hộp thoại in, tên môn học, chân trang), không phải
+Claude tự ý sửa. Việc kế tiếp sẽ là thầy gửi JSON dữ liệu mới (merge theo quy trình mục 5) hoặc
+tiếp tục nêu yêu cầu sửa 1 phần hiển thị/tính năng cụ thể khác.
 
 → **Khi thầy gửi JSON mới:** làm đúng quy trình cũ — merge cẩn thận (đối chiếu ô nào là chỉnh
 sửa thật vs dữ liệu baseline cũ của Artifact do chưa reload), kiểm định đủ 8 tiêu chí (xem

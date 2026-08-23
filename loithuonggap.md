@@ -156,3 +156,30 @@ Từ 2026-08-23 thầy yêu cầu đóng băng code (`index.html`/`tkb-full-v2.h
 `dongbophienlamviec.md` mục 0. Việc merge DỮ LIỆU (JSON lịch dạy) vẫn bình thường. Chỉ sửa CODE
 khi thầy nêu yêu cầu cụ thể cho đúng phần đó — không lan sang sửa/dọn dẹp/tối ưu chỗ khác dù
 "tiện thể đang mở file ra sửa".
+
+## 16. "Dòng khó coi khi in" — coi chừng nhầm giữa nội dung web và tiêu đề trang do TRÌNH DUYỆT tự thêm
+
+**Bối cảnh (v3.25):** thầy phàn nàn có "1 dòng ví dụ 'tkb 1.1' rất thiếu thẩm mỹ" xuất hiện khi
+in, ban đầu tưởng là dòng "Khối/GVCN/Tổng tiết" trong `.class-meta` (nội dung web tự sinh) —
+HỎI LẠI mới biết KHÔNG PHẢI, mà là **tiêu đề trang do trình duyệt tự in thêm** (tùy chọn
+"Headers and footers" trong hộp thoại in, mặc định lấy `document.title`) — đúng lúc code đang
+chủ động đặt `document.title = 'TKB_Lop_' + selectedClass` (dạng "TKB_Lop_1.1", trông như code)
+để gợi ý tên file khi "Save as PDF".
+
+**Bài học:** khi thầy mô tả "1 dòng xấu xuất hiện khi in" mà dòng đó trông như 1 slug/code (có
+gạch dưới, viết tắt) chứ không giống câu tiếng Việt bình thường trong trang, khả năng cao đó là
+`document.title` bị trình duyệt in kèm, KHÔNG PHẢI nội dung HTML của trang. Cách xử lý: (1) đổi
+`document.title` sang dạng tên đọc được, có dấu, có khoảng trắng (VD: `"Thời Khóa Biểu - Lớp
+1.1"`) thay vì dạng slug; (2) không thể dùng CSS/JS để tắt hẳn "Headers and footers" của trình
+duyệt (đây là tùy chọn phía người dùng trong hộp thoại in, ngoài tầm kiểm soát của trang web) —
+chỉ có thể hướng dẫn thầy tự tắt nếu muốn trang in hoàn toàn sạch (giống bài học #12 về
+`@page size`: trình duyệt luôn có tiếng nói cuối cùng).
+
+## 17. Ẩn 1 phần nội dung theo "chế độ" (VD: in nộp BGH vs in cho lớp) — dùng class trên `<body>` + `@media print`, đừng tạo 2 hàm render riêng
+
+Khi cần hiển thị khác nhau tùy lựa chọn của người dùng (ở đây: ẩn tên GV khi in nộp BGH), cách
+gọn nhất là: (1) gắn 1 class CSS lên phần tử cần ẩn ngay lúc render (`class="cell-teacher-note"`
+cho dòng tên GV), (2) khi người dùng chọn chế độ, toggle 1 class trên `<body>`
+(`print-mode-bgh`), (3) viết đúng 1 rule CSS bên trong `@media print`:
+`body.print-mode-bgh .cell-teacher-note{display:none!important;}`. KHÔNG viết lại hàm render
+để có 2 phiên bản HTML khác nhau — vừa trùng lặp code vừa dễ lệch dữ liệu giữa 2 phiên bản.
