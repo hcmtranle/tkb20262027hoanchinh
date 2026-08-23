@@ -261,6 +261,7 @@ footer strong{color:#475569;}
   .cell-text{font-size:7.5px!important;line-height:1.15!important;}
   .cell-text div{font-size:6.5px!important;}
   .cell-custom-badge,.conflict-tag{display:none!important;}
+  body.print-mode-bgh .cell-teacher-note{display:none!important;}
 
   /* Thống kê — dồn gọn thành hàng nhỏ
      (các span này được JS render với inline style nên phải !important để ghi đè) */
@@ -471,7 +472,8 @@ footer strong{color:#475569;}
 <footer>
   <div><strong>TRƯỜNG TIỂU HỌC NGUYỄN AN KHƯƠNG — NĂM HỌC 2026 - 2027</strong></div>
   <div>Hiệu trưởng: <strong>Hồ Thị Ngọc Diễm</strong> | Quản lý: UỶ BAN NHÂN DÂN PHƯỜNG ĐÔNG HƯNG THUẬN</div>
-  <div style="color:#cbd5e1;margin-top:4px;">Hệ thống Thời Khóa Biểu Tự Động Hóa & Lịch Báo Giảng Giáo Viên Bộ Môn — Phiên bản V2.4 (Branch: tkbnak2627V2)</div>
+  <div style="color:#cbd5e1;margin-top:4px;">Hệ thống Thời Khóa Biểu Tự Động Hóa & Lịch Báo Giảng Giáo Viên Bộ Môn</div>
+  <div style="color:#cbd5e1;margin-top:2px;">© Bản quyền thuộc về Trường Tiểu học Nguyễn An Khương</div>
 </footer>
 
 <!-- Admin Login Modal -->
@@ -545,6 +547,23 @@ footer strong{color:#475569;}
   </div>
 </div>
 
+<!-- Print Choice Modal (Nộp BGH hay In Cho Lớp) -->
+<div class="modal-backdrop" id="printChoiceModal">
+  <div class="modal-box" style="max-width:420px;">
+    <div class="modal-hdr">
+      <div class="modal-title-wrap">
+        <div class="modal-icon" style="background:#eff6ff;">🖨️</div>
+        <div><div class="modal-title">Chọn Hình Thức In</div><div class="modal-sub">Bạn muốn in Thời khóa biểu để nộp Ban Giám hiệu hay in cho lớp?</div></div>
+      </div>
+      <button class="modal-close" onclick="closePrintChoice()">×</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-top:6px;">
+      <button class="btn btn-blue" style="justify-content:center;padding:12px;font-size:13px;" onclick="doPrint('bgh')">📋 Nộp Ban Giám Hiệu <span style="font-weight:500;opacity:.85;">(ẩn tên GV dạy)</span></button>
+      <button class="btn btn-green" style="justify-content:center;padding:12px;font-size:13px;" onclick="doPrint('class')">🏫 In Cho Lớp <span style="font-weight:500;opacity:.85;">(hiện tên GV dạy)</span></button>
+    </div>
+  </div>
+</div>
+
 <!-- Toast -->
 <div class="toast hidden" id="toast"></div>
 <script>
@@ -581,7 +600,15 @@ const SUBJECT_COLORS = {
 // Tên hiển thị đầy đủ thay cho mã môn viết tắt (chỉ áp dụng cho các ô lịch dễ đọc —
 // Tab 1 "Xem Theo Lớp" và Tab 2 "Xem Theo GV" — KHÔNG áp dụng ở Ma Trận Toàn Trường
 // vì bảng đó quá dày đặc, viết đầy đủ sẽ vỡ layout).
-const SUBJECT_DISPLAY = { "KH": "Khoa học", "TA(BN)": 'Tiếng Anh<div style="font-size:9px;font-weight:700;line-height:1.15;margin-top:1px;">Với người NN</div>' };
+const SUBJECT_DISPLAY = {
+  "TV": "Tiếng Việt",
+  "TA": "Tiếng Anh",
+  "CN": "Công nghệ",
+  "ĐĐ": "Đạo đức",
+  "KH": "Khoa học",
+  "TH": "Tin học",
+  "TA(BN)": 'Tiếng Anh<div style="font-size:9px;font-weight:700;line-height:1.15;margin-top:1px;">Với người NN</div>'
+};
 function displaySubj(subj) { return SUBJECT_DISPLAY[subj] || subj; }
 
 const TIME_SLOTS = [
@@ -948,7 +975,7 @@ function renderScheduleTable() {
           ${col
             ? `<span class="cell-icon">${col.icon}</span>
                <div class="cell-text">${displaySubj(subj)}
-                 ${tchr ? `<div style="font-size:9px;font-weight:500;opacity:.75;margin-top:1px;">${tchr}</div>` : ''}
+                 ${tchr ? `<div class="cell-teacher-note" style="font-size:9px;font-weight:500;opacity:.75;margin-top:1px;">${tchr}</div>` : ''}
                </div>`
             : `<span class="cell-empty">—</span>`}
         </div>
@@ -1526,19 +1553,35 @@ async function downloadFile(filename, content, mimeType) {
 // (ẩn header/nav/nút bấm, gọn trong 1 trang A4 ngang, xem phần CSS phía trên).
 // Luôn hiển thị rõ hướng dẫn Ctrl+P làm phương án dự phòng chắc chắn hoạt
 // động — đây là phím tắt của trình duyệt, không trang web nào chặn được.
+// In lịch: LUÔN hỏi mục đích in trước (nộp BGH -> ẩn tên GV dạy | in cho lớp -> hiện đủ)
+// vì 2 bên cần thông tin khác nhau (tên GV không cần thiết khi nộp Ban Giám Hiệu).
 function exportPDF() {
+  document.getElementById('printChoiceModal').style.display = 'flex';
+}
+
+function closePrintChoice() {
+  document.getElementById('printChoiceModal').style.display = 'none';
+}
+
+function doPrint(mode) {
+  closePrintChoice();
+  // mode 'bgh' -> gắn class lên <body> để CSS @media print ẩn tên GV dưới môn học
+  document.body.classList.toggle('print-mode-bgh', mode === 'bgh');
+
   const teacherPane = document.getElementById('view-teacher');
   const isTeacherView = teacherPane && !teacherPane.classList.contains('hidden');
 
   const prevTitle = document.title;
-  let suggestedName = 'TKB_Lop_' + selectedClass;
+  // Đặt tên trang dễ đọc (không dùng gạch dưới kiểu code) — nếu trình duyệt có in kèm
+  // tiêu đề trang (tùy chọn "Headers and footers"), dòng này sẽ trông gọn gàng hơn.
+  let suggestedName = 'Thời Khóa Biểu - Lớp ' + selectedClass;
   if (isTeacherView) {
     const t = TEACHERS_CONFIG[selectedTeacherId];
-    suggestedName = 'TKB_GV_' + (t ? t.name.replace(/\s+/g, '_') : 'GiaoVien');
+    suggestedName = 'Thời Khóa Biểu - GV ' + (t ? t.name : 'Giáo viên');
   }
   document.title = suggestedName; // gợi ý tên file khi chọn "Save as PDF"
 
-  showToast('🖨️ Đang mở hộp thoại In... Nếu thấy khổ giấy đang DỌC, thầy đổi mục "Layout/Hướng giấy" sang NGANG (Landscape). Không thấy hộp thoại thì bấm Ctrl+P (Cmd+P trên Mac).', 7000, 'ok');
+  showToast('🖨️ Đang mở hộp thoại In... Nếu thấy khổ giấy đang DỌC, thầy đổi mục "Layout/Hướng giấy" sang NGANG (Landscape). Nếu thấy dòng tiêu đề/đường dẫn tự thêm ở đầu hoặc cuối trang, thầy tắt mục "Headers and footers" (Tiêu đề và chân trang) trong hộp thoại in để có trang in sạch hơn. Không thấy hộp thoại thì bấm Ctrl+P (Cmd+P trên Mac).', 8000, 'ok');
 
   setTimeout(() => {
     try { window.print(); }
