@@ -213,7 +213,10 @@ footer strong{color:#475569;}
 }
 
 /* ============= PRINT / XUẤT PDF — gọn trong 1 mặt giấy A4 ngang ============= */
-@page{ size:A4 landscape; margin:8mm; }
+/* Dùng kích thước tường minh (297mm x 210mm = A4 ngang) thay vì từ khóa "A4 landscape" —
+   một số trình duyệt/máy in ảo (đặc biệt khi in từ trong khung Artifact) không áp dụng
+   đúng hướng giấy với cú pháp từ khóa, nhưng nhận đúng khi ghi thẳng kích thước. */
+@page{ size:297mm 210mm; margin:8mm; }
 @media print{
   *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important;}
   html,body{background:#fff!important;margin:0!important;padding:0!important;}
@@ -1535,7 +1538,7 @@ function exportPDF() {
   }
   document.title = suggestedName; // gợi ý tên file khi chọn "Save as PDF"
 
-  showToast('🖨️ Đang mở hộp thoại In... Nếu KHÔNG thấy hộp thoại, thầy bấm Ctrl+P (Cmd+P trên Mac) để in trang này nhé!', 5000, 'ok');
+  showToast('🖨️ Đang mở hộp thoại In... Nếu thấy khổ giấy đang DỌC, thầy đổi mục "Layout/Hướng giấy" sang NGANG (Landscape). Không thấy hộp thoại thì bấm Ctrl+P (Cmd+P trên Mac).', 7000, 'ok');
 
   setTimeout(() => {
     try { window.print(); }
