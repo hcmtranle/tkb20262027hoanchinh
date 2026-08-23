@@ -572,7 +572,7 @@ const SUBJECT_COLORS = {
   "CDS": {bg:"#fae8ff",border:"#f0abfc",text:"#701a75",name:"CLB Công dân số",icon:"📱"},
   "CLB Stem": {bg:"#ccfbf1",border:"#5eead4",text:"#134e4a",name:"CLB Stem",icon:"💡"},
   "CLB KNS": {bg:"#fef3c7",border:"#fcd34d",text:"#78350f",name:"CLB KNS",icon:"🌟"},
-  "TA(BN)": {bg:"#dbeafe",border:"#60a5fa",text:"#1e3a8a",name:"Tiếng Anh với người NN",icon:"🗣️"},
+  "TA(BN)": {bg:"#dbeafe",border:"#60a5fa",text:"#1e3a8a",name:"Tiếng Anh với người nước ngoài",icon:"🗣️"},
   "TA(T-K)": {bg:"#cffafe",border:"#22d3ee",text:"#164e63",name:"Tiếng Anh (Toán-Khoa)",icon:"🔢"},
   "CLB Toán TD": {bg:"#d1fae5",border:"#34d399",text:"#064e3b",name:"CLB Toán Tư duy",icon:"🧠"},
   "Tự học": {bg:"#f1f5f9",border:"#cbd5e1",text:"#1e293b",name:"Tự học/học có hướng dẫn",icon:"📝"}
@@ -581,7 +581,7 @@ const SUBJECT_COLORS = {
 // Tên hiển thị đầy đủ thay cho mã môn viết tắt (chỉ áp dụng cho các ô lịch dễ đọc —
 // Tab 1 "Xem Theo Lớp" và Tab 2 "Xem Theo GV" — KHÔNG áp dụng ở Ma Trận Toàn Trường
 // vì bảng đó quá dày đặc, viết đầy đủ sẽ vỡ layout).
-const SUBJECT_DISPLAY = { "KH": "Khoa học" };
+const SUBJECT_DISPLAY = { "KH": "Khoa học", "TA(BN)": 'Tiếng Anh<div style="font-size:9px;font-weight:700;line-height:1.15;margin-top:1px;">Với người NN</div>' };
 function displaySubj(subj) { return SUBJECT_DISPLAY[subj] || subj; }
 
 const TIME_SLOTS = [
