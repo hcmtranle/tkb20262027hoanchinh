@@ -184,8 +184,8 @@
       },
       "6": {
         "subject": "TH",
-        "teacher_id": "gvcn_1_1",
-        "teacher_name": "Cô Linh (1.1)"
+        "teacher_id": "t_pht_tao",
+        "teacher_name": "Thầy Tạo (PHT)"
       },
       "7": {
         "subject": "HĐTN(SHL)",
@@ -265,8 +265,8 @@
       },
       "7": {
         "subject": "TH",
-        "teacher_id": "gvcn_1_2",
-        "teacher_name": "Cô Hoa (1.2)"
+        "teacher_id": "t_pht_tao",
+        "teacher_name": "Thầy Tạo (PHT)"
       }
     },
     "T4": {
@@ -432,8 +432,8 @@
       },
       "3": {
         "subject": "TH",
-        "teacher_id": "gvcn_1_3",
-        "teacher_name": "Cô Hân (1.3)"
+        "teacher_id": "t_pht_tao",
+        "teacher_name": "Thầy Tạo (PHT)"
       },
       "4": {
         "subject": "TV",
@@ -738,8 +738,8 @@
       },
       "4": {
         "subject": "TH",
-        "teacher_id": "gvcn_1_4",
-        "teacher_name": "Cô Nga (1.4)"
+        "teacher_id": "t_pht_tao",
+        "teacher_name": "Thầy Tạo (PHT)"
       },
       "5": {
         "subject": "Toán",
