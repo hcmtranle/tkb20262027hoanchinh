@@ -307,6 +307,18 @@ lấy đúng nội dung bên trong `"schedule": { ... }`.
 
 ---
 
+## 🔧 Fix Hồi Quy Do Các Bước Sửa Trước Làm Hỏng Lẫn Nhau (2026-08-23, ngay sau khi merge V1.1)
+
+Thầy phát hiện: lớp 1.1 có ngày 4 tiết TV (vượt mẫu tối đa 3 tiết/ngày Khối 1) và CDS bị lạc
+sang buổi sáng (Tiết 2). Nguyên nhân: bước sửa "tối đa 1 Toán/ngày" + "giãn cách môn 2 tiết/tuần"
+chạy SAU bước xếp TV, dùng logic hoán đổi chung chung không kiểm tra ràng buộc riêng của TV/CDS/Stem
+— đúng loại lỗi đã ghi trong `loithuonggap.md` mục 8 ("các bước sửa độc lập làm hỏng lẫn nhau").
+
+**Đã audit + fix toàn bộ 29 lớp** với 1 hàm kiểm tra ràng buộc tổng thể (TV theo mẫu, Toán
+tối đa 1/ngày, giãn cách môn, CDS/Stem bắt buộc buổi chiều) TRƯỚC khi cho phép hoán đổi bất kỳ
+ô nào — phát hiện 7 lớp bị vỡ mẫu TV (1.1, 2.3, 2.4, 2.6, 3.4, 3.6, 5.2) + 2 lớp CDS/Stem lạc
+buổi (1.1, 3.4). Đã sửa hết, kiểm định lại đủ 10 tiêu chí — sạch 100%.
+
 ## ✅ V1.1 Đã Được Merge Vào Bản Chính Thức (2026-08-23)
 
 Toàn bộ nội dung V1.1 (144 ô xếp lại theo 3 quy tắc mới + fix Toán tối đa 1 tiết/ngày +
