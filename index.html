@@ -709,9 +709,11 @@ function init() {
   } else {
     schedule = JSON.parse(JSON.stringify(defaultData));
   }
+  normalizeTeacherNames();
+
   const adminSaved = sessionStorage.getItem('tkb_nak_admin');
   if (adminSaved === 'true') { isAdmin = true; }
-  
+
   // Render all components
   renderClassGrid();
   renderScheduleTable();
@@ -723,6 +725,29 @@ function init() {
   renderTeacherTable();
   renderMasterMatrix();
   updateAdminUI();
+}
+
+// Chuẩn hóa tên GV hiển thị trong MỌI ô về đúng dạng rút gọn (VD: "Cô Linh (1.1)"),
+// không để lọt tên đầy đủ (VD: "Trần Thị Diễm Linh") — chạy mỗi khi tải dữ liệu
+// (localStorage / dữ liệu gốc INITIAL_SCHEDULE / khôi phục gốc) để đảm bảo nhất
+// quán VĨNH VIỄN, không phụ thuộc dữ liệu nguồn (kể cả file JSON merge sau này
+// còn sót tên đầy đủ từ những lần lưu rất cũ) có sạch sẵn hay không.
+function normalizeTeacherNames() {
+  for (const cls of Object.values(schedule)) {
+    for (const day of Object.values(cls)) {
+      for (const cell of Object.values(day)) {
+        if (!cell || !cell.subject) continue;
+        let t = cell.teacher_id ? TEACHERS_CONFIG[cell.teacher_id] : null;
+        if (!t && cell.teacher_name) {
+          t = Object.values(TEACHERS_CONFIG).find(tc => tc.name === cell.teacher_name || tc.short === cell.teacher_name);
+        }
+        if (t) {
+          cell.teacher_name = t.short;
+          if (!cell.teacher_id) cell.teacher_id = t.id;
+        }
+      }
+    }
+  }
 }
 
 function saveSchedule() {
@@ -1521,6 +1546,7 @@ function printAll() { exportPDF(); }
 function resetToDefault() {
   if (!confirm('Khôi phục toàn bộ thời khóa biểu về dữ liệu gốc?')) return;
   schedule = JSON.parse(JSON.stringify(INITIAL_SCHEDULE));
+  normalizeTeacherNames();
   localStorage.setItem(LOCAL_KEY, JSON.stringify(schedule));
   renderScheduleTable(); renderStats();
   showToast('↩️ Đã khôi phục về dữ liệu gốc!');
