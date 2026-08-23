@@ -294,12 +294,12 @@ footer strong{color:#475569;}
       </div>
     </div>
     <div>
-      <div class="hdr-btns" style="margin-bottom:8px;">
+      <div class="hdr-btns hidden" id="badgeAudit" style="margin-bottom:8px;">
         <div class="badge-audit"><span style="width:8px;height:8px;border-radius:50%;background:#34d399;display:inline-block;"></span> 100% TUÂN THỦ QUY TẮC (10/16)</div>
       </div>
       <div class="hdr-btns" id="hdrBtns">
-        <button class="btn btn-green" onclick="saveTKB()">💾 Lưu Thời Khóa Biểu</button>
-        <button class="btn btn-orange" onclick="exportZip()">📦 Tải File Nén (.zip)</button>
+        <button class="btn btn-green hidden" id="btnSaveTKB" onclick="saveTKB()">💾 Lưu Thời Khóa Biểu</button>
+        <button class="btn btn-orange hidden" id="btnExportZip" onclick="exportZip()">📦 Tải File Nén (.zip)</button>
         <button class="btn btn-slate" id="loginBtn" onclick="openLogin()">🔒 Đăng Nhập Quản Trị</button>
         <!-- Admin buttons (hidden until login) -->
         <button class="btn btn-orange hidden" id="btnSync" onclick="triggerSync()">🔄 Cập Nhật Lịch Báo Giảng</button>
@@ -1372,7 +1372,7 @@ function doLogout() {
 
 function updateAdminUI() {
   // Show/hide admin-only buttons
-  const adminIds = ['btnSync','btnPrint','btnReset','logoutBtn','btnUpload','btnUpdateBG'];
+  const adminIds = ['btnSync','btnPrint','btnReset','logoutBtn','btnUpload','btnUpdateBG','badgeAudit','btnSaveTKB','btnExportZip'];
   adminIds.forEach(id => {
     const el = document.getElementById(id);
     if (el) el.classList.toggle('hidden', !isAdmin);
