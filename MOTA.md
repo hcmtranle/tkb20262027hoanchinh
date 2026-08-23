@@ -307,7 +307,15 @@ lấy đúng nội dung bên trong `"schedule": { ... }`.
 
 ---
 
-## 🧪 Dự Án Số 2 — Artifact V1.1 (Bản Đã Xếp Lại, Để Đối Chiếu)
+## ✅ V1.1 Đã Được Merge Vào Bản Chính Thức (2026-08-23)
+
+Toàn bộ nội dung V1.1 (144 ô xếp lại theo 3 quy tắc mới + fix Toán tối đa 1 tiết/ngày +
+giãn cách môn 2 tiết/tuần + hiển thị "Khoa học" đầy đủ + fix CSS in khổ ngang) đã được
+**đè hoàn toàn** lên `tkb-full-v2.html`, `index.html`, `initial_schedule.json`.
+File `tkb-V1.1-xep-lai.html` và Artifact V1.1 riêng giờ chỉ còn giá trị lưu trữ/tham
+chiếu lịch sử, không còn là bản "thử nghiệm" nữa — **bản chính thức = bản V1.1 cũ**.
+
+## 🧪 Dự Án Số 2 — Artifact V1.1 (Bản Đã Xếp Lại, Để Đối Chiếu) — LỊCH SỬ
 
 > **Artifact V1.1:** https://claude.ai/code/artifact/1150a615-6300-4363-b2b7-269baf249ed7
 > **File:** `tkb-V1.1-xep-lai.html` (KHÔNG phải file chính, không dùng cho Netlify/GitHub Pages)
