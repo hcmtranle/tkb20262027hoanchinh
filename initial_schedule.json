@@ -34,9 +34,10 @@
         "teacher_name": "Cô Linh (1.1)"
       },
       "7": {
-        "subject": "CDS",
-        "teacher_id": "t_cds_1",
-        "teacher_name": "GV CDS (1)"
+        "subject": "TNXH",
+        "teacher_id": "gvcn_1_1",
+        "teacher_name": "Cô Linh (1.1)",
+        "isCustom": true
       }
     },
     "T3": {
@@ -62,7 +63,7 @@
         "teacher_name": "Cô Linh (1.1)"
       },
       "5": {
-        "subject": "TNXH",
+        "subject": "NT(MT)",
         "teacher_id": "gvcn_1_1",
         "teacher_name": "Cô Linh (1.1)",
         "isCustom": true
@@ -109,7 +110,7 @@
         "isCustom": true
       },
       "6": {
-        "subject": "NT(MT)",
+        "subject": "TNXH",
         "teacher_id": "gvcn_1_1",
         "teacher_name": "Cô Linh (1.1)",
         "isCustom": true
@@ -187,7 +188,7 @@
         "isCustom": true
       },
       "5": {
-        "subject": "TNXH",
+        "subject": "HĐTN(SHL)",
         "teacher_id": "gvcn_1_1",
         "teacher_name": "Cô Linh (1.1)",
         "isCustom": true
@@ -199,9 +200,10 @@
         "isCustom": true
       },
       "7": {
-        "subject": "HĐTN(SHL)",
-        "teacher_id": "gvcn_1_1",
-        "teacher_name": "Cô Linh (1.1)"
+        "subject": "CDS",
+        "teacher_id": "t_cds_1",
+        "teacher_name": "GV CDS (1)",
+        "isCustom": true
       }
     }
   },
@@ -3439,9 +3441,9 @@
         "isCustom": true
       },
       "8": {
-        "subject": "CLB Toán TD",
-        "teacher_id": "gvcn_3_5",
-        "teacher_name": "Cô Yến Nhi (3.5)",
+        "subject": "CLB Stem",
+        "teacher_id": "t_stem_2",
+        "teacher_name": "GV STEM (2)",
         "isCustom": true
       }
     },
@@ -3534,9 +3536,10 @@
         "isCustom": true
       },
       "8": {
-        "subject": "CLB Stem",
-        "teacher_id": "t_stem_2",
-        "teacher_name": "GV STEM (2)"
+        "subject": "CLB Toán TD",
+        "teacher_id": "gvcn_3_5",
+        "teacher_name": "Cô Yến Nhi (3.5)",
+        "isCustom": true
       }
     }
   },
@@ -3611,20 +3614,22 @@
         "teacher_name": "Cô Trang (TA)"
       },
       "5": {
-        "subject": "CLB Stem",
-        "teacher_id": "t_stem_3",
-        "teacher_name": "GV STEM (3)",
+        "subject": "Toán",
+        "teacher_id": "gvcn_3_6",
+        "teacher_name": "Cô Thảo (3.6)",
         "isCustom": true
       },
       "6": {
-        "subject": "Tự học",
+        "subject": "NT(MT)",
         "teacher_id": "gvcn_3_6",
-        "teacher_name": "Cô Thảo (3.6)"
+        "teacher_name": "Cô Thảo (3.6)",
+        "isCustom": true
       },
       "7": {
-        "subject": "Toán",
+        "subject": "Tự học",
         "teacher_id": "gvcn_3_6",
-        "teacher_name": "Cô Thảo (3.6)"
+        "teacher_name": "Cô Thảo (3.6)",
+        "isCustom": true
       },
       "8": {
         "subject": "CLB Toán TD",
@@ -3756,9 +3761,9 @@
         "isCustom": true
       },
       "6": {
-        "subject": "NT(MT)",
-        "teacher_id": "gvcn_3_6",
-        "teacher_name": "Cô Thảo (3.6)",
+        "subject": "CLB Stem",
+        "teacher_id": "t_stem_3",
+        "teacher_name": "GV STEM (3)",
         "isCustom": true
       },
       "7": {
@@ -4264,12 +4269,13 @@
         "teacher_name": "GV TA-TK (2)"
       },
       "7": {
-        "subject": "CLB Stem",
-        "teacher_id": "t_stem_3",
-        "teacher_name": "GV STEM (3)"
+        "subject": "CN",
+        "teacher_id": "gvcn_4_3",
+        "teacher_name": "Thầy Thắng (4.3)",
+        "isCustom": true
       },
       "8": {
-        "subject": "CN",
+        "subject": "Tự học",
         "teacher_id": "gvcn_4_3",
         "teacher_name": "Thầy Thắng (4.3)",
         "isCustom": true
@@ -4402,9 +4408,9 @@
         "isCustom": true
       },
       "7": {
-        "subject": "Tự học",
-        "teacher_id": "gvcn_4_3",
-        "teacher_name": "Thầy Thắng (4.3)",
+        "subject": "CLB Stem",
+        "teacher_id": "t_stem_3",
+        "teacher_name": "GV STEM (3)",
         "isCustom": true
       },
       "8": {
@@ -5194,12 +5200,13 @@
         "isCustom": true
       },
       "6": {
-        "subject": "CLB Stem",
-        "teacher_id": "t_stem_3",
-        "teacher_name": "GV STEM (3)"
+        "subject": "CN",
+        "teacher_id": "gvcn_5_1",
+        "teacher_name": "Cô Tuyết Mai (5.1)",
+        "isCustom": true
       },
       "7": {
-        "subject": "CN",
+        "subject": "Tự học",
         "teacher_id": "gvcn_5_1",
         "teacher_name": "Cô Tuyết Mai (5.1)",
         "isCustom": true
@@ -5342,9 +5349,10 @@
         "isCustom": true
       },
       "8": {
-        "subject": "Tự học",
-        "teacher_id": "gvcn_5_1",
-        "teacher_name": "Cô Tuyết Mai (5.1)"
+        "subject": "CLB Stem",
+        "teacher_id": "t_stem_3",
+        "teacher_name": "GV STEM (3)",
+        "isCustom": true
       }
     },
     "T6": {
@@ -6214,9 +6222,10 @@
         "isCustom": true
       },
       "6": {
-        "subject": "CLB Stem",
-        "teacher_id": "t_stem_3",
-        "teacher_name": "GV STEM (3)"
+        "subject": "CN",
+        "teacher_id": "gvcn_5_5",
+        "teacher_name": "Cô Trâm (5.5)",
+        "isCustom": true
       },
       "7": {
         "subject": "GDTC",
@@ -6309,18 +6318,19 @@
         "isCustom": true
       },
       "6": {
-        "subject": "CN",
+        "subject": "GDTC",
         "teacher_id": "gvcn_5_5",
         "teacher_name": "Cô Trâm (5.5)",
         "isCustom": true
       },
       "7": {
-        "subject": "HĐTN(SHL)",
-        "teacher_id": "gvcn_5_5",
-        "teacher_name": "Cô Trâm (5.5)"
+        "subject": "CLB Stem",
+        "teacher_id": "t_stem_3",
+        "teacher_name": "GV STEM (3)",
+        "isCustom": true
       },
       "8": {
-        "subject": "GDTC",
+        "subject": "HĐTN(SHL)",
         "teacher_id": "gvcn_5_5",
         "teacher_name": "Cô Trâm (5.5)",
         "isCustom": true
