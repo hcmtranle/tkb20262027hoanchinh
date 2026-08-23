@@ -127,3 +127,32 @@ quyết định cuối cùng, không trang web nào ép được 100%.
 Xem chi tiết trong bộ nhớ Claude (`quy-trinh-3-may-tinh.md`) và `dongbophienlamviec.md`.
 Tóm tắt: luôn đợi Drive báo đồng bộ xong + `git log`/`git status` trước khi commit/push trên
 bất kỳ máy nào trong 3 máy.
+
+## 14. Đổi tên hiển thị 1 môn học phải sửa ĐÚNG 2 CHỖ, không phải 1
+
+**Bối cảnh (v3.23):** thầy nhờ đổi hiển thị `TA(BN)` thành "Tiếng Anh với người nước ngoài".
+Tưởng chỉ cần sửa 1 chỗ nhưng thực ra có 2 cơ chế hiển thị độc lập:
+
+1. **`SUBJECT_COLORS[code].name`** — tên đầy đủ, chỉ xuất hiện ở "🎨 Bảng Mã Màu" (Legend).
+   KHÔNG dùng ở modal "Sửa Nhanh" (`renderSubjectGrid` hiển thị thẳng `code`, không phải `name`).
+2. **`SUBJECT_DISPLAY` + hàm `displaySubj()`** — áp dụng cho ô lịch ở Tab "Xem Theo Lớp" và
+   Tab "Xem Theo GV" (2 tab này gọi chung `displaySubj()`). Đây là cơ chế đã có sẵn từ trước
+   cho `"KH"` → `"Khoa học"`. Muốn hiện nhiều dòng trong ô nhỏ, giá trị trong map này có thể là
+   HTML (VD: `'Tiếng Anh<div style="...">Với người NN</div>'`) vì nó được nhúng thẳng vào
+   `innerHTML`, không escape — an toàn vì chỉ 2 nơi gọi `displaySubj()`, cả 2 đều là ngữ cảnh
+   `innerHTML` (không phải Excel/PDF export dùng text thuần).
+
+**Cố ý KHÔNG đổi:** "Ma Trận TKB Toàn Trường" (`renderMasterMatrix`) không gọi `displaySubj()`
+— giữ nguyên mã ngắn vì bảng quá dày, đổi tên dài sẽ vỡ layout. Đây là quyết định thiết kế có
+chủ đích từ trước (áp dụng cho cả "KH"), không phải thiếu sót.
+
+**Quy tắc:** trước khi đổi tên hiển thị 1 môn, `grep` toàn bộ chuỗi tên cũ trong file để tìm hết
+các nơi nó xuất hiện (thường là 2: field `.name` cho Legend, và `SUBJECT_DISPLAY` cho ô lịch),
+đừng chỉ sửa chỗ đầu tiên tìm thấy.
+
+## 15. Sau khi thầy yêu cầu "cố định code" — KHÔNG tự sửa code khi không được nhờ
+
+Từ 2026-08-23 thầy yêu cầu đóng băng code (`index.html`/`tkb-full-v2.html`) — xem
+`dongbophienlamviec.md` mục 0. Việc merge DỮ LIỆU (JSON lịch dạy) vẫn bình thường. Chỉ sửa CODE
+khi thầy nêu yêu cầu cụ thể cho đúng phần đó — không lan sang sửa/dọn dẹp/tối ưu chỗ khác dù
+"tiện thể đang mở file ra sửa".

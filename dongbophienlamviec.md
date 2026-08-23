@@ -5,20 +5,45 @@
 > kỳ phiên Claude nào khác cùng tài khoản. Claude đọc xong sẽ nắm ngay bối cảnh, không cần
 > giải thích lại từ đầu.
 >
-> **Cập nhật lần cuối:** 2026-08-23 (phiên làm việc máy #3 — cơ quan)
+> **Cập nhật lần cuối:** 2026-08-23 (phiên làm việc máy #1 — MacBook)
 
 ---
 
+## 0. ⚠️ CHÍNH SÁCH MỚI: CỐ ĐỊNH CODE (từ 2026-08-23)
+
+Thầy yêu cầu **đóng băng code** của app (`index.html`, `tkb-full-v2.html`) — Claude KHÔNG được
+tự ý sửa/refactor/"cải thiện" bất kỳ phần code nào (HTML/CSS/JS, cấu trúc, logic) cho đến khi
+thầy chủ động nhờ đổi cụ thể. Việc merge **DỮ LIỆU** (JSON lịch dạy mới từ thầy vào
+`INITIAL_SCHEDULE`/`initial_schedule.json`) vẫn làm bình thường — đó không phải là sửa code.
+Khi thầy nhờ sửa 1 phần hiển thị/tính năng cụ thể, chỉ làm ĐÚNG phạm vi đó, không lan sang sửa
+thêm chỗ khác dù "tiện thể".
+
 ## 1. TRẠNG THÁI HIỆN TẠI
 
-- **Phiên bản đang chạy chính thức:** v3.17 (đã merge hoàn toàn bản "V1.1 — xếp lại theo quy tắc mới")
+- **Phiên bản đang chạy chính thức:** v3.23
 - **3 nơi đã đồng bộ khớp nhau:**
-  - GitHub: `github.com/hcmtranle/tkb20262027hoanchinh` — commit `c42dcda`
-  - Artifact chính: `https://claude.ai/code/artifact/8552c45d-c843-4f04-aa02-ac0ed341b2b6` — đã publish lại bản mới nhất
+  - GitHub: `github.com/hcmtranle/tkb20262027hoanchinh` — commit `aaa6a1b`
+  - Artifact chính: `https://claude.ai/code/artifact/8552c45d-c843-4f04-aa02-ac0ed341b2b6` — đã publish lại bản mới nhất (v3.23)
   - Netlify: tự build lại từ GitHub (không cần thao tác gì thêm)
-- **Dữ liệu:** 29 lớp, 57 giáo viên, 1098 ô tiết học (trước đây 1100 — giảm 2 do chính thầy xóa 2 ô ở lớp 5.1 trong 1 lần chỉnh sửa trước)
+- **Dữ liệu:** 29 lớp, 57 giáo viên, 1100 ô tiết học (con số "1098" ghi ở bản cũ của file này đã
+  lỗi thời — v3.19 đã điền đủ lại 2 ô thiếu ở lớp 5.1, về đúng 1100)
 
-## 2. NHỮNG GÌ ĐÃ HOÀN THÀNH (tóm tắt các đợt lớn)
+## 2. NHỮNG GÌ ĐÃ HOÀN THÀNH (tóm tắt các đợt lớn, mới nhất trước)
+
+0. **v3.20 → v3.23 (2026-08-23, máy #1):**
+   - v3.21: Merge JSON thầy gửi (95 ô) — hết buổi lẻ Thầy Thái & Thầy Tạo, fix quota LSĐL lớp
+     5.2 (1→2 tiết/tuần, đúng quy định 2 tiết/tuần), điền tên GV còn thiếu (hiển thị trống) ở
+     lớp 3.4/3.6/4.6.
+   - v3.22: Merge JSON thầy gửi (21 ô) — hết buổi lẻ NỐT cho GV STEM(2), GV STEM(3), GV CDS(1).
+     **→ Nguyên tắc 3 (GV bộ môn tránh buổi lẻ) coi như HOÀN TẤT 100%.**
+   - v3.23: Đổi tên hiển thị môn `TA(BN)` thành "Tiếng Anh với người nước ngoài" (đúng quy định)
+     — Bảng Mã Màu hiện tên đầy đủ, ô lịch Tab "Xem Theo Lớp" & "Xem Theo GV" hiện 2 dòng
+     ("Tiếng Anh" / "Với người NN"), Ma Trận Toàn Trường vẫn giữ mã ngắn `TA(BN)` (bảng dày,
+     giữ nguyên như cách đã làm với "KH"→"Khoa học" trước đây). Sửa ở CẢ `SUBJECT_COLORS.name`
+     (cho Legend) LẪN `SUBJECT_DISPLAY` (cho ô lịch) — xem thêm `loithuonggap.md`.
+   - Cùng đợt: thầy yêu cầu **cố định code** kể từ nay (xem mục 0 phía trên).
+
+## 2b. NHỮNG GÌ ĐÃ HOÀN THÀNH TRƯỚC ĐÓ (v3.17 trở về trước)
 
 1. **Fix lỗi hiển thị/dữ liệu nền tảng:** lệch cột Tiết 8 bảng GV, auto-suggest GV thiếu cho 7 môn liên kết (CDS, IC3, CLB Stem, CLB KNS, CLB Toán TD, TA(BN), TA(T-K)), chuẩn hóa tên GV về dạng rút gọn, thêm GV thứ 57 (Thầy Lê Thành Tạo — Phó Hiệu trưởng, dạy Tin học 4 lớp 1.1-1.4), đồng bộ dữ liệu real-time giữa nhiều tab trình duyệt (sự kiện `storage`).
 2. **Xếp lại TKB theo 3 quy tắc mới của thầy** (144 ô thay đổi, kiểm định đầy đủ):
@@ -33,10 +58,13 @@
 
 ## 3. CÔNG VIỆC CÒN DANG DỞ — CHƯA LÀM
 
-**Nguyên tắc 3 (GV bộ môn tránh "buổi lẻ 1 tiết"):** Đã audit, PHÁT HIỆN nhưng **CHƯA SỬA** —
-thầy chủ động nói "không cần điều chỉnh, thầy tự sửa thủ công rồi gửi JSON". Danh sách GV còn
-bị buổi lẻ (tham khảo nếu cần): Thầy Thái (Tin học) 1 buổi, GV STEM (2) 2 buổi, GV STEM (3)
-2 buổi, GV CDS (1) 1 buổi, **Thầy Tạo (PHT) 4 buổi** (do chỉ dạy 4 tiết rải 2 ngày).
+**Nguyên tắc 3 (GV bộ môn tránh "buổi lẻ 1 tiết"):** ✅ **ĐÃ XONG HOÀN TOÀN** (v3.21 + v3.22,
+2026-08-23) — thầy tự sửa thủ công rồi gửi JSON 2 lần, Claude merge + kiểm định đủ 8 tiêu chí
+cả 2 lần. Không còn GV nào bị buổi lẻ (Thầy Thái, Thầy Tạo, GV STEM(2)/(3), GV CDS(1) đều hết).
+
+Hiện tại **không có việc gì dang dở** — code đã được thầy yêu cầu cố định (xem mục 0). Việc kế
+tiếp sẽ là thầy gửi JSON dữ liệu mới (merge theo quy trình mục 5) hoặc yêu cầu sửa 1 phần hiển
+thị/tính năng cụ thể.
 
 → **Khi thầy gửi JSON mới:** làm đúng quy trình cũ — merge cẩn thận (đối chiếu ô nào là chỉnh
 sửa thật vs dữ liệu baseline cũ của Artifact do chưa reload), kiểm định đủ 8 tiêu chí (xem
@@ -79,6 +107,11 @@ cập nhật thêm trừ khi thầy yêu cầu cụ thể.
   Claude push) → Netlify (tự build lại, chỉ hiển thị tĩnh). localStorage trên Artifact **ưu
   tiên hơn** dữ liệu mới publish — nghĩa là nếu thầy F5 mà vẫn thấy dữ liệu cũ, đó là vì trình
   duyệt giữ bản đã lưu cục bộ, không phải do publish thất bại.
+- **Sửa trên Artifact có tự lưu không?** CÓ — mỗi lần sửa 1 ô qua modal "Sửa Nhanh", hàm
+  `saveCell()` tự gọi `saveSchedule()` ngay, ghi vào `localStorage` lập tức, không cần bấm nút
+  "💾 Lưu Thời Khóa Biểu" riêng. NHƯNG đó chỉ là lưu CỤC BỘ (1 trình duyệt, 1 máy) — không tự
+  đẩy về GitHub/không đồng bộ máy khác. Muốn đưa vào bản chính thức: thầy xuất JSON từ Artifact
+  gửi cho Claude → Claude merge thủ công theo quy trình mục 5.
 
 ## 7. LIÊN KẾT QUAN TRỌNG
 
