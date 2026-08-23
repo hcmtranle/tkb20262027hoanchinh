@@ -730,6 +730,27 @@ function saveSchedule() {
   showToast('💾 Đã lưu thời khóa biểu!');
 }
 
+// ============= ĐỒNG BỘ GIỮA CÁC TAB/CỬA SỔ TRÌNH DUYỆT =============
+// Vấn đề: nếu Admin mở TKB trong 2 tab/cửa sổ khác nhau (VD: 1 tab xem
+// "Xem Theo Lớp", 1 tab khác xem "Xem Theo Giáo Viên"), sửa/xóa tiết ở
+// tab này KHÔNG tự cập nhật sang tab kia — vì `schedule` chỉ là biến JS
+// trong bộ nhớ, chỉ đọc lại từ localStorage lúc tải trang (init()).
+// Sự kiện 'storage' của trình duyệt chỉ bắn ra ở các tab KHÁC (không phải
+// tab vừa ghi) mỗi khi localStorage thay đổi -> dùng nó để tự làm mới.
+window.addEventListener('storage', function(e) {
+  if (e.key !== LOCAL_KEY || e.newValue === null) return;
+  try {
+    schedule = JSON.parse(e.newValue);
+  } catch (err) { return; }
+  const classPane = document.getElementById('view-class');
+  const teacherPane = document.getElementById('view-teacher');
+  const masterPane = document.getElementById('view-master');
+  if (classPane && !classPane.classList.contains('hidden')) { renderScheduleTable(); renderStats(); }
+  if (teacherPane && !teacherPane.classList.contains('hidden')) { renderTeacherTable(); }
+  if (masterPane && !masterPane.classList.contains('hidden')) { renderMasterMatrix(); }
+  showToast('🔄 Phát hiện thay đổi từ tab/cửa sổ khác — đã tự làm mới dữ liệu!');
+});
+
 // ============= TAB =============
 function switchTab(tabId) {
   document.querySelectorAll('.tab-pane,.view-pane').forEach(p => {
