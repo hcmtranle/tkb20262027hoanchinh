@@ -151,7 +151,8 @@
       "7": {
         "subject": "CLB Stem",
         "teacher_name": "GV Stem_1",
-        "isCustom": true
+        "isCustom": true,
+        "teacher_id": "t_stem_1"
       }
     },
     "T6": {
