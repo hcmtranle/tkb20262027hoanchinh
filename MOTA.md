@@ -307,6 +307,17 @@ lấy đúng nội dung bên trong `"schedule": { ... }`.
 
 ---
 
+## 🧪 Dự Án Số 2 — Artifact V1.1 (Bản Đã Xếp Lại, Để Đối Chiếu)
+
+> **Artifact V1.1:** https://claude.ai/code/artifact/1150a615-6300-4363-b2b7-269baf249ed7
+> **File:** `tkb-V1.1-xep-lai.html` (KHÔNG phải file chính, không dùng cho Netlify/GitHub Pages)
+
+Bản Artifact **riêng biệt**, publish 2026-08-23, nhúng sẵn kết quả xếp lại tự động theo 3 quy tắc mới (xem Nhiệm vụ xếp lại TKB ở phần trên) — 144 ô thay đổi/29 lớp, đã kiểm định đầy đủ (0 trùng GV, 0 trùng phòng máy, 0 vỡ cặp IC3, 0 lệch quota). Cùng tính năng y hệt bản chính (v3.16 + fix đồng bộ tab + chuẩn hóa tên GV).
+
+**Mục đích:** để thầy thao tác thử trực tiếp trên Artifact thật (không chỉ đọc PDF tĩnh) trước khi quyết định. Khi thầy thấy hợp lý, báo em **"đè lên phiên bản đang dùng"** — em sẽ: (1) copy dữ liệu này vào `initial_schedule.json` + `tkb-full-v2.html`/`index.html` chính thức, (2) commit + push GitHub, (3) publish lại Artifact chính (link cũ `8552c45d...`).
+
+---
+
 ## 🔗 Liên Kết
 
 - **Artifact:** https://claude.ai/code/artifact/8552c45d-c843-4f04-aa02-ac0ed341b2b6

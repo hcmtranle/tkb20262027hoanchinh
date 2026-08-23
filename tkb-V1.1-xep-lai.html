@@ -1,0 +1,1581 @@
+﻿<title>TKB Trường TH Nguyễn An Khương — V1.1 (Đã xếp lại)</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f1f5f9;color:#1e293b;min-height:100vh;}
+:root{--blue-900:#1e3a8a;--indigo-900:#312e81;--slate-100:#f1f5f9;--slate-200:#e2e8f0;--slate-700:#334155;--white:#fff;}
+
+/* Header */
+header{background:linear-gradient(135deg,#1e3a8a,#312e81,#172554);color:#fff;padding:16px 20px;box-shadow:0 4px 15px rgba(0,0,0,.2);}
+.hdr-wrap{max-width:1680px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;}
+.hdr-left{display:flex;align-items:center;gap:14px;}
+.hdr-logo{width:48px;height:48px;background:rgba(255,255,255,.15);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;border:1px solid rgba(255,255,255,.2);}
+.hdr-info .district{font-size:10px;font-weight:700;letter-spacing:.1em;color:#93c5fd;text-transform:uppercase;}
+.hdr-info .school{font-size:18px;font-weight:900;color:#fff;}
+.hdr-info .meta{font-size:11px;color:#bfdbfe;margin-top:3px;}
+.hdr-meta .badge-audit{display:inline-flex;align-items:center;gap:6px;background:rgba(16,185,129,.2);border:1px solid rgba(16,185,129,.4);color:#6ee7b7;padding:6px 12px;border-radius:10px;font-size:11px;font-weight:700;}
+.hdr-btns{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+.btn{padding:8px 14px;border:none;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all .15s;}
+.btn-green{background:linear-gradient(135deg,#059669,#047857);color:#fff;}
+.btn-orange{background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;}
+.btn-blue{background:#3b82f6;color:#fff;}
+.btn-rose{background:#e11d48;color:#fff;}
+.btn-slate{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.2);}
+.btn-dark{background:#1e293b;color:#fff;}
+.btn-indigo{background:#4f46e5;color:#fff;}
+.btn:hover{filter:brightness(1.1);transform:translateY(-1px);}
+.hidden{display:none!important;}
+
+/* Toast */
+.toast{position:fixed;bottom:20px;right:20px;background:#1e293b;color:#fff;padding:12px 20px;border-radius:14px;font-size:13px;font-weight:700;z-index:1000;box-shadow:0 8px 25px rgba(0,0,0,.3);display:flex;align-items:center;gap:10px;max-width:420px;}
+.toast.toast-ok{background:#059669;}
+.toast.toast-warn{background:#dc2626;}
+
+/* Conflict banner (trùng tiết) */
+.conflict-banner{background:linear-gradient(135deg,#fef2f2,#fee2e2);border:2px solid #fca5a5;border-radius:12px;padding:12px 18px;margin:16px 20px 0;color:#991b1b;font-size:12px;}
+.conflict-banner .cb-title{font-weight:900;display:flex;align-items:center;gap:6px;margin-bottom:6px;font-size:12.5px;}
+.conflict-banner ul{margin:0;padding-left:20px;}
+.conflict-banner li{margin:3px 0;line-height:1.5;}
+.conflict-banner b{color:#7f1d1d;}
+.cell-conflict{background:#fee2e2!important;border-color:#f87171!important;color:#991b1b!important;}
+.conflict-tag{font-size:8.5px;font-weight:900;color:#dc2626;margin-top:2px;display:flex;align-items:center;gap:2px;}
+
+/* Rule check modal */
+.rule-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;max-height:280px;overflow-y:auto;}
+.rule-list li{background:#fef2f2;border:1px solid #fecaca;border-radius:10px;padding:10px 12px;font-size:12px;color:#7f1d1d;line-height:1.5;display:flex;gap:8px;align-items:flex-start;}
+.rule-list li .ri{flex-shrink:0;}
+.rule-ok-box{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:16px;text-align:center;color:#166534;font-size:13px;font-weight:700;}
+
+/* Navigation */
+nav{background:#fff;border-bottom:2px solid #e2e8f0;box-shadow:0 1px 3px rgba(0,0,0,.05);}
+.nav-tabs{max-width:1680px;margin:0 auto;display:flex;overflow-x:auto;padding:0 16px;}
+.nav-tab{padding:14px 20px;font-size:13px;font-weight:700;cursor:pointer;border-bottom:3px solid transparent;color:#64748b;white-space:nowrap;transition:all .15s;display:flex;align-items:center;gap:7px;}
+.nav-tab.active{color:#2563eb;border-bottom-color:#2563eb;}
+.nav-tab:hover{color:#2563eb;background:#f8fafc;}
+
+/* Main */
+main{max-width:1680px;margin:24px auto;padding:0 16px;}
+
+/* Control bar */
+.ctrl-bar{background:#fff;border-radius:16px;padding:16px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.07);border:1px solid #e2e8f0;}
+.filter-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px;}
+.filter-label{font-size:12px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.05em;}
+.filter-btn{padding:6px 14px;border:2px solid #e2e8f0;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;background:#f8fafc;color:#475569;transition:all .15s;}
+.filter-btn.active{background:#2563eb;color:#fff;border-color:#2563eb;}
+.filter-btn:hover:not(.active){background:#eff6ff;border-color:#bfdbfe;color:#1d4ed8;}
+
+.class-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+.class-btn{padding:7px 14px;border:2px solid #e2e8f0;border-radius:10px;font-size:12px;font-weight:800;cursor:pointer;background:#fff;color:#334155;transition:all .15s;}
+.class-btn.active{background:#4338ca;color:#fff;border-color:#4338ca;box-shadow:0 2px 8px rgba(79,70,229,.4);ring:2px solid #818cf8;}
+.class-btn:hover:not(.active){background:#eef2ff;color:#4338ca;border-color:#c7d2fe;}
+
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding-top:12px;border-top:1px solid #f1f5f9;justify-content:space-between;}
+.toolbar-info{font-size:12px;color:#475569;display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+.toolbar-info strong{color:#1e293b;}
+.toolbar-actions{display:flex;gap:8px;flex-wrap:wrap;}
+
+/* Schedule table */
+.sched-wrap{background:#fff;border-radius:16px;padding:20px 24px;box-shadow:0 1px 4px rgba(0,0,0,.07);border:1px solid #e2e8f0;}
+.sched-header{margin-bottom:16px;}
+.sched-hdr-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;gap:16px;}
+.sched-hdr-left{text-align:center;}
+.sched-hdr-right{text-align:center;font-size:10px;color:#475569;font-weight:600;line-height:1.7;}
+.sched-hdr-right .chxhcnvn{font-size:11px;font-weight:800;color:#1e3a8a;letter-spacing:.05em;}
+.sched-hdr-right .doc-lap{font-style:italic;font-weight:700;color:#334155;font-size:11px;}
+.sched-hdr-right .hdr-date{font-size:10px;color:#64748b;}
+.sched-header .admin-header{font-size:10px;font-weight:700;letter-spacing:.08em;color:#64748b;text-transform:uppercase;}
+.sched-header .school-name{font-size:17px;font-weight:900;color:#1e3a8a;margin:3px 0;}
+.sched-header .school-meta{font-size:11px;color:#64748b;margin-top:2px;}
+.sched-header .class-title{font-size:22px;font-weight:900;color:#312e81;margin:8px 0 6px;text-align:center;}
+.sched-header .class-meta{font-size:12px;color:#64748b;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;align-items:center;}
+.sched-header .class-meta span{font-weight:600;}
+.sched-header .class-meta .badge{background:#eff6ff;color:#1d4ed8;padding:2px 10px;border-radius:6px;font-weight:800;}
+
+.edit-hint{background:linear-gradient(135deg,#fffbeb,#fef3c7);border:2px solid #f59e0b;border-radius:12px;padding:12px 20px;font-size:12px;color:#92400e;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px rgba(245,158,11,.2);animation:pulse-hint 2s infinite;}
+@keyframes pulse-hint{0%,100%{box-shadow:0 2px 8px rgba(245,158,11,.2);}50%{box-shadow:0 2px 16px rgba(245,158,11,.4);}}
+
+table{width:100%;border-collapse:collapse;table-layout:fixed;}
+thead tr{background:linear-gradient(135deg,#1e3a8a,#312e81);color:#fff;}
+th,td{border:1px solid #e2e8f0;padding:0;}
+th{padding:10px 8px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;}
+th.th-day .day-name{color:#fde047;font-size:13px;font-weight:900;}
+th.th-day .day-full{color:#bfdbfe;font-size:10px;margin-top:2px;}
+th.th-narrow{width:52px;}
+th.th-time{width:90px;}
+td.td-session{font-size:11px;font-weight:900;letter-spacing:.1em;padding:4px;width:42px;text-align:center;vertical-align:middle;}
+td.td-session .sess-text{display:inline-block;transform:rotate(-90deg);white-space:nowrap;letter-spacing:3px;font-size:11px;font-weight:900;}
+td.td-morning{background:linear-gradient(180deg,#dbeafe,#bfdbfe);color:#1e3a8a;}
+td.td-afternoon{background:linear-gradient(180deg,#fef3c7,#fde68a);color:#92400e;}
+td.td-period{font-size:12px;font-weight:800;color:#334155;background:#f8fafc;padding:8px;text-align:center;}
+td.td-time{font-size:10px;font-family:monospace;color:#64748b;background:#f8fafc;padding:6px 8px;text-align:center;}
+td.td-break{background:#f1f5f9;color:#64748b;font-size:10px;font-weight:600;text-align:center;padding:6px;}
+td.td-lunch{background:#fef9c3;color:#92400e;font-size:10px;font-weight:700;text-align:center;padding:8px;}
+td.td-cell{padding:5px;vertical-align:middle;cursor:default;}
+td.td-cell.editable{cursor:pointer;position:relative;}
+td.td-cell.editable::after{content:'✏️';position:absolute;top:3px;right:4px;font-size:10px;opacity:0;transition:opacity .15s;}
+td.td-cell.editable:hover::after{opacity:1;}
+td.td-cell.editable:hover .cell-inner{transform:scale(1.03);box-shadow:0 0 0 2px #4f46e5;border-color:#4f46e5!important;transition:all .15s;}
+td.td-cell.editable .cell-inner{transition:all .15s;}
+.cell-inner{border-radius:10px;border:1px solid;padding:8px 6px;display:flex;align-items:center;gap:5px;min-height:44px;transition:all .15s;position:relative;}
+.cell-icon{font-size:16px;flex-shrink:0;}
+.cell-text{font-size:11px;font-weight:800;line-height:1.3;text-align:left;}
+.cell-empty{color:#cbd5e1;font-size:11px;text-align:center;padding:12px 0;width:100%;}
+.cell-custom-badge{position:absolute;top:3px;right:3px;width:14px;height:14px;background:#fde68a;border-radius:50%;font-size:9px;display:flex;align-items:center;justify-content:center;}
+tr.tr-even{background:#f8fafc;}
+
+/* Subject stats */
+.stats-wrap{background:#fff;border-radius:16px;padding:16px 20px;box-shadow:0 1px 4px rgba(0,0,0,.07);border:1px solid #e2e8f0;margin-top:16px;}
+.stats-wrap h4{font-size:13px;font-weight:800;color:#1e293b;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.stats-chips{display:flex;flex-wrap:wrap;gap:8px;}
+.stat-chip{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:8px;border:1px solid;font-size:12px;font-weight:700;}
+.stats-total{font-size:11px;color:#64748b;margin-top:8px;}
+
+/* Signatures */
+.sigs{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px;text-align:center;}
+.sig-box{font-size:12px;color:#334155;}
+.sig-title{font-weight:800;text-transform:uppercase;margin-bottom:48px;}
+.sig-sub{font-size:10px;color:#64748b;font-style:italic;margin-top:2px;}
+.sig-name{font-weight:900;font-size:14px;color:#1e293b;}
+
+/* Color legend */
+.legend-wrap{background:#fff;border-radius:16px;padding:16px 20px;margin-top:16px;box-shadow:0 1px 4px rgba(0,0,0,.07);}
+.legend-wrap h3{font-size:12px;font-weight:800;color:#334155;text-transform:uppercase;margin-bottom:12px;}
+.legend-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px;}
+.legend-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;border:1px solid;}
+.legend-item .l-icon{font-size:18px;}
+.legend-item .l-name{font-size:11px;font-weight:700;line-height:1.2;}
+.legend-item .l-code{font-size:9px;opacity:.65;font-family:monospace;}
+
+/* Modal */
+.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(15,23,42,.6);backdrop-filter:blur(4px);z-index:500;align-items:center;justify-content:center;padding:16px;}
+.modal-backdrop.show{display:flex;}
+.modal-box{background:#fff;border-radius:24px;padding:28px;max-width:480px;width:100%;box-shadow:0 25px 50px rgba(0,0,0,.25);animation:popup .25s ease-out;}
+@keyframes popup{from{opacity:0;transform:scale(.94) translateY(12px)}to{opacity:1;transform:none}}
+.modal-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.modal-title-wrap{display:flex;align-items:center;gap:10px;}
+.modal-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;}
+.modal-title{font-size:17px;font-weight:900;color:#1e293b;}
+.modal-sub{font-size:11px;color:#64748b;margin-top:2px;}
+.modal-close{background:none;border:none;font-size:22px;color:#94a3b8;cursor:pointer;padding:4px;}
+.modal-close:hover{color:#475569;}
+
+/* Edit modal */
+.edit-section-title{font-size:11px;font-weight:800;color:#475569;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;}
+.subj-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;max-height:220px;overflow-y:auto;padding:4px;border:1px solid #e2e8f0;border-radius:12px;}
+.subj-btn{padding:8px 10px;border-radius:8px;border:1px solid #e2e8f0;cursor:pointer;background:#fff;text-align:left;display:flex;align-items:center;gap:8px;transition:all .12s;font-size:11px;font-weight:700;}
+.subj-btn.sel{ring:2px solid #2563eb;font-weight:900;}
+.subj-btn:hover{background:#eff6ff;}
+.subj-btn .sb-icon{font-size:16px;}
+.subj-btn .sb-name{font-weight:700;line-height:1.2;}
+.subj-btn .sb-code{font-size:9px;opacity:.6;font-family:monospace;}
+select.teacher-sel{width:100%;padding:10px 12px;border:1px solid #cbd5e1;border-radius:10px;font-size:13px;font-weight:700;color:#1e293b;background:#f8fafc;margin-top:4px;}
+select.teacher-sel:focus{outline:none;border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.15);}
+
+.modal-footer{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:16px;border-top:1px solid #f1f5f9;}
+.modal-footer .footer-left{display:flex;gap:8px;}
+.modal-footer .footer-right{display:flex;gap:8px;}
+
+/* Login modal */
+.pass-input{width:100%;padding:12px 16px;border:1px solid #cbd5e1;border-radius:12px;font-size:15px;margin-top:4px;}
+.pass-input:focus{outline:none;border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.12);}
+.err-msg{color:#dc2626;font-size:12px;font-weight:700;margin-top:8px;}
+
+/* Teacher View */
+.teacher-filter-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;}
+.teacher-filter-btn{padding:6px 14px;border:2px solid #e2e8f0;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;background:#f8fafc;color:#475569;transition:all .15s;}
+.teacher-filter-btn.active{background:#7c3aed;color:#fff;border-color:#7c3aed;}
+.teacher-sel-wrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px;}
+select.teacher-main-sel{padding:8px 14px;border:2px solid #e2e8f0;border-radius:10px;font-size:13px;font-weight:700;color:#1e293b;background:#fff;min-width:280px;}
+.teacher-tbl-wrap{background:#fff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;}
+.teacher-tbl-header{background:linear-gradient(135deg,#312e81,#4c1d95);color:#fff;padding:16px 20px;}
+.teacher-tbl-header h3{font-size:16px;font-weight:900;}
+.teacher-tbl-header p{font-size:12px;color:#c4b5fd;margin-top:4px;}
+.teacher-tbl th{font-size:11px;background:#312e81;color:#fff;padding:10px 8px;}
+.teacher-tbl td.td-cell{background:#fff;}
+
+/* Master View */
+.master-search{padding:8px 14px;border:2px solid #e2e8f0;border-radius:10px;font-size:13px;width:280px;margin-bottom:16px;}
+.master-tbl-wrap{overflow-x:auto;border-radius:16px;border:1px solid #e2e8f0;}
+.master-tbl{width:100%;border-collapse:collapse;font-size:11px;}
+.master-tbl th{background:#1e3a8a;color:#fff;padding:8px;font-weight:700;white-space:nowrap;position:sticky;top:0;}
+.master-tbl td{border:1px solid #e2e8f0;padding:4px;vertical-align:middle;}
+.master-tbl td.td-class{font-weight:900;color:#1e3a8a;background:#eff6ff;white-space:nowrap;padding:6px 10px;}
+.master-tbl td.td-gvcn{font-size:10px;color:#475569;background:#f8fafc;white-space:nowrap;padding:6px 10px;}
+.master-cell{padding:3px 5px;border-radius:6px;border:1px solid;font-size:10px;font-weight:700;text-align:center;line-height:1.2;}
+
+/* Footer */
+footer{background:#fff;border-top:1px solid #e2e8f0;padding:20px;text-align:center;font-size:11px;color:#94a3b8;margin-top:24px;}
+footer strong{color:#475569;}
+
+@media(max-width:768px){
+  .hdr-wrap{flex-direction:column;align-items:flex-start;}
+  .sched-header .class-meta{flex-direction:column;gap:4px;}
+  .sigs{grid-template-columns:1fr 1fr;}
+}
+
+/* ============= PRINT / XUẤT PDF — gọn trong 1 mặt giấy A4 ngang ============= */
+@page{ size:A4 landscape; margin:8mm; }
+@media print{
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important;}
+  html,body{background:#fff!important;margin:0!important;padding:0!important;}
+
+  /* Ẩn toàn bộ khung điều hướng, nút bấm, thông báo — chỉ in nội dung TKB */
+  header,nav,footer,.ctrl-bar,.edit-hint,.toast,.modal-backdrop,
+  .toolbar,.teacher-filter-row,.teacher-sel-wrap,.master-search,
+  button,select{display:none!important;}
+  .conflict-banner{padding:4px 8px!important;margin:0 0 3mm!important;font-size:8px!important;}
+  .conflict-banner .cb-title{font-size:8.5px!important;margin-bottom:2px!important;}
+
+  main{margin:0!important;padding:0!important;max-width:100%!important;}
+
+  /* Bỏ khung/đổ bóng thẻ để tiết kiệm diện tích trang in */
+  .sched-wrap,.stats-wrap,.legend-wrap,.teacher-tbl-wrap,.master-tbl-wrap{
+    box-shadow:none!important;border:none!important;border-radius:0!important;
+    padding:0!important;margin:0 0 3mm 0!important;page-break-inside:avoid;
+  }
+
+  /* Header trường — thu gọn */
+  .sched-hdr-top{margin-bottom:4px!important;}
+  .sched-header .admin-header{font-size:8px!important;}
+  .sched-header .school-name{font-size:12px!important;margin:2px 0!important;}
+  .sched-header .school-meta{font-size:8px!important;}
+  .sched-hdr-right{font-size:8px!important;}
+  .sched-hdr-right .chxhcnvn{font-size:9px!important;}
+  .sched-header .class-title{font-size:14px!important;margin:4px 0 3px!important;}
+  .sched-header .class-meta{font-size:9px!important;gap:8px!important;}
+
+  /* Bảng TKB / bảng GV — font nhỏ, đệm mỏng để vừa 1 trang */
+  table{font-size:8px!important;}
+  th{padding:3px 2px!important;font-size:8px!important;}
+  .th-day .day-name{font-size:9px!important;}
+  .th-day .day-full{font-size:7px!important;}
+  td.td-period{font-size:8px!important;padding:2px!important;}
+  td.td-time{font-size:7px!important;padding:2px!important;}
+  td.td-break{font-size:7px!important;padding:2px!important;}
+  td.td-session .sess-text{font-size:8px!important;letter-spacing:1px!important;}
+  td.td-cell{padding:1px!important;}
+  .cell-inner{padding:2px 3px!important;min-height:auto!important;border-radius:4px!important;gap:2px!important;}
+  .cell-icon{font-size:9px!important;}
+  .cell-text{font-size:7.5px!important;line-height:1.15!important;}
+  .cell-text div{font-size:6.5px!important;}
+  .cell-custom-badge,.conflict-tag{display:none!important;}
+
+  /* Thống kê — dồn gọn thành hàng nhỏ
+     (các span này được JS render với inline style nên phải !important để ghi đè) */
+  .stats-wrap{padding:2mm 0!important;}
+  .stats-wrap h4{font-size:9px!important;margin-bottom:3px!important;}
+  #statsChips span{padding:1px 6px!important;font-size:7.5px!important;margin:1px!important;}
+  .stats-total{font-size:8px!important;margin-top:3px!important;}
+
+  /* Chỉ in ĐÚNG 1 trang thông tin của lớp/GV đang xem: Header + Bảng + Thống kê + Chữ ký.
+     Bảng Mã Màu (chú thích chung, không riêng lớp nào) KHÔNG in để tránh tràn trang. */
+  .legend-wrap{display:none!important;}
+
+  /* Chữ ký — thu gọn khoảng trắng ký tên */
+  .sigs{margin-top:6mm!important;gap:12px!important;}
+  .sig-title{font-size:9px!important;margin-bottom:14mm!important;}
+  .sig-name{font-size:11px!important;}
+
+  /* Bảng ma trận toàn trường / bảng GV báo giảng */
+  .master-tbl th,.master-tbl td{padding:2px!important;font-size:7px!important;}
+  .teacher-tbl-header{padding:4px 0!important;background:none!important;color:#1e293b!important;}
+  .teacher-tbl-header h3{font-size:12px!important;}
+  .teacher-tbl-header p{font-size:8px!important;color:#475569!important;}
+}
+</style>
+<!-- BODY HTML -->
+<header>
+  <div class="hdr-wrap">
+    <div class="hdr-left">
+      <div class="hdr-logo">🏫</div>
+      <div class="hdr-info">
+        <div class="district">UỶ BAN NHÂN DÂN PHƯỜNG ĐÔNG HƯNG THUẬN</div>
+        <div class="school">TRƯỜNG TIỂU HỌC NGUYỄN AN KHƯƠNG</div>
+        <div class="meta">📅 Năm học 2026 - 2027 • 🎓 29 Lớp học • 👩‍🏫 57 Giáo viên • ✨ Hiệu trưởng: Hồ Thị Ngọc Diễm</div>
+      </div>
+    </div>
+    <div>
+      <div class="hdr-btns hidden" id="badgeAudit" style="margin-bottom:8px;">
+        <div class="badge-audit"><span style="width:8px;height:8px;border-radius:50%;background:#34d399;display:inline-block;"></span> 100% TUÂN THỦ QUY TẮC (10/16)</div>
+      </div>
+      <div class="hdr-btns" id="hdrBtns">
+        <button class="btn btn-green hidden" id="btnSaveTKB" onclick="saveTKB()">💾 Lưu Thời Khóa Biểu</button>
+        <button class="btn btn-orange hidden" id="btnExportZip" onclick="exportZip()">📦 Tải File Nén (.zip)</button>
+        <button class="btn btn-slate" id="loginBtn" onclick="openLogin()">🔒 Đăng Nhập Quản Trị</button>
+        <!-- Admin buttons (hidden until login) -->
+        <button class="btn btn-orange hidden" id="btnSync" onclick="triggerSync()">🔄 Cập Nhật Lịch Báo Giảng</button>
+        <button class="btn btn-blue hidden" id="btnPrint" onclick="printAll()">🖨️ In / Xuất PDF</button>
+        <button class="btn btn-rose hidden" id="btnReset" onclick="resetToDefault()">↩️ Khôi Phục Gốc</button>
+        <button class="btn btn-slate hidden" id="logoutBtn" onclick="doLogout()">🚪 Đăng Xuất Admin</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-tabs">
+    <div class="nav-tab active" id="tab-class" onclick="switchTab('class')">📋 Xem Theo Lớp</div>
+    <div class="nav-tab" id="tab-teacher" onclick="switchTab('teacher')">👩‍🏫 Xem Theo Giáo Viên & Lịch Báo Giảng</div>
+    <div class="nav-tab" id="tab-master" onclick="switchTab('master')">📊 Ma Trận TKB Toàn Trường</div>
+  </div>
+</nav>
+
+<main>
+  <!-- TAB 1: CLASS VIEW -->
+  <div id="view-class">
+    <div class="ctrl-bar">
+      <div class="filter-row">
+        <span class="filter-label">Khối Lớp:</span>
+        <button class="filter-btn active" id="grade-all" onclick="filterGrade('all')">Tất cả (29 lớp)</button>
+        <button class="filter-btn" id="grade-1" onclick="filterGrade('1')">Khối 1 (6 lớp)</button>
+        <button class="filter-btn" id="grade-2" onclick="filterGrade('2')">Khối 2 (6 lớp)</button>
+        <button class="filter-btn" id="grade-3" onclick="filterGrade('3')">Khối 3 (6 lớp)</button>
+        <button class="filter-btn" id="grade-4" onclick="filterGrade('4')">Khối 4 (6 lớp)</button>
+        <button class="filter-btn" id="grade-5" onclick="filterGrade('5')">Khối 5 (5 lớp)</button>
+      </div>
+      <div class="class-grid" id="classGrid"></div>
+      <div class="toolbar">
+        <div class="toolbar-info">
+          <span>Đang xem: <span class="badge" style="background:#eff6ff;color:#1d4ed8;padding:3px 10px;border-radius:8px;font-weight:800;" id="currentClassBadge">LỚP 1.1 (Khối 1)</span></span>
+          <span>GVCN: <strong id="currentGVCN">Cô Linh (1.1)</strong></span>
+          <span>Tổng: <strong id="totalPeriods">35 tiết/tuần</strong></span>
+        </div>
+        <div class="toolbar-actions">
+          <button class="btn btn-rose" onclick="exportPDF()">📄 Xuất PDF (A4 Ngang)</button>
+          <button class="btn" style="background:#f1f5f9;color:#334155;border:1px solid #e2e8f0;" onclick="exportExcel()">📥 Tải File Mẫu Excel</button>
+          <button class="btn btn-green hidden" id="btnUpload" onclick="openUpload()">📤 Upload TKB</button>
+          <button class="btn btn-dark" id="btnEditMode" onclick="toggleEditMode()" style="background:#4f46e5;">✏️ Bật Sửa Nhanh Từng Tiết</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="sched-wrap" id="classTimetablePrintArea">
+      <div class="sched-header">
+        <!-- 2-cột: Trái = UBND + Trường | Phải = CHXHCNVN -->
+        <div class="sched-hdr-top">
+          <div class="sched-hdr-left">
+            <div class="admin-header">UỶ BAN NHÂN DÂN PHƯỜNG ĐÔNG HƯNG THUẬN</div>
+            <div class="school-name">TRƯỜNG TIỂU HỌC NGUYỄN AN KHƯƠNG</div>
+            <div class="school-meta">Khối <span id="hdrGrade">1</span> • Quy mô: 29 Lớp học • 57 Cán bộ - Giáo viên</div>
+          </div>
+          <div class="sched-hdr-right">
+            <div class="chxhcnvn">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
+            <div class="doc-lap">Độc lập - Tự do - Hạnh phúc</div>
+            <div class="hdr-date" id="hdrDate">Đông Hưng Thuận, <span id="hdrDateVal"></span></div>
+          </div>
+        </div>
+        <!-- Tiêu đề chính căn giữa -->
+        <div class="class-title">🏫 THỜI KHÓA BIỂU — LỚP <span id="hdrClass">1.1</span></div>
+        <div class="class-meta">
+          <span class="badge" id="hdrGradeBadge">Khối 1</span>
+          <span>• Giáo viên chủ nhiệm: <strong id="hdrGVCN">Trần Thị Diễm Linh</strong></span>
+          <span>• <strong id="hdrTotal" style="color:#4338ca;">Lớp 1.1: 35 tiết/tuần</strong></span>
+        </div>
+      </div>
+      
+      <div class="edit-hint hidden" id="editHint">
+        <span>💡 <strong>Chế độ Sửa Nhanh đang bật:</strong> Click vào bất kỳ ô tiết học nào để đổi môn học hoặc giáo viên phụ trách.</span>
+        <button class="btn btn-orange" onclick="toggleEditMode()" style="padding:5px 12px;font-size:11px;">Tắt</button>
+      </div>
+
+      <div style="overflow-x:auto;border-radius:12px;border:1px solid #e2e8f0;">
+        <table id="scheduleTable"></table>
+      </div>
+    </div>
+
+    <div class="stats-wrap" id="statsWrap">
+      <h4>📊 Thống kê số tiết theo môn học (Lớp <span id="statsClass">1.1</span>)</h4>
+      <div class="stats-chips" id="statsChips"></div>
+      <div class="stats-total" id="statsTotal"></div>
+    </div>
+
+    <!-- Signatures -->
+    <div class="sched-wrap" style="margin-top:16px;">
+      <div class="sigs">
+        <div class="sig-box">
+          <div class="sig-title">HIỆU TRƯỞNG</div>
+          <div class="sig-name">Hồ Thị Ngọc Diễm</div>
+        </div>
+        <div class="sig-box">
+          <div class="sig-title">GIÁO VIÊN CHỦ NHIỆM</div>
+          <div class="sig-name" id="sigGVCN">Trần Thị Diễm Linh</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Color Legend -->
+    <div class="legend-wrap">
+      <h3>🎨 Bảng Mã Màu & Biểu Tượng Nhận Diện Môn Học Chuẩn</h3>
+      <div class="legend-grid" id="legendGrid"></div>
+    </div>
+  </div>
+
+  <!-- TAB 2: TEACHER VIEW -->
+  <div id="view-teacher" class="hidden">
+    <div class="ctrl-bar">
+      <div class="teacher-filter-row">
+        <button class="teacher-filter-btn active" id="tf-all" onclick="filterTeacher('all')">Tất cả (57 GV)</button>
+        <button class="teacher-filter-btn" id="tf-bomon" onclick="filterTeacher('specialist')">Bộ môn & TPT (10 GV)</button>
+        <button class="teacher-filter-btn" id="tf-lienket" onclick="filterTeacher('partner')">GV Liên kết (18 GV)</button>
+        <button class="teacher-filter-btn" id="tf-gvcn" onclick="filterTeacher('gvcn')">Chủ nhiệm (29 GVCN)</button>
+      </div>
+      <div class="teacher-sel-wrap">
+        <span class="filter-label">Chọn Giáo Viên:</span>
+        <select class="teacher-main-sel" id="teacherSelect" onchange="selectTeacher(this.value)"></select>
+      </div>
+      <div class="toolbar-actions">
+        <button class="btn btn-rose" onclick="exportPDF()">📄 Xuất PDF (A4 Ngang)</button>
+        <button class="btn btn-green" onclick="exportExcelTeacher()">📊 Xuất Excel Báo Giảng GV</button>
+        <button class="btn btn-indigo" onclick="exportAllTeachers()">📁 Xuất Trọn Bộ Tổ Bộ Môn</button>
+        <button class="btn btn-orange hidden" id="btnUpdateBG" onclick="updateBaoGiang()">🔄 Cập Nhật Báo Giảng</button>
+      </div>
+    </div>
+    <div class="teacher-tbl-wrap">
+      <div class="teacher-tbl-header">
+        <h3 id="teacherName">Cô Phượng (TA)</h3>
+        <p id="teacherInfo">Nguyễn Thị Kim Phượng — GV Tiếng Anh — 24 tiết/tuần</p>
+      </div>
+      <div id="teacherConflictBanner"></div>
+      <div style="overflow-x:auto;padding:16px;">
+        <table class="teacher-tbl" id="teacherTable"></table>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: MASTER VIEW -->
+  <div id="view-master" class="hidden">
+    <div class="ctrl-bar">
+      <div class="filter-row">
+        <span class="filter-label">Lọc Khối:</span>
+        <button class="filter-btn active" id="mgrade-all" onclick="filterMasterGrade('all')">Tất cả (29 lớp)</button>
+        <button class="filter-btn" id="mgrade-1" onclick="filterMasterGrade('1')">Khối 1</button>
+        <button class="filter-btn" id="mgrade-2" onclick="filterMasterGrade('2')">Khối 2</button>
+        <button class="filter-btn" id="mgrade-3" onclick="filterMasterGrade('3')">Khối 3</button>
+        <button class="filter-btn" id="mgrade-4" onclick="filterMasterGrade('4')">Khối 4</button>
+        <button class="filter-btn" id="mgrade-5" onclick="filterMasterGrade('5')">Khối 5</button>
+      </div>
+      <input class="master-search" type="text" placeholder="🔍 Tìm môn hoặc giáo viên..." oninput="searchMaster(this.value)">
+    </div>
+    <div>
+      <h3 style="font-size:16px;font-weight:900;color:#1e3a8a;margin-bottom:4px;text-align:center;">MA TRẬN THỜI KHÓA BIỂU TOÀN TRƯỜNG (29 LỚP HỌC)</h3>
+      <p style="font-size:11px;color:#64748b;text-align:center;margin-bottom:16px;">Tổng hợp toàn bộ 1.100 tiết học của 29 lớp từ Thứ 2 đến Thứ 6 • Năm học 2026-2027</p>
+      <div class="master-tbl-wrap">
+        <table class="master-tbl" id="masterTable"></table>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div><strong>TRƯỜNG TIỂU HỌC NGUYỄN AN KHƯƠNG — NĂM HỌC 2026 - 2027</strong></div>
+  <div>Hiệu trưởng: <strong>Hồ Thị Ngọc Diễm</strong> | Quản lý: UỶ BAN NHÂN DÂN PHƯỜNG ĐÔNG HƯNG THUẬN</div>
+  <div style="color:#cbd5e1;margin-top:4px;">Hệ thống Thời Khóa Biểu Tự Động Hóa & Lịch Báo Giảng Giáo Viên Bộ Môn — Phiên bản V2.4 (Branch: tkbnak2627V2)</div>
+</footer>
+
+<!-- Admin Login Modal -->
+<div class="modal-backdrop" id="loginModal">
+  <div class="modal-box" style="max-width:400px;">
+    <div class="modal-hdr">
+      <div class="modal-title-wrap">
+        <div class="modal-icon" style="background:#eff6ff;">🔒</div>
+        <div><div class="modal-title">Xác Thực Quản Trị</div><div class="modal-sub">Nhập mật khẩu quản trị viên</div></div>
+      </div>
+      <button class="modal-close" onclick="closeLogin()">×</button>
+    </div>
+    <div>
+      <div class="edit-section-title">Mật Khẩu Quản Trị:</div>
+      <input type="password" class="pass-input" id="passInput" placeholder="Nhập mật khẩu..." onkeydown="if(event.key==='Enter')doLogin()">
+      <div class="err-msg hidden" id="passErr">❌ Mật khẩu không chính xác!</div>
+    </div>
+    <div class="modal-footer">
+      <div></div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn" style="background:#f1f5f9;color:#334155;" onclick="closeLogin()">Hủy</button>
+        <button class="btn btn-blue" onclick="doLogin()">🔓 Đăng Nhập</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Cell Modal -->
+<div class="modal-backdrop" id="editModal">
+  <div class="modal-box">
+    <div class="modal-hdr">
+      <div class="modal-title-wrap">
+        <div class="modal-icon" style="background:#fffbeb;">✏️</div>
+        <div><div class="modal-title">Chỉnh Sửa Tiết Học</div><div class="modal-sub" id="editModalSub">Lớp 1.1 • THỨ 2 • Tiết 1 (7:45 - 8:20)</div></div>
+      </div>
+      <button class="modal-close" onclick="closeEdit()">×</button>
+    </div>
+    <div>
+      <div class="edit-section-title" style="margin-bottom:8px;">1. CHỌN MÔN HỌC:</div>
+      <div class="subj-grid" id="subjGrid"></div>
+      <div class="edit-section-title" style="margin-top:16px;margin-bottom:4px;">2. CHỌN GIÁO VIÊN GIẢNG DẠY:</div>
+      <select class="teacher-sel" id="teacherSelEdit"></select>
+    </div>
+    <div class="modal-footer">
+      <div class="footer-left">
+        <button class="btn btn-rose" style="background:none;color:#e11d48;border:1px solid #fecdd3;" onclick="clearCell()">🗑️ Xóa Tiết Này</button>
+      </div>
+      <div class="footer-right">
+        <button class="btn" style="background:#f1f5f9;color:#334155;" onclick="closeEdit()">Hủy</button>
+        <button class="btn btn-blue" onclick="saveCell()">💾 Lưu Thay Đổi</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Rule Check Modal (Kiểm Định Quy Tắc) -->
+<div class="modal-backdrop" id="ruleModal">
+  <div class="modal-box" style="max-width:500px;">
+    <div class="modal-hdr">
+      <div class="modal-title-wrap">
+        <div class="modal-icon" id="ruleModalIcon" style="background:#fef2f2;">⚠️</div>
+        <div><div class="modal-title">Kiểm Tra Quy Tắc</div><div class="modal-sub" id="ruleModalSub">Đang kiểm tra dữ liệu...</div></div>
+      </div>
+      <button class="modal-close" onclick="closeRuleModal()">×</button>
+    </div>
+    <div id="ruleModalBody"></div>
+    <div class="modal-footer">
+      <div></div>
+      <button class="btn btn-blue" onclick="closeRuleModal()">Đã hiểu</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast hidden" id="toast"></div>
+<script>
+// ============= DATA =============
+const ADMIN_PASS = "Tram@0211";
+const LOCAL_KEY = "tkb_nak_schedule_v4";
+
+const SUBJECT_COLORS = {
+  "TV": {bg:"#fef3c7",border:"#fcd34d",text:"#78350f",name:"Tiếng Việt",icon:"📖"},
+  "Toán": {bg:"#dbeafe",border:"#93c5fd",text:"#1e3a8a",name:"Toán",icon:"📐"},
+  "ĐĐ": {bg:"#fef9c3",border:"#fde047",text:"#713f12",name:"Đạo đức",icon:"🌱"},
+  "TNXH": {bg:"#d1fae5",border:"#6ee7b7",text:"#064e3b",name:"Tự nhiên và Xã hội",icon:"🌿"},
+  "KH": {bg:"#ccfbf1",border:"#5eead4",text:"#134e4a",name:"Khoa học",icon:"🔬"},
+  "LSĐL": {bg:"#ffedd5",border:"#fdba74",text:"#7c2d12",name:"Lịch sử và Địa lí",icon:"🧭"},
+  "HĐTN(CC)": {bg:"#fee2e2",border:"#fca5a5",text:"#7f1d1d",name:"HĐTN (Chào cờ)",icon:"🚩"},
+  "HĐTN(CĐ)": {bg:"#ffe4e6",border:"#fda4af",text:"#881337",name:"HĐTN (Chủ đề)",icon:"🤝"},
+  "HĐTN(SHL)": {bg:"#f3e8ff",border:"#d8b4fe",text:"#581c87",name:"HĐTN (SHL)",icon:"🏫"},
+  "GDTC": {bg:"#dcfce7",border:"#86efac",text:"#14532d",name:"Giáo dục thể chất",icon:"⚽"},
+  "NT(MT)": {bg:"#fce7f3",border:"#f9a8d4",text:"#831843",name:"Mĩ thuật",icon:"🎨"},
+  "NT(ÂN)": {bg:"#cffafe",border:"#67e8f9",text:"#164e63",name:"Âm nhạc",icon:"🎵"},
+  "CN": {bg:"#ecfccb",border:"#bef264",text:"#365314",name:"Công nghệ",icon:"⚙️"},
+  "TA": {bg:"#e0e7ff",border:"#a5b4fc",text:"#312e81",name:"Tiếng Anh",icon:"📘"},
+  "TH": {bg:"#e0f2fe",border:"#7dd3fc",text:"#0c4a6e",name:"Tin học",icon:"💻"},
+  "IC3": {bg:"#ede9fe",border:"#c4b5fd",text:"#4c1d95",name:"Tin học Quốc tế IC3",icon:"🌐"},
+  "CDS": {bg:"#fae8ff",border:"#f0abfc",text:"#701a75",name:"CLB Công dân số",icon:"📱"},
+  "CLB Stem": {bg:"#ccfbf1",border:"#5eead4",text:"#134e4a",name:"CLB Stem",icon:"💡"},
+  "CLB KNS": {bg:"#fef3c7",border:"#fcd34d",text:"#78350f",name:"CLB KNS",icon:"🌟"},
+  "TA(BN)": {bg:"#dbeafe",border:"#60a5fa",text:"#1e3a8a",name:"Tiếng Anh với người NN",icon:"🗣️"},
+  "TA(T-K)": {bg:"#cffafe",border:"#22d3ee",text:"#164e63",name:"Tiếng Anh (Toán-Khoa)",icon:"🔢"},
+  "CLB Toán TD": {bg:"#d1fae5",border:"#34d399",text:"#064e3b",name:"CLB Toán Tư duy",icon:"🧠"},
+  "Tự học": {bg:"#f1f5f9",border:"#cbd5e1",text:"#1e293b",name:"Tự học/học có hướng dẫn",icon:"📝"}
+};
+
+const TIME_SLOTS = [
+  {period:1,session:"SÁNG",name:"Tiết 1",time:"7:45 - 8:20",isBreak:false},
+  {period:2,session:"SÁNG",name:"Tiết 2",time:"8:25 - 9:00",isBreak:false},
+  {period:"break_am",session:"Ra chơi",name:"Ra chơi sáng",time:"9:00 - 9:35",isBreak:true,breakType:"am"},
+  {period:3,session:"SÁNG",name:"Tiết 3",time:"9:35 - 10:10",isBreak:false},
+  {period:4,session:"SÁNG",name:"Tiết 4",time:"10:15 - 10:50",isBreak:false},
+  {period:"lunch",session:"Nghỉ trưa",name:"Bán trú & Nghỉ trưa",time:"10:50 - 13:30",isBreak:true,breakType:"lunch"},
+  {period:5,session:"CHIỀU",name:"Tiết 5",time:"13:30 - 14:05",isBreak:false},
+  {period:6,session:"CHIỀU",name:"Tiết 6",time:"14:10 - 14:45",isBreak:false},
+  {period:"break_pm",session:"Ra chơi",name:"Ra chơi chiều",time:"14:45 - 15:15",isBreak:true,breakType:"pm"},
+  {period:7,session:"CHIỀU",name:"Tiết 7",time:"15:15 - 15:50",isBreak:false},
+  {period:8,session:"CHIỀU",name:"Tiết 8",time:"15:55 - 16:30",isBreak:false}
+];
+
+const DAYS = [
+  {id:"T2",name:"THỨ 2",fullName:"Thứ Hai"},
+  {id:"T3",name:"THỨ 3",fullName:"Thứ Ba"},
+  {id:"T4",name:"THỨ 4",fullName:"Thứ Tư"},
+  {id:"T5",name:"THỨ 5",fullName:"Thứ Năm"},
+  {id:"T6",name:"THỨ 6",fullName:"Thứ Sáu"}
+];
+
+const CLASSES_CONFIG = {
+  "1.1":{grade:1,gvcn:"gvcn_1_1",gvcnName:"Trần Thị Diễm Linh",gvcnShort:"Cô Linh (1.1)",taTeacher:"t_ta_thy",gdtcTeacher:"t_gdtc_tien",anTeacher:"t_an_chau",thTeacher:"t_pht_tao",cdsTeacher:"t_cds_1",stemTeacher:"t_stem_1",toanTdTeacher:"t_toantuduy_1",tabnTeacher:"t_tabn_1",tatkTeacher:"t_tatk_avs"},
+  "1.2":{grade:1,gvcn:"gvcn_1_2",gvcnName:"Lê Thị Hoa",gvcnShort:"Cô Hoa (1.2)",taTeacher:"t_ta_thy",gdtcTeacher:"t_gdtc_tien",anTeacher:"t_an_chau",thTeacher:"t_pht_tao",cdsTeacher:"t_cds_1",stemTeacher:"t_stem_1",toanTdTeacher:"t_toantuduy_1",tabnTeacher:"t_tabn_1",tatkTeacher:"t_tatk_avs"},
+  "1.3":{grade:1,gvcn:"gvcn_1_3",gvcnName:"Phạm Thị Ngọc Hân",gvcnShort:"Cô Hân (1.3)",taTeacher:"t_ta_thy",gdtcTeacher:"t_gdtc_tien",anTeacher:"t_an_chau",thTeacher:"t_pht_tao",cdsTeacher:"t_cds_1",stemTeacher:"t_stem_1",toanTdTeacher:"t_toantuduy_1",tabnTeacher:"t_tabn_1",tatkTeacher:"t_tatk_avs"},
+  "1.4":{grade:1,gvcn:"gvcn_1_4",gvcnName:"Hoàng Thị Hiền Nga",gvcnShort:"Cô Nga (1.4)",taTeacher:"t_ta_thy",gdtcTeacher:"t_gdtc_tien",anTeacher:"t_an_chau",thTeacher:"t_pht_tao",cdsTeacher:"t_cds_1",stemTeacher:"t_stem_1",toanTdTeacher:"t_toantuduy_1",tabnTeacher:"t_tabn_1",tatkTeacher:"t_tatk_avs"},
+  "1.5":{grade:1,gvcn:"gvcn_1_5",gvcnName:"Nguyễn Thị Phương Thảo",gvcnShort:"Cô Thảo (1.5)",taTeacher:"t_ta_thy",gdtcTeacher:"t_gdtc_tien",anTeacher:"t_an_chau",thTeacher:"t_th_thai",cdsTeacher:"t_cds_1",stemTeacher:"t_stem_1",toanTdTeacher:"t_toantuduy_1",tabnTeacher:"t_tabn_1",tatkTeacher:"t_tatk_avs"},
+  "1.6":{grade:1,gvcn:"gvcn_1_6",gvcnName:"Lê Phương Anh",gvcnShort:"Cô Phương Anh (1.6)",taTeacher:"t_ta_thy",gdtcTeacher:"t_gdtc_tien",anTeacher:"t_an_chau",thTeacher:"t_th_thai",cdsTeacher:"t_cds_1",stemTeacher:"t_stem_1",toanTdTeacher:"t_toantuduy_1",tabnTeacher:"t_tabn_1",tatkTeacher:"t_tatk_avs"},
+  "2.1":{grade:2,gvcn:"gvcn_2_1",gvcnName:"Lai Quí Phượng",gvcnShort:"Cô Phượng (2.1)",taTeacher:"t_ta_thy",gdtcTeacher:"t_gdtc_tien",anTeacher:"t_an_chau",thTeacher:"t_th_thai",cdsTeacher:"t_cds_2",stemTeacher:"t_stem_1",toanTdTeacher:"t_toantuduy_1",tabnTeacher:"t_tabn_1",tatkTeacher:"t_tatk_1"},
+  "2.2":{grade:2,gvcn:"gvcn_2_2",gvcnName:"Dương Phạm Bích Ngân",gvcnShort:"Cô Ngân (2.2)",taTeacher:"t_ta_tam",gdtcTeacher:"t_gdtc_tien",anTeacher:"t_an_chau",thTeacher:"t_th_thai",cdsTeacher:"t_cds_2",stemTeacher:"t_stem_1",toanTdTeacher:"t_toantuduy_1",tabnTeacher:"t_tabn_1",tatkTeacher:"t_tatk_1"},
+  "2.3":{grade:2,gvcn:"gvcn_2_3",gvcnName:"Nguyễn Thị Hải Yến",gvcnShort:"Cô Hải Yến (2.3)",taTeacher:"t_ta_tam",gdtcTeacher:"t_gdtc_tien",anTeacher:"t_an_chau",thTeacher:"t_th_thai",cdsTeacher:"t_cds_2",stemTeacher:"t_stem_1",toanTdTeacher:"t_toantuduy_1",tabnTeacher:"t_tabn_1",tatkTeacher:"t_tatk_1"},
+  "2.4":{grade:2,gvcn:"gvcn_2_4",gvcnName:"Vương Gia Linh",gvcnShort:"Cô Gia Linh (2.4)",taTeacher:"t_ta_tam",gdtcTeacher:"t_gdtc_tien",anTeacher:"t_an_chau",thTeacher:"t_th_thai",cdsTeacher:"t_cds_2",stemTeacher:"t_stem_1",toanTdTeacher:"t_toantuduy_1",tabnTeacher:"t_tabn_1",tatkTeacher:"t_tatk_1"},
+  "2.5":{grade:2,gvcn:"gvcn_2_5",gvcnName:"Phan Thị Thanh Tịnh",gvcnShort:"Cô Tịnh (2.5)",taTeacher:"t_ta_tam",gdtcTeacher:"t_gdtc_tien",anTeacher:"t_an_chau",thTeacher:"t_th_thai",cdsTeacher:"t_cds_2",stemTeacher:"t_stem_2",toanTdTeacher:"t_toantuduy_2",tabnTeacher:"t_tabn_2",tatkTeacher:"t_tatk_1"},
+  "2.6":{grade:2,gvcn:"gvcn_2_6",gvcnName:"Ngô Thị Thanh Hằng",gvcnShort:"Cô Hằng (2.6)",taTeacher:"t_ta_tam",gdtcTeacher:"gvcn_2_6",anTeacher:"gvcn_2_6",thTeacher:"t_th_thai",cdsTeacher:"t_cds_2",stemTeacher:"t_stem_2",toanTdTeacher:"t_toantuduy_2",tabnTeacher:"t_tabn_2",tatkTeacher:"t_tatk_1"},
+  "3.1":{grade:3,gvcn:"gvcn_3_1",gvcnName:"Nguyễn Thị Thanh Trúc",gvcnShort:"Cô Trúc (3.1)",taTeacher:"t_ta_thy",gdtcTeacher:"t_tpt_nhi",anTeacher:"t_an_chau",thTeacher:"t_th_thai",ic3Teacher:"t_ic3_1",stemTeacher:"t_stem_2",knsTeacher:"t_kns_1",toanTdTeacher:"t_toantuduy_2",tabnTeacher:"t_tabn_2",tatkTeacher:"t_tatk_1"},
+  "3.2":{grade:3,gvcn:"gvcn_3_2",gvcnName:"Nguyễn Hoàng Yến Nhi",gvcnShort:"Cô Yến Nhi (3.2)",taTeacher:"t_ta_thy",gdtcTeacher:"t_gdtc_phong",anTeacher:"t_an_chau",thTeacher:"t_th_thai",ic3Teacher:"t_ic3_1",stemTeacher:"t_stem_2",knsTeacher:"t_kns_1",toanTdTeacher:"t_toantuduy_2",tabnTeacher:"t_tabn_2",tatkTeacher:"t_tatk_1"},
+  "3.3":{grade:3,gvcn:"gvcn_3_3",gvcnName:"Đỗ Thị Kim Anh",gvcnShort:"Cô Kim Anh (3.3)",taTeacher:"t_ta_tam",gdtcTeacher:"t_gdtc_phong",anTeacher:"t_an_chau",thTeacher:"t_th_thai",ic3Teacher:"t_ic3_1",stemTeacher:"t_stem_2",knsTeacher:"t_kns_1",toanTdTeacher:"t_toantuduy_2",tabnTeacher:"t_tabn_2",tatkTeacher:"t_tatk_1"},
+  "3.4":{grade:3,gvcn:"gvcn_3_4",gvcnName:"Phạm Thị Thanh Uyên",gvcnShort:"Cô Uyên (3.4)",taTeacher:"t_ta_trang",gdtcTeacher:"t_gdtc_phong",anTeacher:"t_an_chau",thTeacher:"t_th_thai",ic3Teacher:"t_ic3_1",stemTeacher:"t_stem_2",knsTeacher:"t_kns_1",toanTdTeacher:"t_toantuduy_2",tabnTeacher:"t_tabn_2",tatkTeacher:"t_tatk_1"},
+  "3.5":{grade:3,gvcn:"gvcn_3_5",gvcnName:"Võ Thị Yến Nhi",gvcnShort:"Cô Yến Nhi (3.5)",taTeacher:"t_ta_trang",gdtcTeacher:"t_gdtc_phong",anTeacher:"t_an_chau",thTeacher:"t_th_thai",ic3Teacher:"t_ic3_1",stemTeacher:"t_stem_2",knsTeacher:"t_kns_1",toanTdTeacher:"t_toantuduy_2",tabnTeacher:"t_tabn_2",tatkTeacher:"t_tatk_1"},
+  "3.6":{grade:3,gvcn:"gvcn_3_6",gvcnName:"Nguyễn Thanh Thảo",gvcnShort:"Cô Thảo (3.6)",taTeacher:"t_ta_trang",gdtcTeacher:"gvcn_3_6",anTeacher:"gvcn_3_6",thTeacher:"t_th_thai",ic3Teacher:"t_ic3_1",stemTeacher:"t_stem_2",knsTeacher:"t_kns_1",toanTdTeacher:"t_toantuduy_2",tabnTeacher:"t_tabn_2",tatkTeacher:"t_tatk_1"},
+  "4.1":{grade:4,gvcn:"gvcn_4_1",gvcnName:"Phạm Thị Huế",gvcnShort:"Cô Huế (4.1)",taTeacher:"t_ta_phuong",gdtcTeacher:"t_gdtc_phong",anTeacher:"t_an_chau",thTeacher:"t_th_thai",ic3Teacher:"t_ic3_1",stemTeacher:"t_stem_2",knsTeacher:"t_kns_1",toanTdTeacher:"t_toantuduy_2",tabnTeacher:"t_tabn_2",tatkTeacher:"t_tatk_2"},
+  "4.2":{grade:4,gvcn:"gvcn_4_2",gvcnName:"Trần Thị Thu Hương",gvcnShort:"Cô Thu Hương (4.2)",taTeacher:"t_ta_phuong",gdtcTeacher:"t_gdtc_phong",anTeacher:"t_an_chau",thTeacher:"t_th_thai",ic3Teacher:"t_ic3_1",stemTeacher:"t_stem_2",knsTeacher:"t_kns_1",toanTdTeacher:"t_toantuduy_2",tabnTeacher:"t_tabn_2",tatkTeacher:"t_tatk_2"},
+  "4.3":{grade:4,gvcn:"gvcn_4_3",gvcnName:"Nguyễn Minh Thắng",gvcnShort:"Thầy Thắng (4.3)",taTeacher:"t_ta_phuong",gdtcTeacher:"t_gdtc_phong",anTeacher:"t_an_chau",thTeacher:"t_th_thai",ic3Teacher:"t_ic3_1",stemTeacher:"t_stem_3",knsTeacher:"t_kns_1",toanTdTeacher:"t_toantuduy_3",tabnTeacher:"t_tabn_3",tatkTeacher:"t_tatk_2"},
+  "4.4":{grade:4,gvcn:"gvcn_4_4",gvcnName:"Trịnh Ngọc Minh Phương",gvcnShort:"Cô Minh Phương (4.4)",taTeacher:"t_ta_phuong",gdtcTeacher:"t_gdtc_phong",anTeacher:"t_an_chau",thTeacher:"t_th_thai",ic3Teacher:"t_ic3_2",stemTeacher:"t_stem_3",knsTeacher:"t_kns_2",toanTdTeacher:"t_toantuduy_3",tabnTeacher:"t_tabn_3",tatkTeacher:"t_tatk_2"},
+  "4.5":{grade:4,gvcn:"gvcn_4_5",gvcnName:"Lê Thị Dạ Thảo",gvcnShort:"Cô Dạ Thảo (4.5)",taTeacher:"t_ta_phuong",gdtcTeacher:"gvcn_4_5",anTeacher:"gvcn_4_5",thTeacher:"t_th_thai",ic3Teacher:"t_ic3_2",stemTeacher:"t_stem_3",knsTeacher:"t_kns_2",toanTdTeacher:"t_toantuduy_3",tabnTeacher:"t_tabn_3",tatkTeacher:"t_tatk_2"},
+  "4.6":{grade:4,gvcn:"gvcn_4_6",gvcnName:"Phạm Quỳnh Như",gvcnShort:"Cô Quỳnh Như (4.6)",taTeacher:"t_ta_phuong",gdtcTeacher:"gvcn_4_6",anTeacher:"gvcn_4_6",thTeacher:"t_th_thai",ic3Teacher:"t_ic3_2",stemTeacher:"t_stem_3",knsTeacher:"t_kns_2",toanTdTeacher:"t_toantuduy_3",tabnTeacher:"t_tabn_3",tatkTeacher:"t_tatk_2"},
+  "5.1":{grade:5,gvcn:"gvcn_5_1",gvcnName:"Nguyễn Thị Tuyết Mai",gvcnShort:"Cô Tuyết Mai (5.1)",taTeacher:"t_ta_trang",gdtcTeacher:"t_gdtc_phong",anTeacher:"t_an_chau",thTeacher:"t_th_thai",ic3Teacher:"t_ic3_2",stemTeacher:"t_stem_3",knsTeacher:"t_kns_2",toanTdTeacher:"t_toantuduy_3",tabnTeacher:"t_tabn_3",tatkTeacher:"t_tatk_2"},
+  "5.2":{grade:5,gvcn:"gvcn_5_2",gvcnName:"Trần Nguyễn Trung Trực",gvcnShort:"Thầy Trực (5.2)",taTeacher:"t_ta_trang",gdtcTeacher:"t_gdtc_phong",anTeacher:"t_an_chau",thTeacher:"t_th_thai",ic3Teacher:"t_ic3_2",stemTeacher:"t_stem_3",knsTeacher:"t_kns_2",toanTdTeacher:"t_toantuduy_3",tabnTeacher:"t_tabn_3",tatkTeacher:"t_tatk_2"},
+  "5.3":{grade:5,gvcn:"gvcn_5_3",gvcnName:"Đặng Kim Anh",gvcnShort:"Cô Kim Anh (5.3)",taTeacher:"t_ta_trang",gdtcTeacher:"t_gdtc_phong",anTeacher:"t_an_chau",thTeacher:"t_th_thai",ic3Teacher:"t_ic3_2",stemTeacher:"t_stem_3",knsTeacher:"t_kns_2",toanTdTeacher:"t_toantuduy_3",tabnTeacher:"t_tabn_3",tatkTeacher:"t_tatk_2"},
+  "5.4":{grade:5,gvcn:"gvcn_5_4",gvcnName:"Nguyễn Duy Đang",gvcnShort:"Thầy Đang (5.4)",taTeacher:"t_ta_tam",gdtcTeacher:"t_gdtc_phong",anTeacher:"t_an_chau",thTeacher:"t_th_thai",ic3Teacher:"t_ic3_2",stemTeacher:"t_stem_3",knsTeacher:"t_kns_2",toanTdTeacher:"t_toantuduy_3",tabnTeacher:"t_tabn_3",tatkTeacher:"t_tatk_2"},
+  "5.5":{grade:5,gvcn:"gvcn_5_5",gvcnName:"Huỳnh Ngọc Trâm",gvcnShort:"Cô Trâm (5.5)",taTeacher:"t_ta_tam",gdtcTeacher:"gvcn_5_5",anTeacher:"gvcn_5_5",thTeacher:"t_th_thai",ic3Teacher:"t_ic3_2",stemTeacher:"t_stem_3",knsTeacher:"t_kns_2",toanTdTeacher:"t_toantuduy_3",tabnTeacher:"t_tabn_3",tatkTeacher:"t_tatk_2"}
+};
+
+const INITIAL_TEACHERS = {
+  "t_gdtc_phong":{id:"t_gdtc_phong",name:"Lưu Thanh Phong",short:"Thầy Phong (GDTC)",type:"specialist",subject:"GDTC",assigned:"12 lớp (Khối 3-5)"},
+  "t_gdtc_tien":{id:"t_gdtc_tien",name:"Vũ Trần Hoàng Nhật Tiến",short:"Thầy Tiến (GDTC)",type:"specialist",subject:"GDTC",assigned:"11 lớp (Khối 1-2)"},
+  "t_an_chau":{id:"t_an_chau",name:"Phạm Thị Hồng Châu",short:"Cô Châu (Âm nhạc)",type:"specialist",subject:"NT(ÂN)",assigned:"24 lớp"},
+  "t_ta_trang":{id:"t_ta_trang",name:"Khưu Thị Minh Trang",short:"Cô Trang (TA)",type:"specialist",subject:"TA",assigned:"6 lớp (3.4-3.6, 5.1-5.3)"},
+  "t_ta_phuong":{id:"t_ta_phuong",name:"Nguyễn Thị Kim Phượng",short:"Cô Phượng (TA)",type:"specialist",subject:"TA",assigned:"6 lớp (4.1-4.6)"},
+  "t_ta_thy":{id:"t_ta_thy",name:"Nguyễn Thị Hữu Thy",short:"Cô Thy (TA)",type:"specialist",subject:"TA",assigned:"9 lớp (1.1-1.6, 2.1, 3.1-3.2)"},
+  "t_ta_tam":{id:"t_ta_tam",name:"Tăng Thị Minh Tâm",short:"Cô Tâm (TA)",type:"specialist",subject:"TA",assigned:"8 lớp (2.2-2.6, 3.3, 5.4-5.5)"},
+  "t_th_thai":{id:"t_th_thai",name:"Phạm Lê Hoàng Thái",short:"Thầy Thái (Tin học)",type:"specialist",subject:"TH",assigned:"25 lớp"},
+  "t_pht_tao":{id:"t_pht_tao",name:"Lê Thành Tạo",short:"Thầy Tạo (PHT)",type:"specialist",subject:"TH",assigned:"4 lớp (1.1-1.4)"},
+  "t_tpt_nhi":{id:"t_tpt_nhi",name:"Lê Phạm Yến Nhi",short:"Cô Yến Nhi (TPT)",type:"specialist",subject:"HĐTN(CC)",assigned:"Toàn trường (29 lớp)"},
+  "t_tabn_1":{id:"t_tabn_1",name:"GV TA (BN)_1",short:"GV TA-BN (1)",type:"partner",subject:"TA(BN)",assigned:"Khối 1-5"},
+  "t_tabn_2":{id:"t_tabn_2",name:"GV TA (BN)_2",short:"GV TA-BN (2)",type:"partner",subject:"TA(BN)",assigned:"Khối 1-5"},
+  "t_tabn_3":{id:"t_tabn_3",name:"GV TA (BN)_3",short:"GV TA-BN (3)",type:"partner",subject:"TA(BN)",assigned:"Khối 1-5"},
+  "t_tatk_avs":{id:"t_tatk_avs",name:"GV TA (T-K) AVS",short:"TA(T-K) AVS",type:"partner",subject:"TA(T-K)",assigned:"Khối 1"},
+  "t_tatk_1":{id:"t_tatk_1",name:"GV TA (T-K)_1",short:"GV TA-TK (1)",type:"partner",subject:"TA(T-K)",assigned:"Khối 2-5"},
+  "t_tatk_2":{id:"t_tatk_2",name:"GV TA (T-K)_2",short:"GV TA-TK (2)",type:"partner",subject:"TA(T-K)",assigned:"Khối 2-5"},
+  "t_ic3_1":{id:"t_ic3_1",name:"GV IC 3_1",short:"GV IC3 (1)",type:"partner",subject:"IC3",assigned:"Khối 3-5"},
+  "t_ic3_2":{id:"t_ic3_2",name:"GV IC 3_2",short:"GV IC3 (2)",type:"partner",subject:"IC3",assigned:"Khối 3-5"},
+  "t_kns_1":{id:"t_kns_1",name:"GV KNS 1",short:"GV KNS (1)",type:"partner",subject:"CLB KNS",assigned:"Khối 3-5"},
+  "t_kns_2":{id:"t_kns_2",name:"GV KNS 2",short:"GV KNS (2)",type:"partner",subject:"CLB KNS",assigned:"Khối 3-5"},
+  "t_toantuduy_1":{id:"t_toantuduy_1",name:"GV Toán Tư duy_1",short:"GV Toán TD (1)",type:"partner",subject:"CLB Toán TD",assigned:"Khối 1-5"},
+  "t_toantuduy_2":{id:"t_toantuduy_2",name:"GV Toán Tư duy_2",short:"GV Toán TD (2)",type:"partner",subject:"CLB Toán TD",assigned:"Khối 1-5"},
+  "t_toantuduy_3":{id:"t_toantuduy_3",name:"GV Toán Tư duy_3",short:"GV Toán TD (3)",type:"partner",subject:"CLB Toán TD",assigned:"Khối 1-5"},
+  "t_cds_1":{id:"t_cds_1",name:"GV Công dân số_1",short:"GV CDS (1)",type:"partner",subject:"CDS",assigned:"Khối 1-2"},
+  "t_cds_2":{id:"t_cds_2",name:"GV Công dân số_2",short:"GV CDS (2)",type:"partner",subject:"CDS",assigned:"Khối 1-2"},
+  "t_stem_1":{id:"t_stem_1",name:"GV Stem_1",short:"GV STEM (1)",type:"partner",subject:"CLB Stem",assigned:"Khối 1-5"},
+  "t_stem_2":{id:"t_stem_2",name:"GV Stem_2",short:"GV STEM (2)",type:"partner",subject:"CLB Stem",assigned:"Khối 1-5"},
+  "t_stem_3":{id:"t_stem_3",name:"GV Stem_3",short:"GV STEM (3)",type:"partner",subject:"CLB Stem",assigned:"Khối 1-5"}
+};
+
+// Build TEACHERS_CONFIG with GVCN
+const TEACHERS_CONFIG = {...INITIAL_TEACHERS};
+for (const [cId, cInfo] of Object.entries(CLASSES_CONFIG)) {
+  TEACHERS_CONFIG[cInfo.gvcn] = {
+    id: cInfo.gvcn, name: cInfo.gvcnName, short: cInfo.gvcnShort,
+    type: "gvcn", subject: "GVCN (Môn cốt lõi)", assigned: "Chủ nhiệm Lớp "+cId
+  };
+}
+
+const INITIAL_SCHEDULE = {"1.1":{"T2":{"1":{"subject":"HĐTN(CC)","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)"},"2":{"subject":"CDS","teacher_id":"t_cds_1","teacher_name":"GV CDS (1)"},"3":{"subject":"TA(BN)","teacher_id":"t_tabn_1","teacher_name":"GV TA-BN (1)"},"4":{"subject":"TA(BN)","teacher_id":"t_tabn_1","teacher_name":"GV TA-BN (1)"},"5":{"subject":"TV","teacher_name":"Cô Linh (1.1)","isCustom":true,"teacher_id":"gvcn_1_1"},"6":{"subject":"TV","teacher_id":"gvcn_1_1","teacher_name":"Cô Linh (1.1)"},"7":{"subject":"TNXH","teacher_name":"Cô Linh (1.1)","isCustom":true,"teacher_id":"gvcn_1_1"}},"T3":{"1":{"subject":"TV","teacher_id":"gvcn_1_1","teacher_name":"Cô Linh (1.1)"},"2":{"subject":"TV","teacher_id":"gvcn_1_1","teacher_name":"Cô Linh (1.1)"},"3":{"subject":"GDTC","teacher_id":"t_gdtc_tien","teacher_name":"Thầy Tiến (GDTC)","isCustom":true},"4":{"subject":"TNXH","teacher_id":"gvcn_1_1","teacher_name":"Cô Linh (1.1)"},"5":{"subject":"TV","teacher_id":"gvcn_1_1","teacher_name":"Cô Linh (1.1)","isCustom":true},"6":{"subject":"NT(ÂN)","teacher_id":"t_an_chau","teacher_name":"Cô Châu (Âm nhạc)"},"7":{"subject":"ĐĐ","teacher_id":"gvcn_1_1","teacher_name":"Cô Linh (1.1)","isCustom":true}},"T4":{"1":{"subject":"TV","teacher_id":"gvcn_1_1","teacher_name":"Cô Linh (1.1)"},"2":{"subject":"TV","teacher_id":"gvcn_1_1","teacher_name":"Cô Linh (1.1)"},"3":{"subject":"TA","teacher_id":"t_ta_thy","teacher_name":"Cô Thy (TA)"},"4":{"subject":"TA","teacher_id":"t_ta_thy","teacher_name":"Cô Thy (TA)"},"5":{"subject":"Toán","teacher_name":"Cô Linh (1.1)","isCustom":true,"teacher_id":"gvcn_1_1"},"6":{"subject":"Toán","teacher_id":"gvcn_1_1","teacher_name":"Cô Linh (1.1)"},"7":{"subject":"CLB Toán TD","teacher_id":"gvcn_1_1","teacher_name":"Cô Linh (1.1)","isCustom":true}},"T5":{"1":{"subject":"TV","teacher_id":"gvcn_1_1","teacher_name":"Cô Linh (1.1)","isCustom":true},"2":{"subject":"TV","teacher_id":"gvcn_1_1","teacher_name":"Cô Linh (1.1)","isCustom":true},"3":{"subject":"TV","teacher_name":"Cô Linh (1.1)","isCustom":true,"teacher_id":"gvcn_1_1"},"4":{"subject":"HĐTN(CĐ)","teacher_id":"gvcn_1_1","teacher_name":"Cô Linh (1.1)","isCustom":true},"5":{"subject":"TA(T-K)","teacher_id":"t_tatk_avs","teacher_name":"TA(T-K) AVS"},"6":{"subject":"TA(T-K)","teacher_id":"t_tatk_avs","teacher_name":"TA(T-K) AVS"},"7":{"subject":"CLB Stem","teacher_name":"GV STEM (1)","isCustom":true,"teacher_id":"t_stem_1"}},"T6":{"1":{"subject":"TV","teacher_id":"gvcn_1_1","teacher_name":"Cô Linh (1.1)"},"2":{"subject":"TV","teacher_id":"gvcn_1_1","teacher_name":"Cô Linh (1.1)"},"3":{"subject":"Toán","teacher_name":"Cô Linh (1.1)","isCustom":true,"teacher_id":"gvcn_1_1"},"4":{"subject":"GDTC","teacher_id":"t_gdtc_tien","teacher_name":"Thầy Tiến (GDTC)","isCustom":true},"5":{"subject":"NT(MT)","teacher_id":"gvcn_1_1","teacher_name":"Cô Linh (1.1)","isCustom":true},"6":{"subject":"TH","teacher_id":"t_pht_tao","teacher_name":"Thầy Tạo (PHT)","isCustom":true},"7":{"subject":"HĐTN(SHL)","teacher_id":"gvcn_1_1","teacher_name":"Cô Linh (1.1)"}}},"1.2":{"T2":{"1":{"subject":"HĐTN(CC)","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)"},"2":{"subject":"TV","teacher_id":"gvcn_1_2","teacher_name":"Cô Hoa (1.2)"},"3":{"subject":"TV","teacher_id":"gvcn_1_2","teacher_name":"Cô Hoa (1.2)"},"4":{"subject":"TV","teacher_id":"gvcn_1_2","teacher_name":"Cô Hoa (1.2)"},"5":{"subject":"TA(T-K)","teacher_id":"t_tatk_avs","teacher_name":"TA(T-K) AVS"},"6":{"subject":"TA(T-K)","teacher_id":"t_tatk_avs","teacher_name":"TA(T-K) AVS"},"7":{"subject":"GDTC","teacher_id":"t_gdtc_tien","teacher_name":"Thầy Tiến (GDTC)"}},"T3":{"1":{"subject":"TA(BN)","teacher_id":"t_tabn_1","teacher_name":"GV TA-BN (1)"},"2":{"subject":"TA(BN)","teacher_id":"t_tabn_1","teacher_name":"GV TA-BN (1)"},"3":{"subject":"TV","teacher_id":"gvcn_1_2","teacher_name":"Cô Hoa (1.2)"},"4":{"subject":"TV","teacher_id":"gvcn_1_2","teacher_name":"Cô Hoa (1.2)"},"5":{"subject":"TV","teacher_id":"gvcn_1_2","teacher_name":"Cô Hoa (1.2)"},"6":{"subject":"CDS","teacher_id":"t_cds_1","teacher_name":"GV CDS (1)"},"7":{"subject":"TH","teacher_id":"t_pht_tao","teacher_name":"Thầy Tạo (PHT)","isCustom":true}},"T4":{"1":{"subject":"TV","teacher_id":"gvcn_1_2","teacher_name":"Cô Hoa (1.2)"},"2":{"subject":"TV","teacher_id":"gvcn_1_2","teacher_name":"Cô Hoa (1.2)"},"3":{"subject":"Toán","teacher_id":"gvcn_1_2","teacher_name":"Cô Hoa (1.2)"},"4":{"subject":"TNXH","teacher_id":"gvcn_1_2","teacher_name":"Cô Hoa (1.2)"},"5":{"subject":"CLB Stem","teacher_id":"t_stem_1","teacher_name":"GV STEM (1)"},"6":{"subject":"HĐTN(CĐ)","teacher_id":"gvcn_1_2","teacher_name":"Cô Hoa (1.2)"},"7":{"subject":"CLB Toán TD","teacher_id":"gvcn_1_2","teacher_name":"Cô Hoa (1.2)","isCustom":true}},"T5":{"1":{"subject":"TA","teacher_id":"t_ta_thy","teacher_name":"Cô Thy (TA)"},"2":{"subject":"TA","teacher_id":"t_ta_thy","teacher_name":"Cô Thy (TA)"},"3":{"subject":"TV","teacher_id":"gvcn_1_2","teacher_name":"Cô Hoa (1.2)"},"4":{"subject":"TV","teacher_id":"gvcn_1_2","teacher_name":"Cô Hoa (1.2)"},"5":{"subject":"GDTC","teacher_id":"t_gdtc_tien","teacher_name":"Thầy Tiến (GDTC)"},"6":{"subject":"Toán","teacher_id":"gvcn_1_2","teacher_name":"Cô Hoa (1.2)"},"7":{"subject":"ĐĐ","teacher_id":"gvcn_1_2","teacher_name":"Cô Hoa (1.2)"}},"T6":{"1":{"subject":"TV","teacher_id":"gvcn_1_2","teacher_name":"Cô Hoa (1.2)"},"2":{"subject":"TV","teacher_id":"gvcn_1_2","teacher_name":"Cô Hoa (1.2)"},"3":{"subject":"Toán","teacher_id":"gvcn_1_2","teacher_name":"Cô Hoa (1.2)"},"4":{"subject":"TNXH","teacher_id":"gvcn_1_2","teacher_name":"Cô Hoa (1.2)"},"5":{"subject":"NT(MT)","teacher_id":"gvcn_1_2","teacher_name":"Cô Hoa (1.2)"},"6":{"subject":"NT(ÂN)","teacher_id":"t_an_chau","teacher_name":"Cô Châu (Âm nhạc)"},"7":{"subject":"HĐTN(SHL)","teacher_id":"gvcn_1_2","teacher_name":"Cô Hoa (1.2)"}}},"1.3":{"T2":{"1":{"subject":"HĐTN(CC)","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)"},"2":{"subject":"TV","teacher_id":"gvcn_1_3","teacher_name":"Cô Hân (1.3)"},"3":{"subject":"NT(ÂN)","teacher_id":"t_an_chau","teacher_name":"Cô Châu (Âm nhạc)"},"4":{"subject":"TV","teacher_id":"gvcn_1_3","teacher_name":"Cô Hân (1.3)"},"5":{"subject":"TV","teacher_id":"gvcn_1_3","teacher_name":"Cô Hân (1.3)"},"6":{"subject":"GDTC","teacher_id":"t_gdtc_tien","teacher_name":"Thầy Tiến (GDTC)"},"7":{"subject":"TNXH","teacher_id":"gvcn_1_3","teacher_name":"Cô Hân (1.3)"}},"T3":{"1":{"subject":"TV","teacher_id":"gvcn_1_3","teacher_name":"Cô Hân (1.3)"},"2":{"subject":"TV","teacher_id":"gvcn_1_3","teacher_name":"Cô Hân (1.3)"},"3":{"subject":"TH","teacher_id":"t_pht_tao","teacher_name":"Thầy Tạo (PHT)","isCustom":true},"4":{"subject":"TV","teacher_id":"gvcn_1_3","teacher_name":"Cô Hân (1.3)"},"5":{"subject":"TA(T-K)","teacher_id":"t_tatk_avs","teacher_name":"TA(T-K) AVS"},"6":{"subject":"TA(T-K)","teacher_id":"t_tatk_avs","teacher_name":"TA(T-K) AVS"},"7":{"subject":"CLB Stem","teacher_id":"t_stem_1","teacher_name":"GV STEM (1)"}},"T4":{"1":{"subject":"TA","teacher_id":"t_ta_thy","teacher_name":"Cô Thy (TA)"},"2":{"subject":"TA","teacher_id":"t_ta_thy","teacher_name":"Cô Thy (TA)"},"3":{"subject":"TV","teacher_id":"gvcn_1_3","teacher_name":"Cô Hân (1.3)"},"4":{"subject":"GDTC","teacher_id":"t_gdtc_tien","teacher_name":"Thầy Tiến (GDTC)"},"5":{"subject":"CDS","teacher_id":"t_cds_1","teacher_name":"GV CDS (1)"},"6":{"subject":"Toán","teacher_id":"gvcn_1_3","teacher_name":"Cô Hân (1.3)"},"7":{"subject":"TV","teacher_id":"gvcn_1_3","teacher_name":"Cô Hân (1.3)","isCustom":true}},"T5":{"1":{"subject":"TV","teacher_id":"gvcn_1_3","teacher_name":"Cô Hân (1.3)"},"2":{"subject":"TV","teacher_id":"gvcn_1_3","teacher_name":"Cô Hân (1.3)"},"3":{"subject":"Toán","teacher_id":"gvcn_1_3","teacher_name":"Cô Hân (1.3)"},"4":{"subject":"TNXH","teacher_id":"gvcn_1_3","teacher_name":"Cô Hân (1.3)"},"5":{"subject":"ĐĐ","teacher_id":"gvcn_1_3","teacher_name":"Cô Hân (1.3)"},"6":{"subject":"HĐTN(CĐ)","teacher_id":"gvcn_1_3","teacher_name":"Cô Hân (1.3)"},"7":{"subject":"CLB Toán TD","teacher_id":"gvcn_1_3","teacher_name":"Cô Hân (1.3)","isCustom":true}},"T6":{"1":{"subject":"TA(BN)","teacher_id":"t_tabn_1","teacher_name":"GV TA-BN (1)"},"2":{"subject":"TA(BN)","teacher_id":"t_tabn_1","teacher_name":"GV TA-BN (1)"},"3":{"subject":"TV","teacher_id":"gvcn_1_3","teacher_name":"Cô Hân (1.3)"},"4":{"subject":"TV","teacher_id":"gvcn_1_3","teacher_name":"Cô Hân (1.3)"},"5":{"subject":"Toán","teacher_id":"gvcn_1_3","teacher_name":"Cô Hân (1.3)"},"6":{"subject":"NT(MT)","teacher_id":"gvcn_1_3","teacher_name":"Cô Hân (1.3)"},"7":{"subject":"HĐTN(SHL)","teacher_id":"gvcn_1_3","teacher_name":"Cô Hân (1.3)"}}},"1.4":{"T2":{"1":{"subject":"HĐTN(CC)","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)"},"2":{"subject":"TV","teacher_id":"gvcn_1_4","teacher_name":"Cô Nga (1.4)"},"3":{"subject":"TV","teacher_id":"gvcn_1_4","teacher_name":"Cô Nga (1.4)"},"4":{"subject":"TV","teacher_id":"gvcn_1_4","teacher_name":"Cô Nga (1.4)"},"5":{"subject":"TNXH","teacher_id":"gvcn_1_4","teacher_name":"Cô Nga (1.4)"},"6":{"subject":"ĐĐ","teacher_id":"gvcn_1_4","teacher_name":"Cô Nga (1.4)","isCustom":true},"7":{"subject":"CLB Toán TD","teacher_id":"gvcn_1_4","teacher_name":"Cô Nga (1.4)","isCustom":true}},"T3":{"1":{"subject":"NT(ÂN)","teacher_id":"t_an_chau","teacher_name":"Cô Châu (Âm nhạc)"},"2":{"subject":"TV","teacher_id":"gvcn_1_4","teacher_name":"Cô Nga (1.4)"},"3":{"subject":"TV","teacher_id":"gvcn_1_4","teacher_name":"Cô Nga (1.4)"},"4":{"subject":"TV","teacher_id":"gvcn_1_4","teacher_name":"Cô Nga (1.4)"},"5":{"subject":"TA(BN)","teacher_id":"t_tabn_1","teacher_name":"GV TA-BN (1)"},"6":{"subject":"TA(BN)","teacher_id":"t_tabn_1","teacher_name":"GV TA-BN (1)"},"7":{"subject":"HĐTN(CĐ)","teacher_id":"gvcn_1_4","teacher_name":"Cô Nga (1.4)","isCustom":true}},"T4":{"1":{"subject":"TV","teacher_id":"gvcn_1_4","teacher_name":"Cô Nga (1.4)"},"2":{"subject":"TV","teacher_id":"gvcn_1_4","teacher_name":"Cô Nga (1.4)"},"3":{"subject":"GDTC","teacher_id":"t_gdtc_tien","teacher_name":"Thầy Tiến (GDTC)"},"4":{"subject":"Toán","teacher_id":"gvcn_1_4","teacher_name":"Cô Nga (1.4)"},"5":{"subject":"TA","teacher_id":"t_ta_thy","teacher_name":"Cô Thy (TA)"},"6":{"subject":"TA","teacher_id":"t_ta_thy","teacher_name":"Cô Thy (TA)"},"7":{"subject":"CLB Stem","teacher_id":"t_stem_1","teacher_name":"GV STEM (1)"}},"T5":{"1":{"subject":"TA(T-K)","teacher_id":"t_tatk_avs","teacher_name":"TA(T-K) AVS"},"2":{"subject":"TA(T-K)","teacher_id":"t_tatk_avs","teacher_name":"TA(T-K) AVS"},"3":{"subject":"Toán","teacher_id":"gvcn_1_4","teacher_name":"Cô Nga (1.4)"},"4":{"subject":"TNXH","teacher_id":"gvcn_1_4","teacher_name":"Cô Nga (1.4)"},"5":{"subject":"TV","teacher_id":"gvcn_1_4","teacher_name":"Cô Nga (1.4)","isCustom":true},"6":{"subject":"TV","teacher_id":"gvcn_1_4","teacher_name":"Cô Nga (1.4)","isCustom":true},"7":{"subject":"CDS","teacher_id":"t_cds_1","teacher_name":"GV CDS (1)","isCustom":true}},"T6":{"1":{"subject":"TV","teacher_id":"gvcn_1_4","teacher_name":"Cô Nga (1.4)"},"2":{"subject":"TV","teacher_id":"gvcn_1_4","teacher_name":"Cô Nga (1.4)"},"3":{"subject":"GDTC","teacher_id":"t_gdtc_tien","teacher_name":"Thầy Tiến (GDTC)"},"4":{"subject":"TH","teacher_id":"t_pht_tao","teacher_name":"Thầy Tạo (PHT)","isCustom":true},"5":{"subject":"Toán","teacher_id":"gvcn_1_4","teacher_name":"Cô Nga (1.4)"},"6":{"subject":"NT(MT)","teacher_id":"gvcn_1_4","teacher_name":"Cô Nga (1.4)"},"7":{"subject":"HĐTN(SHL)","teacher_id":"gvcn_1_4","teacher_name":"Cô Nga (1.4)"}}},"1.5":{"T2":{"1":{"subject":"HĐTN(CC)","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)"},"2":{"subject":"TV","teacher_id":"gvcn_1_5","teacher_name":"Cô Thảo (1.5)"},"3":{"subject":"TV","teacher_id":"gvcn_1_5","teacher_name":"Cô Thảo (1.5)"},"4":{"subject":"NT(ÂN)","teacher_id":"t_an_chau","teacher_name":"Cô Châu (Âm nhạc)"},"5":{"subject":"TV","teacher_id":"gvcn_1_5","teacher_name":"Cô Thảo (1.5)"},"6":{"subject":"CLB Stem","teacher_id":"t_stem_1","teacher_name":"GV STEM (1)"},"7":{"subject":"CLB Toán TD","teacher_id":"gvcn_1_5","teacher_name":"Cô Thảo (1.5)","isCustom":true}},"T3":{"1":{"subject":"TV","teacher_id":"gvcn_1_5","teacher_name":"Cô Thảo (1.5)"},"2":{"subject":"TV","teacher_id":"gvcn_1_5","teacher_name":"Cô Thảo (1.5)"},"3":{"subject":"TV","teacher_id":"gvcn_1_5","teacher_name":"Cô Thảo (1.5)"},"4":{"subject":"GDTC","teacher_id":"t_gdtc_tien","teacher_name":"Thầy Tiến (GDTC)"},"5":{"subject":"TNXH","teacher_id":"gvcn_1_5","teacher_name":"Cô Thảo (1.5)"},"6":{"subject":"HĐTN(CĐ)","teacher_id":"gvcn_1_5","teacher_name":"Cô Thảo (1.5)"},"7":{"subject":"ĐĐ","teacher_id":"gvcn_1_5","teacher_name":"Cô Thảo (1.5)"}},"T4":{"1":{"subject":"TV","teacher_id":"gvcn_1_5","teacher_name":"Cô Thảo (1.5)"},"2":{"subject":"TV","teacher_id":"gvcn_1_5","teacher_name":"Cô Thảo (1.5)"},"3":{"subject":"TA(BN)","teacher_id":"t_tabn_1","teacher_name":"GV TA-BN (1)"},"4":{"subject":"TA(BN)","teacher_id":"t_tabn_1","teacher_name":"GV TA-BN (1)"},"5":{"subject":"Toán","teacher_id":"gvcn_1_5","teacher_name":"Cô Thảo (1.5)"},"6":{"subject":"CDS","teacher_id":"t_cds_1","teacher_name":"GV CDS (1)"},"7":{"subject":"TH","teacher_id":"t_th_thai","teacher_name":"Thầy Thái (Tin học)","isCustom":true}},"T5":{"1":{"subject":"GDTC","teacher_id":"t_gdtc_tien","teacher_name":"Thầy Tiến (GDTC)"},"2":{"subject":"TV","teacher_id":"gvcn_1_5","teacher_name":"Cô Thảo (1.5)"},"3":{"subject":"TA(T-K)","teacher_id":"t_tatk_avs","teacher_name":"TA(T-K) AVS"},"4":{"subject":"TA(T-K)","teacher_id":"t_tatk_avs","teacher_name":"TA(T-K) AVS"},"5":{"subject":"TV","teacher_id":"gvcn_1_5","teacher_name":"Cô Thảo (1.5)"},"6":{"subject":"Toán","teacher_id":"gvcn_1_5","teacher_name":"Cô Thảo (1.5)"},"7":{"subject":"TNXH","teacher_id":"gvcn_1_5","teacher_name":"Cô Thảo (1.5)"}},"T6":{"1":{"subject":"TV","teacher_id":"gvcn_1_5","teacher_name":"Cô Thảo (1.5)"},"2":{"subject":"TV","teacher_id":"gvcn_1_5","teacher_name":"Cô Thảo (1.5)"},"3":{"subject":"Toán","teacher_id":"gvcn_1_5","teacher_name":"Cô Thảo (1.5)"},"4":{"subject":"NT(MT)","teacher_id":"gvcn_1_5","teacher_name":"Cô Thảo (1.5)"},"5":{"subject":"TA","teacher_id":"t_ta_thy","teacher_name":"Cô Thy (TA)"},"6":{"subject":"TA","teacher_id":"t_ta_thy","teacher_name":"Cô Thy (TA)"},"7":{"subject":"HĐTN(SHL)","teacher_id":"gvcn_1_5","teacher_name":"Cô Thảo (1.5)"}}},"1.6":{"T2":{"1":{"subject":"HĐTN(CC)","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)"},"2":{"subject":"GDTC","teacher_id":"t_gdtc_tien","teacher_name":"Thầy Tiến (GDTC)"},"3":{"subject":"TV","teacher_id":"gvcn_1_6","teacher_name":"Cô Phương Anh (1.6)"},"4":{"subject":"TV","teacher_id":"gvcn_1_6","teacher_name":"Cô Phương Anh (1.6)"},"5":{"subject":"TA","teacher_id":"t_ta_thy","teacher_name":"Cô Thy (TA)"},"6":{"subject":"TA","teacher_id":"t_ta_thy","teacher_name":"Cô Thy (TA)"},"7":{"subject":"TV","teacher_id":"gvcn_1_6","teacher_name":"Cô Phương Anh (1.6)"}},"T3":{"1":{"subject":"TV","teacher_id":"gvcn_1_6","teacher_name":"Cô Phương Anh (1.6)"},"2":{"subject":"NT(ÂN)","teacher_id":"t_an_chau","teacher_name":"Cô Châu (Âm nhạc)"},"3":{"subject":"TV","teacher_id":"gvcn_1_6","teacher_name":"Cô Phương Anh (1.6)"},"4":{"subject":"TV","teacher_id":"gvcn_1_6","teacher_name":"Cô Phương Anh (1.6)"},"5":{"subject":"CDS","teacher_id":"t_cds_1","teacher_name":"GV CDS (1)"},"6":{"subject":"TNXH","teacher_id":"gvcn_1_6","teacher_name":"Cô Phương Anh (1.6)"},"7":{"subject":"CLB Toán TD","teacher_id":"gvcn_1_6","teacher_name":"Cô Phương Anh (1.6)","isCustom":true}},"T4":{"1":{"subject":"TV","teacher_id":"gvcn_1_6","teacher_name":"Cô Phương Anh (1.6)"},"2":{"subject":"TV","teacher_id":"gvcn_1_6","teacher_name":"Cô Phương Anh (1.6)"},"3":{"subject":"Toán","teacher_id":"gvcn_1_6","teacher_name":"Cô Phương Anh (1.6)"},"4":{"subject":"HĐTN(CĐ)","teacher_id":"gvcn_1_6","teacher_name":"Cô Phương Anh (1.6)"},"5":{"subject":"TA(BN)","teacher_id":"t_tabn_1","teacher_name":"GV TA-BN (1)"},"6":{"subject":"TA(BN)","teacher_id":"t_tabn_1","teacher_name":"GV TA-BN (1)"},"7":{"subject":"ĐĐ","teacher_id":"gvcn_1_6","teacher_name":"Cô Phương Anh (1.6)"}},"T5":{"1":{"subject":"Toán","teacher_id":"gvcn_1_6","teacher_name":"Cô Phương Anh (1.6)","isCustom":true},"2":{"subject":"TH","teacher_id":"t_th_thai","teacher_name":"Thầy Thái (Tin học)","isCustom":true},"3":{"subject":"TV","teacher_id":"gvcn_1_6","teacher_name":"Cô Phương Anh (1.6)"},"4":{"subject":"TV","teacher_id":"gvcn_1_6","teacher_name":"Cô Phương Anh (1.6)","isCustom":true},"5":{"subject":"CLB Stem","teacher_id":"t_stem_1","teacher_name":"GV STEM (1)","isCustom":true},"6":{"subject":"TNXH","teacher_id":"gvcn_1_6","teacher_name":"Cô Phương Anh (1.6)","isCustom":true},"7":{"subject":"NT(MT)","teacher_id":"gvcn_1_6","teacher_name":"Cô Phương Anh (1.6)","isCustom":true}},"T6":{"1":{"subject":"GDTC","teacher_id":"t_gdtc_tien","teacher_name":"Thầy Tiến (GDTC)"},"2":{"subject":"Toán","teacher_id":"gvcn_1_6","teacher_name":"Cô Phương Anh (1.6)","isCustom":true},"3":{"subject":"TA(T-K)","teacher_id":"t_tatk_avs","teacher_name":"TA(T-K) AVS"},"4":{"subject":"TA(T-K)","teacher_id":"t_tatk_avs","teacher_name":"TA(T-K) AVS"},"5":{"subject":"TV","teacher_id":"gvcn_1_6","teacher_name":"Cô Phương Anh (1.6)"},"6":{"subject":"TV","teacher_id":"gvcn_1_6","teacher_name":"Cô Phương Anh (1.6)","isCustom":true},"7":{"subject":"HĐTN(SHL)","teacher_id":"gvcn_1_6","teacher_name":"Cô Phương Anh (1.6)"}}},"2.1":{"T2":{"1":{"subject":"HĐTN(CC)","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)"},"2":{"subject":"Toán","teacher_id":"gvcn_2_1","teacher_name":"Cô Phượng (2.1)","isCustom":true},"3":{"subject":"TA(T-K)","teacher_id":"t_tatk_1","teacher_name":"GV TA-TK (1)"},"4":{"subject":"TA(T-K)","teacher_id":"t_tatk_1","teacher_name":"GV TA-TK (1)"},"5":{"subject":"TV","teacher_id":"gvcn_2_1","teacher_name":"Cô Phượng (2.1)"},"6":{"subject":"TV","teacher_id":"gvcn_2_1","teacher_name":"Cô Phượng (2.1)","isCustom":true},"7":{"subject":"TNXH","teacher_id":"gvcn_2_1","teacher_name":"Cô Phượng (2.1)","isCustom":true}},"T3":{"1":{"subject":"TV","teacher_id":"gvcn_2_1","teacher_name":"Cô Phượng (2.1)"},"2":{"subject":"TV","teacher_id":"gvcn_2_1","teacher_name":"Cô Phượng (2.1)"},"3":{"subject":"TA(BN)","teacher_id":"t_tabn_1","teacher_name":"GV TA-BN (1)"},"4":{"subject":"TA(BN)","teacher_id":"t_tabn_1","teacher_name":"GV TA-BN (1)"},"5":{"subject":"NT(MT)","teacher_id":"gvcn_2_1","teacher_name":"Cô Phượng (2.1)","isCustom":true},"6":{"subject":"GDTC","teacher_id":"t_gdtc_tien","teacher_name":"Thầy Tiến (GDTC)"},"7":{"subject":"Toán","teacher_id":"gvcn_2_1","teacher_name":"Cô Phượng (2.1)"}},"T4":{"1":{"subject":"TV","teacher_id":"gvcn_2_1","teacher_name":"Cô Phượng (2.1)"},"2":{"subject":"TV","teacher_id":"gvcn_2_1","teacher_name":"Cô Phượng (2.1)"},"3":{"subject":"Toán","teacher_id":"gvcn_2_1","teacher_name":"Cô Phượng (2.1)","isCustom":true},"4":{"subject":"TH","teacher_id":"t_th_thai","teacher_name":"Thầy Thái (Tin học)","isCustom":true},"5":{"subject":"TNXH","teacher_id":"gvcn_2_1","teacher_name":"Cô Phượng (2.1)","isCustom":true},"6":{"subject":"CLB Stem","teacher_id":"t_stem_1","teacher_name":"GV STEM (1)","isCustom":true},"7":{"subject":"HĐTN(CĐ)","teacher_id":"gvcn_2_1","teacher_name":"Cô Phượng (2.1)"}},"T5":{"1":{"subject":"Toán","teacher_id":"gvcn_2_1","teacher_name":"Cô Phượng (2.1)","isCustom":true},"2":{"subject":"GDTC","teacher_id":"t_gdtc_tien","teacher_name":"Thầy Tiến (GDTC)"},"3":{"subject":"TV","teacher_id":"gvcn_2_1","teacher_name":"Cô Phượng (2.1)"},"4":{"subject":"TV","teacher_id":"gvcn_2_1","teacher_name":"Cô Phượng (2.1)","isCustom":true},"5":{"subject":"CDS","teacher_id":"t_cds_1","teacher_name":"GV CDS (1)","isCustom":true},"6":{"subject":"ĐĐ","teacher_id":"gvcn_2_1","teacher_name":"Cô Phượng (2.1)"},"7":{"subject":"CLB Toán TD","teacher_id":"gvcn_2_1","teacher_name":"Cô Phượng (2.1)","isCustom":true}},"T6":{"1":{"subject":"TV","teacher_id":"gvcn_2_1","teacher_name":"Cô Phượng (2.1)","isCustom":true},"2":{"subject":"TV","teacher_id":"gvcn_2_1","teacher_name":"Cô Phượng (2.1)","isCustom":true},"3":{"subject":"TA","teacher_id":"t_ta_thy","teacher_name":"Cô Thy (TA)"},"4":{"subject":"TA","teacher_id":"t_ta_thy","teacher_name":"Cô Thy (TA)"},"5":{"subject":"NT(ÂN)","teacher_id":"t_an_chau","teacher_name":"Cô Châu (Âm nhạc)"},"6":{"subject":"Toán","teacher_id":"gvcn_2_1","teacher_name":"Cô Phượng (2.1)","isCustom":true},"7":{"subject":"HĐTN(SHL)","teacher_id":"gvcn_2_1","teacher_name":"Cô Phượng (2.1)"}}},"2.2":{"T2":{"1":{"subject":"HĐTN(CC)","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)"},"2":{"subject":"Toán","teacher_id":"gvcn_2_2","teacher_name":"Cô Ngân (2.2)","isCustom":true},"3":{"subject":"GDTC","teacher_id":"t_gdtc_tien","teacher_name":"Thầy Tiến (GDTC)"},"4":{"subject":"TH","teacher_id":"t_th_thai","teacher_name":"Thầy Thái (Tin học)","isCustom":true},"5":{"subject":"TV","teacher_id":"gvcn_2_2","teacher_name":"Cô Ngân (2.2)","isCustom":true},"6":{"subject":"TV","teacher_id":"gvcn_2_2","teacher_name":"Cô Ngân (2.2)"},"7":{"subject":"TNXH","teacher_id":"gvcn_2_2","teacher_name":"Cô Ngân (2.2)","isCustom":true}},"T3":{"1":{"subject":"TA","teacher_id":"t_ta_tam","teacher_name":"Cô Tâm (TA)"},"2":{"subject":"TA","teacher_id":"t_ta_tam","teacher_name":"Cô Tâm (TA)"},"3":{"subject":"TV","teacher_id":"gvcn_2_2","teacher_name":"Cô Ngân (2.2)"},"4":{"subject":"TV","teacher_id":"gvcn_2_2","teacher_name":"Cô Ngân (2.2)"},"5":{"subject":"CLB Stem","teacher_id":"t_stem_1","teacher_name":"GV STEM (1)"},"6":{"subject":"Toán","teacher_id":"gvcn_2_2","teacher_name":"Cô Ngân (2.2)"},"7":{"subject":"CLB Toán TD","teacher_id":"gvcn_2_2","teacher_name":"Cô Ngân (2.2)","isCustom":true}},"T4":{"1":{"subject":"GDTC","teacher_id":"t_gdtc_tien","teacher_name":"Thầy Tiến (GDTC)"},"2":{"subject":"Toán","teacher_id":"gvcn_2_2","teacher_name":"Cô Ngân (2.2)","isCustom":true},"3":{"subject":"TV","teacher_id":"gvcn_2_2","teacher_name":"Cô Ngân (2.2)"},"4":{"subject":"TV","teacher_id":"gvcn_2_2","teacher_name":"Cô Ngân (2.2)","isCustom":true},"5":{"subject":"NT(MT)","teacher_id":"gvcn_2_2","teacher_name":"Cô Ngân (2.2)","isCustom":true},"6":{"subject":"HĐTN(CĐ)","teacher_id":"gvcn_2_2","teacher_name":"Cô Ngân (2.2)"},"7":{"subject":"NT(ÂN)","teacher_id":"t_an_chau","teacher_name":"Cô Châu (Âm nhạc)"}},"T5":{"1":{"subject":"TV","teacher_id":"gvcn_2_2","teacher_name":"Cô Ngân (2.2)"},"2":{"subject":"TV","teacher_id":"gvcn_2_2","teacher_name":"Cô Ngân (2.2)"},"3":{"subject":"Toán","teacher_id":"gvcn_2_2","teacher_name":"Cô Ngân (2.2)","isCustom":true},"4":{"subject":"ĐĐ","teacher_id":"gvcn_2_2","teacher_name":"Cô Ngân (2.2)","isCustom":true},"5":{"subject":"TA(BN)","teacher_id":"t_tabn_1","teacher_name":"GV TA-BN (1)"},"6":{"subject":"TA(BN)","teacher_id":"t_tabn_1","teacher_name":"GV TA-BN (1)"},"7":{"subject":"TNXH","teacher_id":"gvcn_2_2","teacher_name":"Cô Ngân (2.2)","isCustom":true}},"T6":{"1":{"subject":"TV","teacher_id":"gvcn_2_2","teacher_name":"Cô Ngân (2.2)","isCustom":true},"2":{"subject":"TV","teacher_id":"gvcn_2_2","teacher_name":"Cô Ngân (2.2)","isCustom":true},"3":{"subject":"Toán","teacher_id":"gvcn_2_2","teacher_name":"Cô Ngân (2.2)","isCustom":true},"4":{"subject":"HĐTN(SHL)","teacher_id":"gvcn_2_2","teacher_name":"Cô Ngân (2.2)","isCustom":true},"5":{"subject":"TA(T-K)","teacher_id":"t_tatk_1","teacher_name":"GV TA-TK (1)"},"6":{"subject":"TA(T-K)","teacher_id":"t_tatk_1","teacher_name":"GV TA-TK (1)"},"7":{"subject":"CDS","teacher_id":"t_cds_1","teacher_name":"GV CDS (1)","isCustom":true}}},"2.3":{"T2":{"1":{"subject":"HĐTN(CC)","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)"},"2":{"subject":"TH","teacher_id":"t_th_thai","teacher_name":"Thầy Thái (Tin học)","isCustom":true},"3":{"subject":"TV","teacher_id":"gvcn_2_3","teacher_name":"Cô Hải Yến (2.3)"},"4":{"subject":"TV","teacher_id":"gvcn_2_3","teacher_name":"Cô Hải Yến (2.3)"},"5":{"subject":"NT(ÂN)","teacher_id":"t_an_chau","teacher_name":"Cô Châu (Âm nhạc)","isCustom":true},"6":{"subject":"TNXH","teacher_id":"gvcn_2_3","teacher_name":"Cô Hải Yến (2.3)"},"7":{"subject":"CLB Stem","teacher_id":"t_stem_1","teacher_name":"GV STEM (1)"}},"T3":{"1":{"subject":"TV","teacher_id":"gvcn_2_3","teacher_name":"Cô Hải Yến (2.3)","isCustom":true},"2":{"subject":"TV","teacher_id":"gvcn_2_3","teacher_name":"Cô Hải Yến (2.3)"},"3":{"subject":"TA(T-K)","teacher_id":"t_tatk_1","teacher_name":"GV TA-TK (1)"},"4":{"subject":"TA(T-K)","teacher_id":"t_tatk_1","teacher_name":"GV TA-TK (1)"},"5":{"subject":"GDTC","teacher_id":"t_gdtc_tien","teacher_name":"Thầy Tiến (GDTC)"},"6":{"subject":"Toán","teacher_id":"gvcn_2_3","teacher_name":"Cô Hải Yến (2.3)","isCustom":true},"7":{"subject":"Toán","teacher_id":"gvcn_2_3","teacher_name":"Cô Hải Yến (2.3)","isCustom":true}},"T4":{"1":{"subject":"TV","teacher_id":"gvcn_2_3","teacher_name":"Cô Hải Yến (2.3)"},"2":{"subject":"TV","teacher_id":"gvcn_2_3","teacher_name":"Cô Hải Yến (2.3)"},"3":{"subject":"Toán","teacher_id":"gvcn_2_3","teacher_name":"Cô Hải Yến (2.3)","isCustom":true},"4":{"subject":"ĐĐ","teacher_id":"gvcn_2_3","teacher_name":"Cô Hải Yến (2.3)","isCustom":true},"5":{"subject":"TNXH","teacher_id":"gvcn_2_3","teacher_name":"Cô Hải Yến (2.3)"},"6":{"subject":"HĐTN(CĐ)","teacher_id":"gvcn_2_3","teacher_name":"Cô Hải Yến (2.3)"},"7":{"subject":"CLB Toán TD","teacher_id":"gvcn_2_3","teacher_name":"Cô Hải Yến (2.3)","isCustom":true}},"T5":{"1":{"subject":"TA(BN)","teacher_id":"t_tabn_1","teacher_name":"GV TA-BN (1)"},"2":{"subject":"TA(BN)","teacher_id":"t_tabn_1","teacher_name":"GV TA-BN (1)"},"3":{"subject":"TV","teacher_id":"gvcn_2_3","teacher_name":"Cô Hải Yến (2.3)"},"4":{"subject":"TV","teacher_id":"gvcn_2_3","teacher_name":"Cô Hải Yến (2.3)"},"5":{"subject":"Toán","teacher_id":"gvcn_2_3","teacher_name":"Cô Hải Yến (2.3)"},"6":{"subject":"NT(MT)","teacher_id":"gvcn_2_3","teacher_name":"Cô Hải Yến (2.3)","isCustom":true},"7":{"subject":"GDTC","teacher_id":"t_gdtc_tien","teacher_name":"Thầy Tiến (GDTC)"}},"T6":{"1":{"subject":"TV","teacher_id":"gvcn_2_3","teacher_name":"Cô Hải Yến (2.3)","isCustom":true},"2":{"subject":"TV","teacher_id":"gvcn_2_3","teacher_name":"Cô Hải Yến (2.3)","isCustom":true},"3":{"subject":"TA","teacher_id":"t_ta_tam","teacher_name":"Cô Tâm (TA)"},"4":{"subject":"TA","teacher_id":"t_ta_tam","teacher_name":"Cô Tâm (TA)"},"5":{"subject":"Toán","teacher_id":"gvcn_2_3","teacher_name":"Cô Hải Yến (2.3)","isCustom":true},"6":{"subject":"CDS","teacher_id":"t_cds_1","teacher_name":"GV CDS (1)","isCustom":true},"7":{"subject":"HĐTN(SHL)","teacher_id":"gvcn_2_3","teacher_name":"Cô Hải Yến (2.3)"}}},"2.4":{"T2":{"1":{"subject":"HĐTN(CC)","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)"},"2":{"subject":"Toán","teacher_id":"gvcn_2_4","teacher_name":"Cô Gia Linh (2.4)","isCustom":true},"3":{"subject":"TV","teacher_id":"gvcn_2_4","teacher_name":"Cô Gia Linh (2.4)"},"4":{"subject":"TV","teacher_id":"gvcn_2_4","teacher_name":"Cô Gia Linh (2.4)","isCustom":true},"5":{"subject":"TA(BN)","teacher_id":"t_tabn_1","teacher_name":"GV TA-BN (1)"},"6":{"subject":"TA(BN)","teacher_id":"t_tabn_1","teacher_name":"GV TA-BN (1)"},"7":{"subject":"CLB Stem","teacher_id":"t_stem_2","teacher_name":"GV STEM (2)","isCustom":true}},"T3":{"1":{"subject":"Toán","teacher_id":"gvcn_2_4","teacher_name":"Cô Gia Linh (2.4)","isCustom":true},"2":{"subject":"GDTC","teacher_id":"t_gdtc_tien","teacher_name":"Thầy Tiến (GDTC)","isCustom":true},"3":{"subject":"TV","teacher_id":"gvcn_2_4","teacher_name":"Cô Gia Linh (2.4)","isCustom":true},"4":{"subject":"TV","teacher_id":"gvcn_2_4","teacher_name":"Cô Gia Linh (2.4)","isCustom":true},"5":{"subject":"TNXH","teacher_id":"gvcn_2_4","teacher_name":"Cô Gia Linh (2.4)","isCustom":true},"6":{"subject":"TH","teacher_id":"t_th_thai","teacher_name":"Thầy Thái (Tin học)","isCustom":true},"7":{"subject":"CLB Toán TD","teacher_id":"gvcn_2_4","teacher_name":"Cô Gia Linh (2.4)","isCustom":true}},"T4":{"1":{"subject":"TV","teacher_id":"gvcn_2_4","teacher_name":"Cô Gia Linh (2.4)"},"2":{"subject":"TV","teacher_id":"gvcn_2_4","teacher_name":"Cô Gia Linh (2.4)"},"3":{"subject":"NT(ÂN)","teacher_id":"t_an_chau","teacher_name":"Cô Châu (Âm nhạc)","isCustom":true},"4":{"subject":"Toán","teacher_id":"gvcn_2_4","teacher_name":"Cô Gia Linh (2.4)","isCustom":true},"5":{"subject":"TNXH","teacher_id":"gvcn_2_4","teacher_name":"Cô Gia Linh (2.4)","isCustom":true},"6":{"subject":"NT(MT)","teacher_id":"gvcn_2_4","teacher_name":"Cô Gia Linh (2.4)","isCustom":true},"7":{"subject":"HĐTN(CĐ)","teacher_id":"gvcn_2_4","teacher_name":"Cô Gia Linh (2.4)"}},"T5":{"1":{"subject":"TV","teacher_id":"gvcn_2_4","teacher_name":"Cô Gia Linh (2.4)","isCustom":true},"2":{"subject":"TV","teacher_id":"gvcn_2_4","teacher_name":"Cô Gia Linh (2.4)","isCustom":true},"3":{"subject":"TA","teacher_id":"t_ta_tam","teacher_name":"Cô Tâm (TA)"},"4":{"subject":"TA","teacher_id":"t_ta_tam","teacher_name":"Cô Tâm (TA)"},"5":{"subject":"Toán","teacher_id":"gvcn_2_4","teacher_name":"Cô Gia Linh (2.4)","isCustom":true},"6":{"subject":"GDTC","teacher_id":"t_gdtc_tien","teacher_name":"Thầy Tiến (GDTC)","isCustom":true},"7":{"subject":"ĐĐ","teacher_id":"gvcn_2_4","teacher_name":"Cô Gia Linh (2.4)"}},"T6":{"1":{"subject":"TA(T-K)","teacher_id":"t_tatk_1","teacher_name":"GV TA-TK (1)"},"2":{"subject":"TA(T-K)","teacher_id":"t_tatk_1","teacher_name":"GV TA-TK (1)"},"3":{"subject":"TV","teacher_id":"gvcn_2_4","teacher_name":"Cô Gia Linh (2.4)","isCustom":true},"4":{"subject":"TV","teacher_id":"gvcn_2_4","teacher_name":"Cô Gia Linh (2.4)","isCustom":true},"5":{"subject":"CDS","teacher_id":"t_cds_1","teacher_name":"GV CDS (1)","isCustom":true},"6":{"subject":"Toán","teacher_id":"gvcn_2_4","teacher_name":"Cô Gia Linh (2.4)","isCustom":true},"7":{"subject":"HĐTN(SHL)","teacher_id":"gvcn_2_4","teacher_name":"Cô Gia Linh (2.4)"}}},"2.5":{"T2":{"1":{"subject":"HĐTN(CC)","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)"},"2":{"subject":"Toán","teacher_id":"gvcn_2_5","teacher_name":"Cô Tịnh (2.5)","isCustom":true},"3":{"subject":"TA(BN)","teacher_id":"t_tabn_2","teacher_name":"GV TA-BN (2)"},"4":{"subject":"TA(BN)","teacher_id":"t_tabn_2","teacher_name":"GV TA-BN (2)"},"5":{"subject":"TV","teacher_id":"gvcn_2_5","teacher_name":"Cô Tịnh (2.5)"},"6":{"subject":"TV","teacher_id":"gvcn_2_5","teacher_name":"Cô Tịnh (2.5)","isCustom":true},"7":{"subject":"TNXH","teacher_id":"gvcn_2_5","teacher_name":"Cô Tịnh (2.5)","isCustom":true}},"T3":{"1":{"subject":"TV","teacher_id":"gvcn_2_5","teacher_name":"Cô Tịnh (2.5)"},"2":{"subject":"TV","teacher_id":"gvcn_2_5","teacher_name":"Cô Tịnh (2.5)","isCustom":true},"3":{"subject":"TA","teacher_id":"t_ta_tam","teacher_name":"Cô Tâm (TA)"},"4":{"subject":"TA","teacher_id":"t_ta_tam","teacher_name":"Cô Tâm (TA)"},"5":{"subject":"Toán","teacher_id":"gvcn_2_5","teacher_name":"Cô Tịnh (2.5)","isCustom":true},"6":{"subject":"CLB Stem","teacher_id":"t_stem_1","teacher_name":"GV STEM (1)","isCustom":true},"7":{"subject":"GDTC","teacher_id":"t_gdtc_tien","teacher_name":"Thầy Tiến (GDTC)","isCustom":true}},"T4":{"1":{"subject":"Toán","teacher_id":"gvcn_2_5","teacher_name":"Cô Tịnh (2.5)","isCustom":true},"2":{"subject":"NT(ÂN)","teacher_id":"t_an_chau","teacher_name":"Cô Châu (Âm nhạc)","isCustom":true},"3":{"subject":"TV","teacher_id":"gvcn_2_5","teacher_name":"Cô Tịnh (2.5)"},"4":{"subject":"TV","teacher_id":"gvcn_2_5","teacher_name":"Cô Tịnh (2.5)","isCustom":true},"5":{"subject":"NT(MT)","teacher_id":"gvcn_2_5","teacher_name":"Cô Tịnh (2.5)","isCustom":true},"6":{"subject":"HĐTN(CĐ)","teacher_id":"gvcn_2_5","teacher_name":"Cô Tịnh (2.5)"},"7":{"subject":"TNXH","teacher_id":"gvcn_2_5","teacher_name":"Cô Tịnh (2.5)","isCustom":true}},"T5":{"1":{"subject":"TV","teacher_id":"gvcn_2_5","teacher_name":"Cô Tịnh (2.5)"},"2":{"subject":"TV","teacher_id":"gvcn_2_5","teacher_name":"Cô Tịnh (2.5)"},"3":{"subject":"Toán","teacher_id":"gvcn_2_5","teacher_name":"Cô Tịnh (2.5)","isCustom":true},"4":{"subject":"GDTC","teacher_id":"t_gdtc_tien","teacher_name":"Thầy Tiến (GDTC)"},"5":{"subject":"ĐĐ","teacher_id":"gvcn_2_5","teacher_name":"Cô Tịnh (2.5)"},"6":{"subject":"CDS","teacher_id":"t_cds_1","teacher_name":"GV CDS (1)","isCustom":true},"7":{"subject":"CLB Toán TD","teacher_id":"gvcn_2_5","teacher_name":"Cô Tịnh (2.5)","isCustom":true}},"T6":{"1":{"subject":"TH","teacher_id":"t_th_thai","teacher_name":"Thầy Thái (Tin học)","isCustom":true},"2":{"subject":"Toán","teacher_id":"gvcn_2_5","teacher_name":"Cô Tịnh (2.5)"},"3":{"subject":"TA(T-K)","teacher_id":"t_tatk_1","teacher_name":"GV TA-TK (1)"},"4":{"subject":"TA(T-K)","teacher_id":"t_tatk_1","teacher_name":"GV TA-TK (1)"},"5":{"subject":"TV","teacher_id":"gvcn_2_5","teacher_name":"Cô Tịnh (2.5)","isCustom":true},"6":{"subject":"TV","teacher_id":"gvcn_2_5","teacher_name":"Cô Tịnh (2.5)","isCustom":true},"7":{"subject":"HĐTN(SHL)","teacher_id":"gvcn_2_5","teacher_name":"Cô Tịnh (2.5)"}}},"2.6":{"T2":{"1":{"subject":"HĐTN(CC)","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)"},"2":{"subject":"Toán","teacher_id":"gvcn_2_6","teacher_name":"Cô Hằng (2.6)","isCustom":true},"3":{"subject":"TV","teacher_id":"gvcn_2_6","teacher_name":"Cô Hằng (2.6)"},"4":{"subject":"TV","teacher_id":"gvcn_2_6","teacher_name":"Cô Hằng (2.6)"},"5":{"subject":"NT(ÂN)","teacher_id":"gvcn_2_6","teacher_name":"Cô Hằng (2.6)"},"6":{"subject":"TNXH","teacher_id":"gvcn_2_6","teacher_name":"Cô Hằng (2.6)","isCustom":true},"7":{"subject":"CLB Toán TD","teacher_id":"gvcn_2_6","teacher_name":"Cô Hằng (2.6)","isCustom":true}},"T3":{"1":{"subject":"TV","teacher_id":"gvcn_2_6","teacher_name":"Cô Hằng (2.6)"},"2":{"subject":"TV","teacher_id":"gvcn_2_6","teacher_name":"Cô Hằng (2.6)"},"3":{"subject":"Toán","teacher_id":"gvcn_2_6","teacher_name":"Cô Hằng (2.6)","isCustom":true},"4":{"subject":"NT(MT)","teacher_id":"gvcn_2_6","teacher_name":"Cô Hằng (2.6)","isCustom":true},"5":{"subject":"ĐĐ","teacher_id":"gvcn_2_6","teacher_name":"Cô Hằng (2.6)","isCustom":true},"6":{"subject":"HĐTN(CĐ)","teacher_id":"gvcn_2_6","teacher_name":"Cô Hằng (2.6)","isCustom":true},"7":{"subject":"CDS","teacher_id":"t_cds_1","teacher_name":"GV CDS (1)","isCustom":true}},"T4":{"1":{"subject":"TH","teacher_id":"t_th_thai","teacher_name":"Thầy Thái (Tin học)","isCustom":true},"2":{"subject":"Toán","teacher_id":"gvcn_2_6","teacher_name":"Cô Hằng (2.6)","isCustom":true},"3":{"subject":"TV","teacher_id":"gvcn_2_6","teacher_name":"Cô Hằng (2.6)","isCustom":true},"4":{"subject":"TV","teacher_id":"gvcn_2_6","teacher_name":"Cô Hằng (2.6)","isCustom":true},"5":{"subject":"TA","teacher_id":"t_ta_tam","teacher_name":"Cô Tâm (TA)"},"6":{"subject":"TA","teacher_id":"t_ta_tam","teacher_name":"Cô Tâm (TA)"},"7":{"subject":"CLB Stem","teacher_id":"t_stem_2","teacher_name":"GV STEM (2)"}},"T5":{"1":{"subject":"TV","teacher_id":"gvcn_2_6","teacher_name":"Cô Hằng (2.6)"},"2":{"subject":"TV","teacher_id":"gvcn_2_6","teacher_name":"Cô Hằng (2.6)","isCustom":true},"3":{"subject":"Toán","teacher_id":"gvcn_2_6","teacher_name":"Cô Hằng (2.6)"},"4":{"subject":"TNXH","teacher_id":"gvcn_2_6","teacher_name":"Cô Hằng (2.6)","isCustom":true},"5":{"subject":"TA(T-K)","teacher_id":"t_tatk_1","teacher_name":"GV TA-TK (1)"},"6":{"subject":"TA(T-K)","teacher_id":"t_tatk_1","teacher_name":"GV TA-TK (1)"},"7":{"subject":"GDTC","teacher_id":"gvcn_2_6","teacher_name":"Cô Hằng (2.6)","isCustom":true}},"T6":{"1":{"subject":"TA(BN)","teacher_id":"t_tabn_2","teacher_name":"GV TA-BN (2)"},"2":{"subject":"TA(BN)","teacher_id":"t_tabn_2","teacher_name":"GV TA-BN (2)"},"3":{"subject":"TV","teacher_id":"gvcn_2_6","teacher_name":"Cô Hằng (2.6)","isCustom":true},"4":{"subject":"TV","teacher_id":"gvcn_2_6","teacher_name":"Cô Hằng (2.6)","isCustom":true},"5":{"subject":"GDTC","teacher_id":"gvcn_2_6","teacher_name":"Cô Hằng (2.6)","isCustom":true},"6":{"subject":"Toán","teacher_id":"gvcn_2_6","teacher_name":"Cô Hằng (2.6)","isCustom":true},"7":{"subject":"HĐTN(SHL)","teacher_id":"gvcn_2_6","teacher_name":"Cô Hằng (2.6)","isCustom":true}}},"3.1":{"T2":{"1":{"subject":"HĐTN(CC)","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)"},"2":{"subject":"GDTC","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)"},"3":{"subject":"TV","teacher_id":"gvcn_3_1","teacher_name":"Cô Trúc (3.1)","isCustom":true},"4":{"subject":"Toán","teacher_id":"gvcn_3_1","teacher_name":"Cô Trúc (3.1)","isCustom":true},"5":{"subject":"NT(MT)","teacher_id":"gvcn_3_1","teacher_name":"Cô Trúc (3.1)","isCustom":true},"6":{"subject":"TNXH","teacher_id":"gvcn_3_1","teacher_name":"Cô Trúc (3.1)"},"7":{"subject":"CN","teacher_id":"gvcn_3_1","teacher_name":"Cô Trúc (3.1)","isCustom":true},"8":{"subject":"CLB KNS","teacher_id":"gvcn_3_1","teacher_name":"Cô Trúc (3.1)","isCustom":true}},"T3":{"1":{"subject":"TV","teacher_id":"gvcn_3_1","teacher_name":"Cô Trúc (3.1)"},"2":{"subject":"TV","teacher_id":"gvcn_3_1","teacher_name":"Cô Trúc (3.1)"},"3":{"subject":"NT(ÂN)","teacher_id":"t_an_chau","teacher_name":"Cô Châu (Âm nhạc)"},"4":{"subject":"Toán","teacher_id":"gvcn_3_1","teacher_name":"Cô Trúc (3.1)"},"5":{"subject":"TA","teacher_id":"t_ta_thy","teacher_name":"Cô Thy (TA)"},"6":{"subject":"TA","teacher_id":"t_ta_thy","teacher_name":"Cô Thy (TA)"},"7":{"subject":"CLB Stem","teacher_id":"t_stem_2","teacher_name":"GV STEM (2)"},"8":{"subject":"Tự học","teacher_id":"gvcn_3_1","teacher_name":"Cô Trúc (3.1)"}},"T4":{"1":{"subject":"TA(T-K)","teacher_id":"t_tatk_1","teacher_name":"GV TA-TK (1)"},"2":{"subject":"TA(T-K)","teacher_id":"t_tatk_1","teacher_name":"GV TA-TK (1)"},"3":{"subject":"IC3","teacher_id":"t_ic3_1","teacher_name":"GV IC3 (1)","isCustom":true},"4":{"subject":"IC3","teacher_id":"t_ic3_1","teacher_name":"GV IC3 (1)","isCustom":true},"5":{"subject":"TV","teacher_id":"gvcn_3_1","teacher_name":"Cô Trúc (3.1)"},"6":{"subject":"Toán","teacher_id":"gvcn_3_1","teacher_name":"Cô Trúc (3.1)"},"7":{"subject":"HĐTN(CĐ)","teacher_id":"gvcn_3_1","teacher_name":"Cô Trúc (3.1)"},"8":{"subject":"Tự học","teacher_id":"gvcn_3_1","teacher_name":"Cô Trúc (3.1)"}},"T5":{"1":{"subject":"GDTC","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)"},"2":{"subject":"Toán","teacher_id":"gvcn_3_1","teacher_name":"Cô Trúc (3.1)","isCustom":true},"3":{"subject":"TV","teacher_id":"gvcn_3_1","teacher_name":"Cô Trúc (3.1)"},"4":{"subject":"TV","teacher_id":"gvcn_3_1","teacher_name":"Cô Trúc (3.1)","isCustom":true},"5":{"subject":"TA","teacher_id":"t_ta_thy","teacher_name":"Cô Thy (TA)"},"6":{"subject":"TA","teacher_id":"t_ta_thy","teacher_name":"Cô Thy (TA)"},"7":{"subject":"ĐĐ","teacher_id":"gvcn_3_1","teacher_name":"Cô Trúc (3.1)"},"8":{"subject":"CLB Toán TD","teacher_id":"gvcn_3_1","teacher_name":"Cô Trúc (3.1)","isCustom":true}},"T6":{"1":{"subject":"TV","teacher_id":"gvcn_3_1","teacher_name":"Cô Trúc (3.1)","isCustom":true},"2":{"subject":"TH","teacher_id":"t_th_thai","teacher_name":"Thầy Thái (Tin học)","isCustom":true},"3":{"subject":"TA(BN)","teacher_id":"t_tabn_2","teacher_name":"GV TA-BN (2)"},"4":{"subject":"TA(BN)","teacher_id":"t_tabn_2","teacher_name":"GV TA-BN (2)"},"5":{"subject":"Toán","teacher_id":"gvcn_3_1","teacher_name":"Cô Trúc (3.1)","isCustom":true},"6":{"subject":"TNXH","teacher_id":"gvcn_3_1","teacher_name":"Cô Trúc (3.1)","isCustom":true},"7":{"subject":"HĐTN(SHL)","teacher_id":"gvcn_3_1","teacher_name":"Cô Trúc (3.1)","isCustom":true},"8":{"subject":"Tự học","teacher_id":"gvcn_3_1","teacher_name":"Cô Trúc (3.1)","isCustom":true}}},"3.2":{"T2":{"1":{"subject":"HĐTN(CC)","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)"},"2":{"subject":"Toán","teacher_id":"gvcn_3_2","teacher_name":"Cô Yến Nhi (3.2)","isCustom":true},"3":{"subject":"TV","teacher_id":"gvcn_3_2","teacher_name":"Cô Yến Nhi (3.2)","isCustom":true},"4":{"subject":"TV","teacher_id":"gvcn_3_2","teacher_name":"Cô Yến Nhi (3.2)","isCustom":true},"5":{"subject":"TA(BN)","teacher_id":"t_tabn_2","teacher_name":"GV TA-BN (2)"},"6":{"subject":"TA(BN)","teacher_id":"t_tabn_2","teacher_name":"GV TA-BN (2)"},"7":{"subject":"ĐĐ","teacher_id":"gvcn_3_2","teacher_name":"Cô Yến Nhi (3.2)","isCustom":true},"8":{"subject":"CLB Stem","teacher_id":"t_stem_2","teacher_name":"GV STEM (2)","isCustom":true}},"T3":{"1":{"subject":"TA","teacher_id":"t_ta_thy","teacher_name":"Cô Thy (TA)"},"2":{"subject":"TA","teacher_id":"t_ta_thy","teacher_name":"Cô Thy (TA)"},"3":{"subject":"GDTC","teacher_id":"t_gdtc_phong","teacher_name":"Thầy Phong (GDTC)","isCustom":true},"4":{"subject":"TV","teacher_id":"gvcn_3_2","teacher_name":"Cô Yến Nhi (3.2)"},"5":{"subject":"NT(ÂN)","teacher_id":"t_an_chau","teacher_name":"Cô Châu (Âm nhạc)"},"6":{"subject":"Toán","teacher_id":"gvcn_3_2","teacher_name":"Cô Yến Nhi (3.2)","isCustom":true},"7":{"subject":"CN","teacher_id":"gvcn_3_2","teacher_name":"Cô Yến Nhi (3.2)","isCustom":true},"8":{"subject":"Tự học","teacher_id":"gvcn_3_2","teacher_name":"Cô Yến Nhi (3.2)"}},"T4":{"1":{"subject":"TV","teacher_id":"gvcn_3_2","teacher_name":"Cô Yến Nhi (3.2)"},"2":{"subject":"TV","teacher_id":"gvcn_3_2","teacher_name":"Cô Yến Nhi (3.2)"},"3":{"subject":"Toán","teacher_id":"gvcn_3_2","teacher_name":"Cô Yến Nhi (3.2)"},"4":{"subject":"TNXH","teacher_id":"gvcn_3_2","teacher_name":"Cô Yến Nhi (3.2)"},"5":{"subject":"HĐTN(CĐ)","teacher_id":"gvcn_3_2","teacher_name":"Cô Yến Nhi (3.2)"},"6":{"subject":"TH","teacher_id":"t_th_thai","teacher_name":"Thầy Thái (Tin học)","isCustom":true},"7":{"subject":"Tự học","teacher_id":"gvcn_3_2","teacher_name":"Cô Yến Nhi (3.2)","isCustom":true},"8":{"subject":"CLB Toán TD","teacher_id":"gvcn_3_2","teacher_name":"Cô Yến Nhi (3.2)","isCustom":true}},"T5":{"1":{"subject":"TA(T-K)","teacher_id":"t_tatk_1","teacher_name":"GV TA-TK (1)"},"2":{"subject":"TA(T-K)","teacher_id":"t_tatk_1","teacher_name":"GV TA-TK (1)"},"3":{"subject":"GDTC","teacher_id":"t_gdtc_phong","teacher_name":"Thầy Phong (GDTC)"},"4":{"subject":"TV","teacher_id":"gvcn_3_2","teacher_name":"Cô Yến Nhi (3.2)"},"5":{"subject":"IC3","teacher_id":"t_ic3_1","teacher_name":"GV IC3 (1)","isCustom":true},"6":{"subject":"IC3","teacher_id":"t_ic3_1","teacher_name":"GV IC3 (1)","isCustom":true},"7":{"subject":"Toán","teacher_id":"gvcn_3_2","teacher_name":"Cô Yến Nhi (3.2)"},"8":{"subject":"NT(MT)","teacher_id":"gvcn_3_2","teacher_name":"Cô Yến Nhi (3.2)","isCustom":true}},"T6":{"1":{"subject":"TA","teacher_id":"t_ta_thy","teacher_name":"Cô Thy (TA)"},"2":{"subject":"TA","teacher_id":"t_ta_thy","teacher_name":"Cô Thy (TA)"},"3":{"subject":"TV","teacher_id":"gvcn_3_2","teacher_name":"Cô Yến Nhi (3.2)","isCustom":true},"4":{"subject":"Toán","teacher_id":"gvcn_3_2","teacher_name":"Cô Yến Nhi (3.2)","isCustom":true},"5":{"subject":"TNXH","teacher_id":"gvcn_3_2","teacher_name":"Cô Yến Nhi (3.2)","isCustom":true},"6":{"subject":"Tự học","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)","isCustom":true},"7":{"subject":"HĐTN(SHL)","teacher_id":"gvcn_3_2","teacher_name":"Cô Yến Nhi (3.2)"},"8":{"subject":"CLB KNS","teacher_id":"gvcn_3_2","teacher_name":"Cô Yến Nhi (3.2)","isCustom":true}}},"3.3":{"T2":{"1":{"subject":"HĐTN(CC)","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)"},"2":{"subject":"Toán","teacher_id":"gvcn_3_3","teacher_name":"Cô Kim Anh (3.3)","isCustom":true},"3":{"subject":"TV","teacher_id":"gvcn_3_3","teacher_name":"Cô Kim Anh (3.3)","isCustom":true},"4":{"subject":"TV","teacher_id":"gvcn_3_3","teacher_name":"Cô Kim Anh (3.3)","isCustom":true},"5":{"subject":"CLB Stem","teacher_id":"t_stem_2","teacher_name":"GV STEM (2)"},"6":{"subject":"TNXH","teacher_id":"gvcn_3_3","teacher_name":"Cô Kim Anh (3.3)","isCustom":true},"7":{"subject":"GDTC","teacher_id":"t_gdtc_phong","teacher_name":"Thầy Phong (GDTC)"},"8":{"subject":"Tự học","teacher_id":"gvcn_3_3","teacher_name":"Cô Kim Anh (3.3)"}},"T3":{"1":{"subject":"TV","teacher_id":"gvcn_3_3","teacher_name":"Cô Kim Anh (3.3)"},"2":{"subject":"Toán","teacher_id":"gvcn_3_3","teacher_name":"Cô Kim Anh (3.3)"},"3":{"subject":"TA(BN)","teacher_id":"t_tabn_2","teacher_name":"GV TA-BN (2)"},"4":{"subject":"TA(BN)","teacher_id":"t_tabn_2","teacher_name":"GV TA-BN (2)"},"5":{"subject":"TH","teacher_id":"t_th_thai","teacher_name":"Thầy Thái (Tin học)","isCustom":true},"6":{"subject":"NT(MT)","teacher_id":"gvcn_3_3","teacher_name":"Cô Kim Anh (3.3)","isCustom":true},"7":{"subject":"Tự học","teacher_id":"gvcn_3_3","teacher_name":"Cô Kim Anh (3.3)","isCustom":true},"8":{"subject":"CLB Toán TD","teacher_id":"gvcn_3_3","teacher_name":"Cô Kim Anh (3.3)","isCustom":true}},"T4":{"1":{"subject":"NT(ÂN)","teacher_id":"t_an_chau","teacher_name":"Cô Châu (Âm nhạc)"},"2":{"subject":"TV","teacher_id":"gvcn_3_3","teacher_name":"Cô Kim Anh (3.3)"},"3":{"subject":"TA","teacher_id":"t_ta_tam","teacher_name":"Cô Tâm (TA)"},"4":{"subject":"TA","teacher_id":"t_ta_tam","teacher_name":"Cô Tâm (TA)"},"5":{"subject":"Toán","teacher_id":"gvcn_3_3","teacher_name":"Cô Kim Anh (3.3)"},"6":{"subject":"ĐĐ","teacher_id":"gvcn_3_3","teacher_name":"Cô Kim Anh (3.3)","isCustom":true},"7":{"subject":"HĐTN(CĐ)","teacher_id":"gvcn_3_3","teacher_name":"Cô Kim Anh (3.3)"},"8":{"subject":"CLB KNS","teacher_id":"gvcn_3_3","teacher_name":"Cô Kim Anh (3.3)","isCustom":true}},"T5":{"1":{"subject":"IC3","teacher_id":"t_ic3_1","teacher_name":"GV IC3 (1)","isCustom":true},"2":{"subject":"IC3","teacher_id":"t_ic3_1","teacher_name":"GV IC3 (1)","isCustom":true},"3":{"subject":"TA(T-K)","teacher_id":"t_tatk_1","teacher_name":"GV TA-TK (1)"},"4":{"subject":"TA(T-K)","teacher_id":"t_tatk_1","teacher_name":"GV TA-TK (1)"},"5":{"subject":"TV","teacher_id":"gvcn_3_3","teacher_name":"Cô Kim Anh (3.3)"},"6":{"subject":"TV","teacher_id":"gvcn_3_3","teacher_name":"Cô Kim Anh (3.3)"},"7":{"subject":"Toán","teacher_id":"gvcn_3_3","teacher_name":"Cô Kim Anh (3.3)","isCustom":true},"8":{"subject":"GDTC","teacher_id":"t_gdtc_phong","teacher_name":"Thầy Phong (GDTC)"}},"T6":{"1":{"subject":"TV","teacher_id":"gvcn_3_3","teacher_name":"Cô Kim Anh (3.3)","isCustom":true},"2":{"subject":"Toán","teacher_id":"gvcn_3_3","teacher_name":"Cô Kim Anh (3.3)","isCustom":true},"3":{"subject":"TNXH","teacher_id":"gvcn_3_3","teacher_name":"Cô Kim Anh (3.3)","isCustom":true},"4":{"subject":"CN","teacher_id":"gvcn_3_3","teacher_name":"Cô Kim Anh (3.3)","isCustom":true},"5":{"subject":"TA","teacher_id":"t_ta_tam","teacher_name":"Cô Tâm (TA)"},"6":{"subject":"TA","teacher_id":"t_ta_tam","teacher_name":"Cô Tâm (TA)"},"7":{"subject":"HĐTN(SHL)","teacher_id":"gvcn_3_3","teacher_name":"Cô Kim Anh (3.3)"},"8":{"subject":"Tự học","teacher_id":"gvcn_3_3","teacher_name":"Cô Kim Anh (3.3)","isCustom":true}}},"3.4":{"T2":{"1":{"subject":"HĐTN(CC)","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)"},"2":{"subject":"CLB Stem","teacher_id":"t_stem_2","teacher_name":"GV STEM (2)"},"3":{"subject":"TV","teacher_id":"gvcn_3_4","teacher_name":"","isCustom":true},"4":{"subject":"Toán","teacher_id":"gvcn_3_4","teacher_name":"Cô Uyên (3.4)"},"5":{"subject":"TA","teacher_id":"t_ta_trang","teacher_name":"Cô Trang (TA)"},"6":{"subject":"TA","teacher_id":"t_ta_trang","teacher_name":"Cô Trang (TA)"},"7":{"subject":"TNXH","teacher_id":"gvcn_3_4","teacher_name":"Cô Uyên (3.4)"},"8":{"subject":"Tự học","teacher_id":"gvcn_3_4","teacher_name":"Cô Uyên (3.4)"}},"T3":{"1":{"subject":"TH","teacher_id":"t_th_thai","teacher_name":"Thầy Thái (Tin học)","isCustom":true},"2":{"subject":"GDTC","teacher_id":"t_gdtc_phong","teacher_name":"Thầy Phong (GDTC)"},"3":{"subject":"IC3","teacher_id":"t_ic3_1","teacher_name":"GV IC3 (1)","isCustom":true},"4":{"subject":"IC3","teacher_id":"t_ic3_1","teacher_name":"GV IC3 (1)","isCustom":true},"5":{"subject":"TV","teacher_id":"gvcn_3_4","teacher_name":"","isCustom":true},"6":{"subject":"TV","teacher_id":"gvcn_3_4","teacher_name":"","isCustom":true},"7":{"subject":"Toán","teacher_id":"gvcn_3_4","teacher_name":"Cô Uyên (3.4)"},"8":{"subject":"Tự học","teacher_id":"gvcn_3_4","teacher_name":"Cô Uyên (3.4)"}},"T4":{"1":{"subject":"TV","teacher_id":"gvcn_3_4","teacher_name":"","isCustom":true},"2":{"subject":"TV","teacher_id":"gvcn_3_4","teacher_name":"","isCustom":true},"3":{"subject":"Toán","teacher_id":"gvcn_3_4","teacher_name":"Cô Uyên (3.4)"},"4":{"subject":"TNXH","teacher_id":"gvcn_3_4","teacher_name":"Cô Uyên (3.4)"},"5":{"subject":"TA(T-K)","teacher_id":"t_tatk_1","teacher_name":"GV TA-TK (1)"},"6":{"subject":"TA(T-K)","teacher_id":"t_tatk_1","teacher_name":"GV TA-TK (1)"},"7":{"subject":"HĐTN(CĐ)","teacher_id":"gvcn_3_4","teacher_name":"Cô Uyên (3.4)"},"8":{"subject":"Toán","teacher_id":"gvcn_3_4","teacher_name":"Cô Uyên (3.4)"}},"T5":{"1":{"subject":"TV","teacher_id":"gvcn_3_4","teacher_name":"","isCustom":true},"2":{"subject":"GDTC","teacher_id":"t_gdtc_phong","teacher_name":"Thầy Phong (GDTC)"},"3":{"subject":"NT(ÂN)","teacher_id":"t_an_chau","teacher_name":"Cô Châu (Âm nhạc)"},"4":{"subject":"Tự học","teacher_id":"gvcn_3_4","teacher_name":"Cô Uyên (3.4)"},"5":{"subject":"TA(BN)","teacher_id":"t_tabn_2","teacher_name":"GV TA-BN (2)"},"6":{"subject":"TA(BN)","teacher_id":"t_tabn_2","teacher_name":"GV TA-BN (2)"},"7":{"subject":"ĐĐ","teacher_id":"gvcn_3_4","teacher_name":"Cô Uyên (3.4)"},"8":{"subject":"CLB KNS","teacher_id":"gvcn_3_4","teacher_name":"Cô Uyên (3.4)","isCustom":true}},"T6":{"1":{"subject":"TA","teacher_id":"t_ta_trang","teacher_name":"Cô Trang (TA)"},"2":{"subject":"TA","teacher_id":"t_ta_trang","teacher_name":"Cô Trang (TA)"},"3":{"subject":"Toán","teacher_id":"gvcn_3_4","teacher_name":"Cô Uyên (3.4)"},"4":{"subject":"CN","teacher_id":"gvcn_3_4","teacher_name":"Cô Uyên (3.4)"},"5":{"subject":"NT(MT)","teacher_id":"gvcn_3_4","teacher_name":"Cô Uyên (3.4)"},"6":{"subject":"TV","teacher_id":"gvcn_3_4","teacher_name":"","isCustom":true},"7":{"subject":"HĐTN(SHL)","teacher_id":"gvcn_3_4","teacher_name":"Cô Uyên (3.4)"},"8":{"subject":"CLB Toán TD","teacher_id":"gvcn_3_4","teacher_name":"Cô Uyên (3.4)","isCustom":true}}},"3.5":{"T2":{"1":{"subject":"HĐTN(CC)","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)"},"2":{"subject":"TV","teacher_id":"gvcn_3_5","teacher_name":"Cô Yến Nhi (3.5)"},"3":{"subject":"TA","teacher_id":"t_ta_trang","teacher_name":"Cô Trang (TA)"},"4":{"subject":"TA","teacher_id":"t_ta_trang","teacher_name":"Cô Trang (TA)"},"5":{"subject":"Toán","teacher_id":"gvcn_3_5","teacher_name":"Cô Yến Nhi (3.5)","isCustom":true},"6":{"subject":"TNXH","teacher_id":"gvcn_3_5","teacher_name":"Cô Yến Nhi (3.5)","isCustom":true},"7":{"subject":"NT(MT)","teacher_id":"gvcn_3_5","teacher_name":"Cô Yến Nhi (3.5)","isCustom":true},"8":{"subject":"Tự học","teacher_id":"gvcn_3_5","teacher_name":"Cô Yến Nhi (3.5)"}},"T3":{"1":{"subject":"TV","teacher_id":"gvcn_3_5","teacher_name":"Cô Yến Nhi (3.5)"},"2":{"subject":"TV","teacher_id":"gvcn_3_5","teacher_name":"Cô Yến Nhi (3.5)"},"3":{"subject":"Toán","teacher_id":"gvcn_3_5","teacher_name":"Cô Yến Nhi (3.5)"},"4":{"subject":"GDTC","teacher_id":"t_gdtc_phong","teacher_name":"Thầy Phong (GDTC)"},"5":{"subject":"TA(T-K)","teacher_id":"t_tatk_1","teacher_name":"GV TA-TK (1)"},"6":{"subject":"TA(T-K)","teacher_id":"t_tatk_1","teacher_name":"GV TA-TK (1)"},"7":{"subject":"Tự học","teacher_id":"gvcn_3_5","teacher_name":"Cô Yến Nhi (3.5)"},"8":{"subject":"CLB KNS","teacher_id":"gvcn_3_5","teacher_name":"Cô Yến Nhi (3.5)","isCustom":true}},"T4":{"1":{"subject":"TA","teacher_id":"t_ta_trang","teacher_name":"Cô Trang (TA)"},"2":{"subject":"TA","teacher_id":"t_ta_trang","teacher_name":"Cô Trang (TA)"},"3":{"subject":"TV","teacher_id":"gvcn_3_5","teacher_name":"Cô Yến Nhi (3.5)","isCustom":true},"4":{"subject":"Toán","teacher_id":"gvcn_3_5","teacher_name":"Cô Yến Nhi (3.5)","isCustom":true},"5":{"subject":"Tự học","teacher_id":"gvcn_3_5","teacher_name":"Cô Yến Nhi (3.5)"},"6":{"subject":"NT(ÂN)","teacher_id":"t_an_chau","teacher_name":"Cô Châu (Âm nhạc)"},"7":{"subject":"CN","teacher_id":"gvcn_3_5","teacher_name":"Cô Yến Nhi (3.5)","isCustom":true},"8":{"subject":"CLB Toán TD","teacher_id":"gvcn_3_5","teacher_name":"Cô Yến Nhi (3.5)","isCustom":true}},"T5":{"1":{"subject":"TH","teacher_id":"t_th_thai","teacher_name":"Thầy Thái (Tin học)","isCustom":true},"2":{"subject":"TV","teacher_id":"gvcn_3_5","teacher_name":"Cô Yến Nhi (3.5)"},"3":{"subject":"Toán","teacher_id":"gvcn_3_5","teacher_name":"Cô Yến Nhi (3.5)","isCustom":true},"4":{"subject":"GDTC","teacher_id":"t_gdtc_phong","teacher_name":"Thầy Phong (GDTC)"},"5":{"subject":"HĐTN(CĐ)","teacher_id":"gvcn_3_5","teacher_name":"Cô Yến Nhi (3.5)","isCustom":true},"6":{"subject":"ĐĐ","teacher_id":"gvcn_3_5","teacher_name":"Cô Yến Nhi (3.5)","isCustom":true},"7":{"subject":"TA(BN)","teacher_id":"t_tabn_2","teacher_name":"GV TA-BN (2)"},"8":{"subject":"TA(BN)","teacher_id":"t_tabn_2","teacher_name":"GV TA-BN (2)"}},"T6":{"1":{"subject":"IC3","teacher_id":"t_ic3_2","teacher_name":"GV IC3 (2)","isCustom":true},"2":{"subject":"IC3","teacher_id":"t_ic3_2","teacher_name":"GV IC3 (2)","isCustom":true},"3":{"subject":"Toán","teacher_id":"gvcn_3_5","teacher_name":"Cô Yến Nhi (3.5)","isCustom":true},"4":{"subject":"TNXH","teacher_id":"gvcn_3_5","teacher_name":"Cô Yến Nhi (3.5)","isCustom":true},"5":{"subject":"HĐTN(SHL)","teacher_id":"gvcn_3_5","teacher_name":"Cô Yến Nhi (3.5)","isCustom":true},"6":{"subject":"CLB Stem","teacher_id":"t_stem_2","teacher_name":"GV STEM (2)"},"7":{"subject":"TV","teacher_id":"gvcn_3_5","teacher_name":"Cô Yến Nhi (3.5)"},"8":{"subject":"TV","teacher_id":"gvcn_3_5","teacher_name":"Cô Yến Nhi (3.5)","isCustom":true}}},"3.6":{"T2":{"1":{"subject":"HĐTN(CC)","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)"},"2":{"subject":"TA(T-K)","teacher_id":"t_tatk_1","teacher_name":"GV TA-TK (1)"},"3":{"subject":"TV","teacher_id":"gvcn_3_6","teacher_name":"","isCustom":true},"4":{"subject":"GDTC","teacher_id":"gvcn_3_6","teacher_name":"Cô Thảo (3.6)"},"5":{"subject":"TNXH","teacher_id":"gvcn_3_6","teacher_name":"Cô Thảo (3.6)","isCustom":true},"6":{"subject":"ĐĐ","teacher_id":"gvcn_3_6","teacher_name":"Cô Thảo (3.6)","isCustom":true},"7":{"subject":"TA","teacher_id":"t_ta_trang","teacher_name":"Cô Trang (TA)"},"8":{"subject":"TA","teacher_id":"t_ta_trang","teacher_name":"Cô Trang (TA)","isCustom":true}},"T3":{"1":{"subject":"TV","teacher_id":"gvcn_3_6","teacher_name":"","isCustom":true},"2":{"subject":"TV","teacher_id":"gvcn_3_6","teacher_name":"","isCustom":true},"3":{"subject":"TA","teacher_id":"t_ta_trang","teacher_name":"Cô Trang (TA)"},"4":{"subject":"TA","teacher_id":"t_ta_trang","teacher_name":"Cô Trang (TA)"},"5":{"subject":"CLB Stem","teacher_id":"t_stem_3","teacher_name":"GV STEM (3)","isCustom":true},"6":{"subject":"Tự học","teacher_id":"gvcn_3_6","teacher_name":"Cô Thảo (3.6)"},"7":{"subject":"Toán","teacher_id":"gvcn_3_6","teacher_name":"Cô Thảo (3.6)"},"8":{"subject":"CLB Toán TD","teacher_id":"gvcn_3_6","teacher_name":"Cô Thảo (3.6)","isCustom":true}},"T4":{"1":{"subject":"GDTC","teacher_id":"gvcn_3_6","teacher_name":"Cô Thảo (3.6)"},"2":{"subject":"TV","teacher_id":"gvcn_3_6","teacher_name":"","isCustom":true},"3":{"subject":"Toán","teacher_id":"gvcn_3_6","teacher_name":"Cô Thảo (3.6)","isCustom":true},"4":{"subject":"HĐTN(CĐ)","teacher_id":"gvcn_3_6","teacher_name":"Cô Thảo (3.6)"},"5":{"subject":"TA(BN)","teacher_id":"t_tabn_2","teacher_name":"GV TA-BN (2)"},"6":{"subject":"TA(BN)","teacher_id":"t_tabn_2","teacher_name":"GV TA-BN (2)"},"7":{"subject":"NT(ÂN)","teacher_id":"gvcn_3_6","teacher_name":"Cô Thảo (3.6)"},"8":{"subject":"Tự học","teacher_id":"gvcn_3_6","teacher_name":"Cô Thảo (3.6)","isCustom":true}},"T5":{"1":{"subject":"TV","teacher_id":"gvcn_3_6","teacher_name":"","isCustom":true},"2":{"subject":"TV","teacher_id":"gvcn_3_6","teacher_name":"","isCustom":true},"3":{"subject":"TH","teacher_id":"t_th_thai","teacher_name":"Thầy Thái (Tin học)","isCustom":true},"4":{"subject":"Toán","teacher_id":"gvcn_3_6","teacher_name":"Cô Thảo (3.6)"},"5":{"subject":"Toán","teacher_id":"gvcn_3_6","teacher_name":"Cô Thảo (3.6)"},"6":{"subject":"Toán","teacher_id":"gvcn_3_6","teacher_name":"Cô Thảo (3.6)","isCustom":true},"7":{"subject":"TA(T-K)","teacher_id":"t_tatk_1","teacher_name":"GV TA-TK (1)"},"8":{"subject":"CLB KNS","teacher_id":"gvcn_3_6","teacher_name":"Cô Thảo (3.6)","isCustom":true}},"T6":{"1":{"subject":"TV","teacher_id":"gvcn_3_6","teacher_name":"","isCustom":true},"2":{"subject":"TNXH","teacher_id":"gvcn_3_6","teacher_name":"Cô Thảo (3.6)"},"3":{"subject":"IC3","teacher_id":"t_ic3_1","teacher_name":"GV IC3 (1)","isCustom":true},"4":{"subject":"IC3","teacher_id":"t_ic3_1","teacher_name":"GV IC3 (1)","isCustom":true},"5":{"subject":"CN","teacher_id":"gvcn_3_6","teacher_name":"Cô Thảo (3.6)"},"6":{"subject":"NT(MT)","teacher_id":"gvcn_3_6","teacher_name":"Cô Thảo (3.6)","isCustom":true},"7":{"subject":"HĐTN(SHL)","teacher_id":"gvcn_3_6","teacher_name":"Cô Thảo (3.6)"},"8":{"subject":"Tự học","teacher_id":"gvcn_3_6","teacher_name":"Cô Thảo (3.6)","isCustom":true}}},"4.1":{"T2":{"1":{"subject":"HĐTN(CC)","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)"},"2":{"subject":"Toán","teacher_id":"gvcn_4_1","teacher_name":"Cô Huế (4.1)","isCustom":true},"3":{"subject":"TV","teacher_id":"gvcn_4_1","teacher_name":"Cô Huế (4.1)"},"4":{"subject":"TV","teacher_id":"gvcn_4_1","teacher_name":"Cô Huế (4.1)","isCustom":true},"5":{"subject":"TA","teacher_id":"t_ta_phuong","teacher_name":"Cô Phượng (TA)"},"6":{"subject":"TA","teacher_id":"t_ta_phuong","teacher_name":"Cô Phượng (TA)"},"7":{"subject":"LSĐL","teacher_id":"gvcn_4_1","teacher_name":"Cô Huế (4.1)","isCustom":true},"8":{"subject":"CLB KNS","teacher_id":"gvcn_4_1","teacher_name":"Cô Huế (4.1)","isCustom":true}},"T3":{"1":{"subject":"TA","teacher_id":"t_ta_phuong","teacher_name":"Cô Phượng (TA)"},"2":{"subject":"TA","teacher_id":"t_ta_phuong","teacher_name":"Cô Phượng (TA)"},"3":{"subject":"TV","teacher_id":"gvcn_4_1","teacher_name":"Cô Huế (4.1)"},"4":{"subject":"NT(ÂN)","teacher_id":"t_an_chau","teacher_name":"Cô Châu (Âm nhạc)"},"5":{"subject":"NT(MT)","teacher_id":"gvcn_4_1","teacher_name":"Cô Huế (4.1)","isCustom":true},"6":{"subject":"Toán","teacher_id":"gvcn_4_1","teacher_name":"Cô Huế (4.1)"},"7":{"subject":"HĐTN(CĐ)","teacher_id":"gvcn_4_1","teacher_name":"Cô Huế (4.1)","isCustom":true},"8":{"subject":"CLB Toán TD","teacher_id":"gvcn_4_1","teacher_name":"Cô Huế (4.1)","isCustom":true}},"T4":{"1":{"subject":"TV","teacher_id":"gvcn_4_1","teacher_name":"Cô Huế (4.1)"},"2":{"subject":"Toán","teacher_id":"gvcn_4_1","teacher_name":"Cô Huế (4.1)"},"3":{"subject":"KH","teacher_id":"gvcn_4_1","teacher_name":"Cô Huế (4.1)"},"4":{"subject":"GDTC","teacher_id":"t_gdtc_phong","teacher_name":"Thầy Phong (GDTC)"},"5":{"subject":"TH","teacher_id":"t_th_thai","teacher_name":"Thầy Thái (Tin học)","isCustom":true},"6":{"subject":"CLB Stem","teacher_id":"t_stem_2","teacher_name":"GV STEM (2)"},"7":{"subject":"TA(BN)","teacher_id":"t_tabn_2","teacher_name":"GV TA-BN (2)"},"8":{"subject":"TA(BN)","teacher_id":"t_tabn_2","teacher_name":"GV TA-BN (2)"}},"T5":{"1":{"subject":"TV","teacher_id":"gvcn_4_1","teacher_name":"Cô Huế (4.1)"},"2":{"subject":"TV","teacher_id":"gvcn_4_1","teacher_name":"Cô Huế (4.1)"},"3":{"subject":"Toán","teacher_id":"gvcn_4_1","teacher_name":"Cô Huế (4.1)","isCustom":true},"4":{"subject":"CN","teacher_id":"gvcn_4_1","teacher_name":"Cô Huế (4.1)","isCustom":true},"5":{"subject":"TA(T-K)","teacher_id":"t_tatk_2","teacher_name":"GV TA-TK (2)"},"6":{"subject":"TA(T-K)","teacher_id":"t_tatk_2","teacher_name":"GV TA-TK (2)"},"7":{"subject":"LSĐL","teacher_id":"gvcn_4_1","teacher_name":"Cô Huế (4.1)"},"8":{"subject":"Tự học","teacher_id":"gvcn_4_1","teacher_name":"Cô Huế (4.1)"}},"T6":{"1":{"subject":"TV","teacher_id":"gvcn_4_1","teacher_name":"Cô Huế (4.1)","isCustom":true},"2":{"subject":"Toán","teacher_id":"gvcn_4_1","teacher_name":"Cô Huế (4.1)","isCustom":true},"3":{"subject":"KH","teacher_id":"gvcn_4_1","teacher_name":"Cô Huế (4.1)","isCustom":true},"4":{"subject":"HĐTN(SHL)","teacher_id":"gvcn_4_1","teacher_name":"Cô Huế (4.1)","isCustom":true},"5":{"subject":"ĐĐ","teacher_id":"gvcn_4_1","teacher_name":"Cô Huế (4.1)"},"6":{"subject":"GDTC","teacher_id":"t_gdtc_phong","teacher_name":"Thầy Phong (GDTC)"},"7":{"subject":"IC3","teacher_id":"t_ic3_1","teacher_name":"GV IC3 (1)","isCustom":true},"8":{"subject":"IC3","teacher_id":"t_ic3_1","teacher_name":"GV IC3 (1)","isCustom":true}}},"4.2":{"T2":{"1":{"subject":"IC3","teacher_id":"t_ic3_1","teacher_name":"GV IC3 (1)","isCustom":true},"2":{"subject":"IC3","teacher_id":"t_ic3_1","teacher_name":"GV IC3 (1)","isCustom":true},"3":{"subject":"TV","teacher_id":"gvcn_4_2","teacher_name":"Cô Thu Hương (4.2)"},"4":{"subject":"TV","teacher_id":"gvcn_4_2","teacher_name":"Cô Thu Hương (4.2)","isCustom":true},"5":{"subject":"KH","teacher_id":"gvcn_4_2","teacher_name":"Cô Thu Hương (4.2)"},"6":{"subject":"NT(MT)","teacher_id":"gvcn_4_2","teacher_name":"Cô Thu Hương (4.2)","isCustom":true},"7":{"subject":"TA(BN)","teacher_id":"t_tabn_2","teacher_name":"GV TA-BN (2)"},"8":{"subject":"TA(BN)","teacher_id":"t_tabn_2","teacher_name":"GV TA-BN (2)"}},"T3":{"1":{"subject":"TV","teacher_id":"gvcn_4_2","teacher_name":"Cô Thu Hương (4.2)","isCustom":true},"2":{"subject":"Toán","teacher_id":"gvcn_4_2","teacher_name":"Cô Thu Hương (4.2)","isCustom":true},"3":{"subject":"TA","teacher_id":"t_ta_phuong","teacher_name":"Cô Phượng (TA)"},"4":{"subject":"TA","teacher_id":"t_ta_phuong","teacher_name":"Cô Phượng (TA)"},"5":{"subject":"LSĐL","teacher_id":"gvcn_4_2","teacher_name":"Cô Thu Hương (4.2)","isCustom":true},"6":{"subject":"Toán","teacher_id":"gvcn_4_2","teacher_name":"Cô Thu Hương (4.2)","isCustom":true},"7":{"subject":"HĐTN(CC)","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)"},"8":{"subject":"CLB KNS","teacher_id":"gvcn_4_2","teacher_name":"Cô Thu Hương (4.2)","isCustom":true}},"T4":{"1":{"subject":"TA","teacher_id":"t_ta_phuong","teacher_name":"Cô Phượng (TA)"},"2":{"subject":"TA","teacher_id":"t_ta_phuong","teacher_name":"Cô Phượng (TA)"},"3":{"subject":"TH","teacher_id":"t_th_thai","teacher_name":"Thầy Thái (Tin học)","isCustom":true},"4":{"subject":"NT(ÂN)","teacher_id":"t_an_chau","teacher_name":"Cô Châu (Âm nhạc)"},"5":{"subject":"TV","teacher_id":"gvcn_4_2","teacher_name":"Cô Thu Hương (4.2)"},"6":{"subject":"Toán","teacher_id":"gvcn_4_2","teacher_name":"Cô Thu Hương (4.2)"},"7":{"subject":"GDTC","teacher_id":"t_gdtc_phong","teacher_name":"Thầy Phong (GDTC)"},"8":{"subject":"HĐTN(CĐ)","teacher_id":"gvcn_4_2","teacher_name":"Cô Thu Hương (4.2)"}},"T5":{"1":{"subject":"TV","teacher_id":"gvcn_4_2","teacher_name":"Cô Thu Hương (4.2)"},"2":{"subject":"TV","teacher_id":"gvcn_4_2","teacher_name":"Cô Thu Hương (4.2)"},"3":{"subject":"Toán","teacher_id":"gvcn_4_2","teacher_name":"Cô Thu Hương (4.2)"},"4":{"subject":"KH","teacher_id":"gvcn_4_2","teacher_name":"Cô Thu Hương (4.2)"},"5":{"subject":"ĐĐ","teacher_id":"gvcn_4_2","teacher_name":"Cô Thu Hương (4.2)"},"6":{"subject":"Tự học","teacher_id":"gvcn_4_2","teacher_name":"Cô Thu Hương (4.2)"},"7":{"subject":"CLB Stem","teacher_id":"t_stem_2","teacher_name":"GV STEM (2)"},"8":{"subject":"CLB Toán TD","teacher_id":"gvcn_4_2","teacher_name":"Cô Thu Hương (4.2)","isCustom":true}},"T6":{"1":{"subject":"TV","teacher_id":"gvcn_4_2","teacher_name":"Cô Thu Hương (4.2)","isCustom":true},"2":{"subject":"Toán","teacher_id":"gvcn_4_2","teacher_name":"Cô Thu Hương (4.2)","isCustom":true},"3":{"subject":"CN","teacher_id":"gvcn_4_2","teacher_name":"Cô Thu Hương (4.2)"},"4":{"subject":"LSĐL","teacher_id":"gvcn_4_2","teacher_name":"Cô Thu Hương (4.2)","isCustom":true},"5":{"subject":"TA(T-K)","teacher_id":"t_tatk_2","teacher_name":"GV TA-TK (2)"},"6":{"subject":"TA(T-K)","teacher_id":"t_tatk_2","teacher_name":"GV TA-TK (2)"},"7":{"subject":"HĐTN(SHL)","teacher_id":"gvcn_4_2","teacher_name":"Cô Thu Hương (4.2)"},"8":{"subject":"GDTC","teacher_id":"t_gdtc_phong","teacher_name":"Thầy Phong (GDTC)"}}},"4.3":{"T2":{"1":{"subject":"HĐTN(CC)","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)"},"2":{"subject":"TV","teacher_id":"gvcn_4_3","teacher_name":"Thầy Thắng (4.3)"},"3":{"subject":"Toán","teacher_id":"gvcn_4_3","teacher_name":"Thầy Thắng (4.3)","isCustom":true},"4":{"subject":"LSĐL","teacher_id":"gvcn_4_3","teacher_name":"Thầy Thắng (4.3)","isCustom":true},"5":{"subject":"TA(T-K)","teacher_id":"t_tatk_2","teacher_name":"GV TA-TK (2)"},"6":{"subject":"TA(T-K)","teacher_id":"t_tatk_2","teacher_name":"GV TA-TK (2)"},"7":{"subject":"CLB Stem","teacher_id":"t_stem_3","teacher_name":"GV STEM (3)"},"8":{"subject":"CN","teacher_id":"gvcn_4_3","teacher_name":"Thầy Thắng (4.3)","isCustom":true}},"T3":{"1":{"subject":"Toán","teacher_id":"gvcn_4_3","teacher_name":"Thầy Thắng (4.3)","isCustom":true},"2":{"subject":"TH","teacher_id":"t_th_thai","teacher_name":"Thầy Thái (Tin học)","isCustom":true},"3":{"subject":"TV","teacher_id":"gvcn_4_3","teacher_name":"Thầy Thắng (4.3)"},"4":{"subject":"TV","teacher_id":"gvcn_4_3","teacher_name":"Thầy Thắng (4.3)","isCustom":true},"5":{"subject":"TA(BN)","teacher_id":"t_tabn_3","teacher_name":"GV TA-BN (3)"},"6":{"subject":"TA(BN)","teacher_id":"t_tabn_3","teacher_name":"GV TA-BN (3)"},"7":{"subject":"KH","teacher_id":"gvcn_4_3","teacher_name":"Thầy Thắng (4.3)"},"8":{"subject":"CLB KNS","teacher_id":"gvcn_4_3","teacher_name":"Thầy Thắng (4.3)","isCustom":true}},"T4":{"1":{"subject":"IC3","teacher_id":"t_ic3_1","teacher_name":"GV IC3 (1)","isCustom":true},"2":{"subject":"IC3","teacher_id":"t_ic3_1","teacher_name":"GV IC3 (1)","isCustom":true},"3":{"subject":"Toán","teacher_id":"gvcn_4_3","teacher_name":"Thầy Thắng (4.3)"},"4":{"subject":"HĐTN(CĐ)","teacher_id":"gvcn_4_3","teacher_name":"Thầy Thắng (4.3)"},"5":{"subject":"TA","teacher_id":"t_ta_phuong","teacher_name":"Cô Phượng (TA)"},"6":{"subject":"TA","teacher_id":"t_ta_phuong","teacher_name":"Cô Phượng (TA)"},"7":{"subject":"TV","teacher_id":"gvcn_4_3","teacher_name":"Thầy Thắng (4.3)","isCustom":true},"8":{"subject":"GDTC","teacher_id":"t_gdtc_phong","teacher_name":"Thầy Phong (GDTC)","isCustom":true}},"T5":{"1":{"subject":"TV","teacher_id":"gvcn_4_3","teacher_name":"Thầy Thắng (4.3)"},"2":{"subject":"TV","teacher_id":"gvcn_4_3","teacher_name":"Thầy Thắng (4.3)"},"3":{"subject":"TA","teacher_id":"t_ta_phuong","teacher_name":"Cô Phượng (TA)"},"4":{"subject":"TA","teacher_id":"t_ta_phuong","teacher_name":"Cô Phượng (TA)"},"5":{"subject":"Toán","teacher_id":"gvcn_4_3","teacher_name":"Thầy Thắng (4.3)","isCustom":true},"6":{"subject":"Tự học","teacher_id":"gvcn_4_3","teacher_name":"Thầy Thắng (4.3)"},"7":{"subject":"ĐĐ","teacher_id":"gvcn_4_3","teacher_name":"Thầy Thắng (4.3)"},"8":{"subject":"CLB Toán TD","teacher_id":"gvcn_4_3","teacher_name":"Thầy Thắng (4.3)","isCustom":true}},"T6":{"1":{"subject":"TV","teacher_id":"gvcn_4_3","teacher_name":"Thầy Thắng (4.3)","isCustom":true},"2":{"subject":"Toán","teacher_id":"gvcn_4_3","teacher_name":"Thầy Thắng (4.3)","isCustom":true},"3":{"subject":"KH","teacher_id":"gvcn_4_3","teacher_name":"Thầy Thắng (4.3)","isCustom":true},"4":{"subject":"LSĐL","teacher_id":"gvcn_4_3","teacher_name":"Thầy Thắng (4.3)","isCustom":true},"5":{"subject":"GDTC","teacher_id":"t_gdtc_phong","teacher_name":"Thầy Phong (GDTC)"},"6":{"subject":"NT(MT)","teacher_id":"gvcn_4_3","teacher_name":"Thầy Thắng (4.3)"},"7":{"subject":"NT(ÂN)","teacher_id":"t_an_chau","teacher_name":"Cô Châu (Âm nhạc)"},"8":{"subject":"HĐTN(SHL)","teacher_id":"gvcn_4_3","teacher_name":"Thầy Thắng (4.3)"}}},"4.4":{"T2":{"1":{"subject":"HĐTN(CC)","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)"},"2":{"subject":"TA(T-K)","teacher_id":"t_tatk_2","teacher_name":"GV TA-TK (2)"},"3":{"subject":"TV","teacher_id":"gvcn_4_4","teacher_name":"Cô Minh Phương (4.4)"},"4":{"subject":"TV","teacher_id":"gvcn_4_4","teacher_name":"Cô Minh Phương (4.4)"},"5":{"subject":"GDTC","teacher_id":"t_gdtc_phong","teacher_name":"Thầy Phong (GDTC)"},"6":{"subject":"Toán","teacher_id":"gvcn_4_4","teacher_name":"Cô Minh Phương (4.4)"},"7":{"subject":"TA(T-K)","teacher_id":"t_tatk_2","teacher_name":"GV TA-TK (2)"},"8":{"subject":"CLB Toán TD","teacher_id":"gvcn_4_4","teacher_name":"Cô Minh Phương (4.4)","isCustom":true}},"T3":{"1":{"subject":"TV","teacher_id":"gvcn_4_4","teacher_name":"Cô Minh Phương (4.4)","isCustom":true},"2":{"subject":"TV","teacher_id":"gvcn_4_4","teacher_name":"Cô Minh Phương (4.4)"},"3":{"subject":"Toán","teacher_id":"gvcn_4_4","teacher_name":"Cô Minh Phương (4.4)","isCustom":true},"4":{"subject":"LSĐL","teacher_id":"gvcn_4_4","teacher_name":"Cô Minh Phương (4.4)"},"5":{"subject":"CN","teacher_id":"gvcn_4_4","teacher_name":"Cô Minh Phương (4.4)","isCustom":true},"6":{"subject":"KH","teacher_id":"gvcn_4_4","teacher_name":"Cô Minh Phương (4.4)"},"7":{"subject":"NT(ÂN)","teacher_id":"t_an_chau","teacher_name":"Cô Châu (Âm nhạc)"},"8":{"subject":"CLB KNS","teacher_id":"gvcn_4_4","teacher_name":"Cô Minh Phương (4.4)","isCustom":true}},"T4":{"1":{"subject":"TV","teacher_id":"gvcn_4_4","teacher_name":"Cô Minh Phương (4.4)"},"2":{"subject":"TH","teacher_id":"t_th_thai","teacher_name":"Thầy Thái (Tin học)","isCustom":true},"3":{"subject":"TA","teacher_id":"t_ta_phuong","teacher_name":"Cô Phượng (TA)"},"4":{"subject":"TA","teacher_id":"t_ta_phuong","teacher_name":"Cô Phượng (TA)"},"5":{"subject":"IC3","teacher_id":"t_ic3_2","teacher_name":"GV IC3 (2)","isCustom":true},"6":{"subject":"IC3","teacher_id":"t_ic3_2","teacher_name":"GV IC3 (2)","isCustom":true},"7":{"subject":"Toán","teacher_id":"gvcn_4_4","teacher_name":"Cô Minh Phương (4.4)"},"8":{"subject":"HĐTN(CĐ)","teacher_id":"gvcn_4_4","teacher_name":"Cô Minh Phương (4.4)"}},"T5":{"1":{"subject":"TV","teacher_id":"gvcn_4_4","teacher_name":"Cô Minh Phương (4.4)"},"2":{"subject":"Toán","teacher_id":"gvcn_4_4","teacher_name":"Cô Minh Phương (4.4)"},"3":{"subject":"KH","teacher_id":"gvcn_4_4","teacher_name":"Cô Minh Phương (4.4)"},"4":{"subject":"NT(MT)","teacher_id":"gvcn_4_4","teacher_name":"Cô Minh Phương (4.4)","isCustom":true},"5":{"subject":"TA","teacher_id":"t_ta_phuong","teacher_name":"Cô Phượng (TA)"},"6":{"subject":"TA","teacher_id":"t_ta_phuong","teacher_name":"Cô Phượng (TA)"},"7":{"subject":"ĐĐ","teacher_id":"gvcn_4_4","teacher_name":"Cô Minh Phương (4.4)"},"8":{"subject":"Tự học","teacher_id":"gvcn_4_4","teacher_name":"Cô Minh Phương (4.4)"}},"T6":{"1":{"subject":"TV","teacher_id":"gvcn_4_4","teacher_name":"Cô Minh Phương (4.4)","isCustom":true},"2":{"subject":"Toán","teacher_id":"gvcn_4_4","teacher_name":"Cô Minh Phương (4.4)","isCustom":true},"3":{"subject":"GDTC","teacher_id":"t_gdtc_phong","teacher_name":"Thầy Phong (GDTC)","isCustom":true},"4":{"subject":"LSĐL","teacher_id":"gvcn_4_4","teacher_name":"Cô Minh Phương (4.4)","isCustom":true},"5":{"subject":"TA(BN)","teacher_id":"t_tabn_3","teacher_name":"GV TA-BN (3)"},"6":{"subject":"TA(BN)","teacher_id":"t_tabn_3","teacher_name":"GV TA-BN (3)"},"7":{"subject":"HĐTN(SHL)","teacher_id":"gvcn_4_4","teacher_name":"Cô Minh Phương (4.4)"},"8":{"subject":"CLB Stem","teacher_id":"t_stem_3","teacher_name":"GV STEM (3)"}}},"4.5":{"T2":{"1":{"subject":"HĐTN(CC)","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)"},"2":{"subject":"Toán","teacher_id":"gvcn_4_5","teacher_name":"Cô Dạ Thảo (4.5)","isCustom":true},"3":{"subject":"TV","teacher_id":"gvcn_4_5","teacher_name":"Cô Dạ Thảo (4.5)","isCustom":true},"4":{"subject":"TV","teacher_id":"gvcn_4_5","teacher_name":"Cô Dạ Thảo (4.5)"},"5":{"subject":"TH","teacher_id":"t_th_thai","teacher_name":"Thầy Thái (Tin học)","isCustom":true},"6":{"subject":"GDTC","teacher_id":"gvcn_4_5","teacher_name":"Cô Dạ Thảo (4.5)","isCustom":true},"7":{"subject":"NT(ÂN)","teacher_id":"gvcn_4_5","teacher_name":"Cô Dạ Thảo (4.5)"},"8":{"subject":"CLB Toán TD","teacher_id":"gvcn_4_5","teacher_name":"Cô Dạ Thảo (4.5)","isCustom":true}},"T3":{"1":{"subject":"IC3","teacher_id":"t_ic3_2","teacher_name":"GV IC3 (2)","isCustom":true},"2":{"subject":"IC3","teacher_id":"t_ic3_2","teacher_name":"GV IC3 (2)","isCustom":true},"3":{"subject":"TA(BN)","teacher_id":"t_tabn_3","teacher_name":"GV TA-BN (3)"},"4":{"subject":"TA(BN)","teacher_id":"t_tabn_3","teacher_name":"GV TA-BN (3)"},"5":{"subject":"Toán","teacher_id":"gvcn_4_5","teacher_name":"Cô Dạ Thảo (4.5)"},"6":{"subject":"LSĐL","teacher_id":"gvcn_4_5","teacher_name":"Cô Dạ Thảo (4.5)"},"7":{"subject":"TV","teacher_id":"gvcn_4_5","teacher_name":"Cô Dạ Thảo (4.5)"},"8":{"subject":"TV","teacher_id":"gvcn_4_5","teacher_name":"Cô Dạ Thảo (4.5)"}},"T4":{"1":{"subject":"TV","teacher_id":"gvcn_4_5","teacher_name":"Cô Dạ Thảo (4.5)"},"2":{"subject":"Toán","teacher_id":"gvcn_4_5","teacher_name":"Cô Dạ Thảo (4.5)"},"3":{"subject":"KH","teacher_id":"gvcn_4_5","teacher_name":"Cô Dạ Thảo (4.5)"},"4":{"subject":"GDTC","teacher_id":"gvcn_4_5","teacher_name":"Cô Dạ Thảo (4.5)","isCustom":true},"5":{"subject":"TA(T-K)","teacher_id":"t_tatk_2","teacher_name":"GV TA-TK (2)"},"6":{"subject":"TA(T-K)","teacher_id":"t_tatk_2","teacher_name":"GV TA-TK (2)"},"7":{"subject":"HĐTN(CĐ)","teacher_id":"gvcn_4_5","teacher_name":"Cô Dạ Thảo (4.5)","isCustom":true},"8":{"subject":"CLB KNS","teacher_id":"gvcn_4_5","teacher_name":"Cô Dạ Thảo (4.5)","isCustom":true}},"T5":{"1":{"subject":"TA","teacher_id":"t_ta_phuong","teacher_name":"Cô Phượng (TA)"},"2":{"subject":"TA","teacher_id":"t_ta_phuong","teacher_name":"Cô Phượng (TA)"},"3":{"subject":"TV","teacher_id":"gvcn_4_5","teacher_name":"Cô Dạ Thảo (4.5)"},"4":{"subject":"Toán","teacher_id":"gvcn_4_5","teacher_name":"Cô Dạ Thảo (4.5)","isCustom":true},"5":{"subject":"LSĐL","teacher_id":"gvcn_4_5","teacher_name":"Cô Dạ Thảo (4.5)","isCustom":true},"6":{"subject":"CN","teacher_id":"gvcn_4_5","teacher_name":"Cô Dạ Thảo (4.5)","isCustom":true},"7":{"subject":"ĐĐ","teacher_id":"gvcn_4_5","teacher_name":"Cô Dạ Thảo (4.5)"},"8":{"subject":"Tự học","teacher_id":"gvcn_4_5","teacher_name":"Cô Dạ Thảo (4.5)"}},"T6":{"1":{"subject":"TV","teacher_id":"gvcn_4_5","teacher_name":"Cô Dạ Thảo (4.5)","isCustom":true},"2":{"subject":"Toán","teacher_id":"gvcn_4_5","teacher_name":"Cô Dạ Thảo (4.5)","isCustom":true},"3":{"subject":"TA","teacher_id":"t_ta_phuong","teacher_name":"Cô Phượng (TA)"},"4":{"subject":"TA","teacher_id":"t_ta_phuong","teacher_name":"Cô Phượng (TA)"},"5":{"subject":"CLB Stem","teacher_id":"t_stem_3","teacher_name":"GV STEM (3)"},"6":{"subject":"KH","teacher_id":"gvcn_4_5","teacher_name":"Cô Dạ Thảo (4.5)","isCustom":true},"7":{"subject":"NT(MT)","teacher_id":"gvcn_4_5","teacher_name":"Cô Dạ Thảo (4.5)","isCustom":true},"8":{"subject":"HĐTN(SHL)","teacher_id":"gvcn_4_5","teacher_name":"Cô Dạ Thảo (4.5)","isCustom":true}}},"4.6":{"T2":{"1":{"subject":"HĐTN(CC)","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)"},"2":{"subject":"TV","teacher_id":"gvcn_4_6","teacher_name":"","isCustom":true},"3":{"subject":"TA(T-K)","teacher_id":"t_tatk_2","teacher_name":"GV TA-TK (2)"},"4":{"subject":"TA(T-K)","teacher_id":"t_tatk_2","teacher_name":"GV TA-TK (2)"},"5":{"subject":"IC3","teacher_id":"t_ic3_2","teacher_name":"GV IC3 (2)","isCustom":true},"6":{"subject":"IC3","teacher_id":"t_ic3_2","teacher_name":"GV IC3 (2)","isCustom":true},"7":{"subject":"KH","teacher_id":"gvcn_4_6","teacher_name":"Cô Quỳnh Như (4.6)","isCustom":true},"8":{"subject":"CLB KNS","teacher_id":"gvcn_4_6","teacher_name":"Cô Quỳnh Như (4.6)","isCustom":true}},"T3":{"1":{"subject":"TV","teacher_id":"gvcn_4_6","teacher_name":"","isCustom":true},"2":{"subject":"TV","teacher_id":"gvcn_4_6","teacher_name":"","isCustom":true},"3":{"subject":"Toán","teacher_id":"gvcn_4_6","teacher_name":"Cô Quỳnh Như (4.6)"},"4":{"subject":"LSĐL","teacher_id":"gvcn_4_6","teacher_name":"Cô Quỳnh Như (4.6)"},"5":{"subject":"GDTC","teacher_id":"gvcn_4_6","teacher_name":"Cô Quỳnh Như (4.6)","isCustom":true},"6":{"subject":"CLB Stem","teacher_id":"t_stem_2","teacher_name":"GV STEM (2)","isCustom":true},"7":{"subject":"TA","teacher_id":"t_ta_phuong","teacher_name":"Cô Phượng (TA)"},"8":{"subject":"TA","teacher_id":"t_ta_phuong","teacher_name":"Cô Phượng (TA)"}},"T4":{"1":{"subject":"TV","teacher_id":"gvcn_4_6","teacher_name":"","isCustom":true},"2":{"subject":"TV","teacher_id":"gvcn_4_6","teacher_name":"","isCustom":true},"3":{"subject":"Toán","teacher_id":"gvcn_4_6","teacher_name":"Cô Quỳnh Như (4.6)"},"4":{"subject":"KH","teacher_id":"gvcn_4_6","teacher_name":"Cô Quỳnh Như (4.6)","isCustom":true},"5":{"subject":"TA(BN)","teacher_id":"t_tabn_3","teacher_name":"GV TA-BN (3)"},"6":{"subject":"TA(BN)","teacher_id":"t_tabn_3","teacher_name":"GV TA-BN (3)"},"7":{"subject":"HĐTN(CĐ)","teacher_id":"gvcn_4_6","teacher_name":"Cô Quỳnh Như (4.6)","isCustom":true},"8":{"subject":"Tự học","teacher_id":"gvcn_4_6","teacher_name":"Cô Quỳnh Như (4.6)","isCustom":true}},"T5":{"1":{"subject":"TV","teacher_id":"gvcn_4_6","teacher_name":"","isCustom":true},"2":{"subject":"Toán","teacher_id":"gvcn_4_6","teacher_name":"Cô Quỳnh Như (4.6)"},"3":{"subject":"LSĐL","teacher_id":"gvcn_4_6","teacher_name":"Cô Quỳnh Như (4.6)"},"4":{"subject":"ĐĐ","teacher_id":"gvcn_4_6","teacher_name":"Cô Quỳnh Như (4.6)"},"5":{"subject":"Toán","teacher_id":"gvcn_4_6","teacher_name":"Cô Quỳnh Như (4.6)","isCustom":true},"6":{"subject":"NT(ÂN)","teacher_id":"gvcn_4_6","teacher_name":"Cô Quỳnh Như (4.6)"},"7":{"subject":"TH","teacher_id":"t_th_thai","teacher_name":"Thầy Thái (Tin học)","isCustom":true},"8":{"subject":"CLB Toán TD","teacher_id":"gvcn_4_6","teacher_name":"Cô Quỳnh Như (4.6)","isCustom":true}},"T6":{"1":{"subject":"TA","teacher_id":"t_ta_phuong","teacher_name":"Cô Phượng (TA)"},"2":{"subject":"TA","teacher_id":"t_ta_phuong","teacher_name":"Cô Phượng (TA)"},"3":{"subject":"TV","teacher_id":"gvcn_4_6","teacher_name":"","isCustom":true},"4":{"subject":"Toán","teacher_id":"gvcn_4_6","teacher_name":"Cô Quỳnh Như (4.6)","isCustom":true},"5":{"subject":"CN","teacher_id":"gvcn_4_6","teacher_name":"Cô Quỳnh Như (4.6)","isCustom":true},"6":{"subject":"NT(MT)","teacher_id":"gvcn_4_6","teacher_name":"Cô Quỳnh Như (4.6)","isCustom":true},"7":{"subject":"HĐTN(SHL)","teacher_id":"gvcn_4_6","teacher_name":"Cô Quỳnh Như (4.6)"},"8":{"subject":"GDTC","teacher_id":"gvcn_4_6","teacher_name":"Cô Quỳnh Như (4.6)","isCustom":true}}},"5.1":{"T2":{"1":{"subject":"HĐTN(CC)","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)"},"2":{"subject":"NT(ÂN)","teacher_id":"t_an_chau","teacher_name":"Cô Châu (Âm nhạc)"},"3":{"subject":"TA(BN)","teacher_id":"t_tabn_3","teacher_name":"GV TA-BN (3)"},"4":{"subject":"TA(BN)","teacher_id":"t_tabn_3","teacher_name":"GV TA-BN (3)"},"5":{"subject":"TV","teacher_id":"gvcn_5_1","teacher_name":"Cô Tuyết Mai (5.1)"},"6":{"subject":"CLB Stem","teacher_id":"t_stem_3","teacher_name":"GV STEM (3)"},"7":{"subject":"Toán","teacher_id":"gvcn_5_1","teacher_name":"Cô Tuyết Mai (5.1)","isCustom":true},"8":{"subject":"CLB KNS","teacher_id":"gvcn_5_1","teacher_name":"Cô Tuyết Mai (5.1)","isCustom":true}},"T3":{"1":{"subject":"TV","teacher_id":"gvcn_5_1","teacher_name":"Cô Tuyết Mai (5.1)"},"2":{"subject":"Toán","teacher_id":"gvcn_5_1","teacher_name":"Cô Tuyết Mai (5.1)"},"3":{"subject":"TA(T-K)","teacher_id":"t_tatk_2","teacher_name":"GV TA-TK (2)"},"4":{"subject":"TA(T-K)","teacher_id":"t_tatk_2","teacher_name":"GV TA-TK (2)"},"5":{"subject":"KH","teacher_id":"gvcn_5_1","teacher_name":"Cô Tuyết Mai (5.1)"},"6":{"subject":"LSĐL","teacher_id":"gvcn_5_1","teacher_name":"Cô Tuyết Mai (5.1)"},"8":{"subject":"CLB Toán TD","teacher_id":"gvcn_5_1","teacher_name":"Cô Tuyết Mai (5.1)","isCustom":true}},"T4":{"1":{"subject":"TV","teacher_id":"gvcn_5_1","teacher_name":"Cô Tuyết Mai (5.1)"},"2":{"subject":"Toán","teacher_id":"gvcn_5_1","teacher_name":"Cô Tuyết Mai (5.1)"},"3":{"subject":"TA","teacher_id":"t_ta_trang","teacher_name":"Cô Trang (TA)"},"4":{"subject":"TA","teacher_id":"t_ta_trang","teacher_name":"Cô Trang (TA)"},"5":{"subject":"HĐTN(CĐ)","teacher_id":"gvcn_5_1","teacher_name":"Cô Tuyết Mai (5.1)"},"6":{"subject":"GDTC","teacher_id":"t_gdtc_phong","teacher_name":"Thầy Phong (GDTC)"},"7":{"subject":"IC3","teacher_id":"t_ic3_2","teacher_name":"GV IC3 (2)","isCustom":true},"8":{"subject":"IC3","teacher_id":"t_ic3_2","teacher_name":"GV IC3 (2)","isCustom":true}},"T5":{"1":{"subject":"TV","teacher_id":"gvcn_5_1","teacher_name":"Cô Tuyết Mai (5.1)"},"2":{"subject":"TV","teacher_id":"gvcn_5_1","teacher_name":"Cô Tuyết Mai (5.1)"},"4":{"subject":"TH","teacher_id":"t_th_thai","teacher_name":"Thầy Thái (Tin học)","isCustom":true},"5":{"subject":"Toán","teacher_id":"gvcn_5_1","teacher_name":"Cô Tuyết Mai (5.1)"},"6":{"subject":"KH","teacher_id":"gvcn_5_1","teacher_name":"Cô Tuyết Mai (5.1)"},"7":{"subject":"LSĐL","teacher_id":"gvcn_5_1","teacher_name":"Cô Tuyết Mai (5.1)"},"8":{"subject":"Tự học","teacher_id":"gvcn_5_1","teacher_name":"Cô Tuyết Mai (5.1)"}},"T6":{"1":{"subject":"GDTC","teacher_id":"t_gdtc_phong","teacher_name":"Thầy Phong (GDTC)"},"2":{"subject":"TV","teacher_id":"gvcn_5_1","teacher_name":"Cô Tuyết Mai (5.1)","isCustom":true},"3":{"subject":"TA","teacher_id":"t_ta_trang","teacher_name":"Cô Trang (TA)"},"4":{"subject":"TA","teacher_id":"t_ta_trang","teacher_name":"Cô Trang (TA)"},"5":{"subject":"Toán","teacher_id":"gvcn_5_1","teacher_name":"Cô Tuyết Mai (5.1)","isCustom":true},"6":{"subject":"ĐĐ","teacher_id":"gvcn_5_1","teacher_name":"Cô Tuyết Mai (5.1)"},"7":{"subject":"HĐTN(SHL)","teacher_id":"gvcn_5_1","teacher_name":"Cô Tuyết Mai (5.1)"},"8":{"subject":"NT(MT)","teacher_id":"gvcn_5_1","teacher_name":"Cô Tuyết Mai (5.1)"}}},"5.2":{"T2":{"1":{"subject":"HĐTN(CC)","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)"},"2":{"subject":"Toán","teacher_id":"gvcn_5_2","teacher_name":"Thầy Trực (5.2)","isCustom":true},"3":{"subject":"IC3","teacher_id":"t_ic3_2","teacher_name":"GV IC3 (2)","isCustom":true},"4":{"subject":"IC3","teacher_id":"t_ic3_2","teacher_name":"GV IC3 (2)","isCustom":true},"5":{"subject":"KH","teacher_id":"gvcn_5_2","teacher_name":"Thầy Trực (5.2)"},"6":{"subject":"NT(ÂN)","teacher_id":"t_an_chau","teacher_name":"Cô Châu (Âm nhạc)","isCustom":true},"7":{"subject":"TV","teacher_id":"gvcn_5_2","teacher_name":"Thầy Trực (5.2)"},"8":{"subject":"TV","teacher_id":"gvcn_5_2","teacher_name":"Thầy Trực (5.2)","isCustom":true}},"T3":{"1":{"subject":"TA(T-K)","teacher_id":"t_tatk_2","teacher_name":"GV TA-TK (2)"},"2":{"subject":"TV","teacher_id":"gvcn_5_2","teacher_name":"Thầy Trực (5.2)"},"3":{"subject":"Toán","teacher_id":"gvcn_5_2","teacher_name":"Thầy Trực (5.2)","isCustom":true},"4":{"subject":"TH","teacher_id":"t_th_thai","teacher_name":"Thầy Thái (Tin học)","isCustom":true},"5":{"subject":"TA","teacher_id":"t_ta_trang","teacher_name":"Cô Trang (TA)","isCustom":true},"6":{"subject":"CN","teacher_id":"gvcn_5_2","teacher_name":"Thầy Trực (5.2)","isCustom":true},"7":{"subject":"TA","teacher_id":"t_ta_trang","teacher_name":"Cô Trang (TA)"},"8":{"subject":"CLB Toán TD","teacher_id":"gvcn_5_2","teacher_name":"Thầy Trực (5.2)","isCustom":true}},"T4":{"1":{"subject":"TV","teacher_id":"gvcn_5_2","teacher_name":"Thầy Trực (5.2)","isCustom":true},"2":{"subject":"TV","teacher_id":"gvcn_5_2","teacher_name":"Thầy Trực (5.2)"},"3":{"subject":"GDTC","teacher_id":"t_gdtc_phong","teacher_name":"Thầy Phong (GDTC)"},"4":{"subject":"Toán","teacher_id":"gvcn_5_2","teacher_name":"Thầy Trực (5.2)","isCustom":true},"5":{"subject":"TV","teacher_id":"gvcn_5_2","teacher_name":"Thầy Trực (5.2)","isCustom":true},"6":{"subject":"HĐTN(CĐ)","teacher_id":"gvcn_5_2","teacher_name":"Thầy Trực (5.2)"},"7":{"subject":"TA(T-K)","teacher_id":"t_tatk_2","teacher_name":"GV TA-TK (2)"},"8":{"subject":"CLB KNS","teacher_id":"gvcn_5_2","teacher_name":"Thầy Trực (5.2)","isCustom":true}},"T5":{"1":{"subject":"TV","teacher_id":"gvcn_5_2","teacher_name":"Thầy Trực (5.2)"},"2":{"subject":"Toán","teacher_id":"gvcn_5_2","teacher_name":"Thầy Trực (5.2)"},"3":{"subject":"TA","teacher_id":"t_ta_trang","teacher_name":"Cô Trang (TA)"},"4":{"subject":"TA","teacher_id":"t_ta_trang","teacher_name":"Cô Trang (TA)"},"5":{"subject":"KH","teacher_id":"gvcn_5_2","teacher_name":"Thầy Trực (5.2)"},"6":{"subject":"CLB Stem","teacher_id":"t_stem_3","teacher_name":"GV STEM (3)"},"7":{"subject":"ĐĐ","teacher_id":"gvcn_5_2","teacher_name":"Thầy Trực (5.2)"},"8":{"subject":"Tự học","teacher_id":"gvcn_5_2","teacher_name":"Thầy Trực (5.2)"}},"T6":{"1":{"subject":"TA(BN)","teacher_id":"t_tabn_3","teacher_name":"GV TA-BN (3)"},"2":{"subject":"TA(BN)","teacher_id":"t_tabn_3","teacher_name":"GV TA-BN (3)"},"3":{"subject":"NT(MT)","teacher_id":"gvcn_5_2","teacher_name":"Thầy Trực (5.2)","isCustom":true},"4":{"subject":"TV","teacher_id":"gvcn_5_2","teacher_name":"Thầy Trực (5.2)","isCustom":true},"5":{"subject":"Toán","teacher_id":"gvcn_5_2","teacher_name":"Thầy Trực (5.2)"},"6":{"subject":"LSĐL","teacher_id":"gvcn_5_2","teacher_name":"Thầy Trực (5.2)","isCustom":true},"7":{"subject":"GDTC","teacher_id":"t_gdtc_phong","teacher_name":"Thầy Phong (GDTC)","isCustom":true},"8":{"subject":"HĐTN(SHL)","teacher_id":"gvcn_5_2","teacher_name":"Thầy Trực (5.2)","isCustom":true}}},"5.3":{"T2":{"1":{"subject":"HĐTN(CC)","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)"},"2":{"subject":"Toán","teacher_id":"gvcn_5_3","teacher_name":"Cô Kim Anh (5.3)","isCustom":true},"3":{"subject":"TV","teacher_id":"gvcn_5_3","teacher_name":"Cô Kim Anh (5.3)"},"4":{"subject":"TV","teacher_id":"gvcn_5_3","teacher_name":"Cô Kim Anh (5.3)"},"5":{"subject":"Tự học","teacher_id":"gvcn_5_3","teacher_name":"Cô Kim Anh (5.3)"},"6":{"subject":"GDTC","teacher_id":"t_gdtc_phong","teacher_name":"Thầy Phong (GDTC)"},"7":{"subject":"IC3","teacher_id":"t_ic3_1","teacher_name":"GV IC3 (1)","isCustom":true},"8":{"subject":"IC3","teacher_id":"t_ic3_1","teacher_name":"GV IC3 (1)","isCustom":true}},"T3":{"1":{"subject":"TA","teacher_id":"t_ta_trang","teacher_name":"Cô Trang (TA)"},"2":{"subject":"TA","teacher_id":"t_ta_trang","teacher_name":"Cô Trang (TA)"},"3":{"subject":"TV","teacher_id":"gvcn_5_3","teacher_name":"Cô Kim Anh (5.3)"},"4":{"subject":"Toán","teacher_id":"gvcn_5_3","teacher_name":"Cô Kim Anh (5.3)"},"5":{"subject":"KH","teacher_id":"gvcn_5_3","teacher_name":"Cô Kim Anh (5.3)","isCustom":true},"6":{"subject":"LSĐL","teacher_id":"gvcn_5_3","teacher_name":"Cô Kim Anh (5.3)","isCustom":true},"7":{"subject":"ĐĐ","teacher_id":"gvcn_5_3","teacher_name":"Cô Kim Anh (5.3)","isCustom":true},"8":{"subject":"TH","teacher_id":"t_th_thai","teacher_name":"Thầy Thái (Tin học)","isCustom":true}},"T4":{"1":{"subject":"TA(BN)","teacher_id":"t_tabn_3","teacher_name":"GV TA-BN (3)"},"2":{"subject":"TA(BN)","teacher_id":"t_tabn_3","teacher_name":"GV TA-BN (3)"},"3":{"subject":"TV","teacher_id":"gvcn_5_3","teacher_name":"Cô Kim Anh (5.3)"},"4":{"subject":"Toán","teacher_id":"gvcn_5_3","teacher_name":"Cô Kim Anh (5.3)"},"5":{"subject":"NT(ÂN)","teacher_id":"t_an_chau","teacher_name":"Cô Châu (Âm nhạc)"},"6":{"subject":"NT(MT)","teacher_id":"gvcn_5_3","teacher_name":"Cô Kim Anh (5.3)","isCustom":true},"7":{"subject":"HĐTN(CĐ)","teacher_id":"gvcn_5_3","teacher_name":"Cô Kim Anh (5.3)"},"8":{"subject":"CLB Toán TD","teacher_id":"gvcn_5_3","teacher_name":"Cô Kim Anh (5.3)","isCustom":true}},"T5":{"1":{"subject":"TA","teacher_id":"t_ta_trang","teacher_name":"Cô Trang (TA)"},"2":{"subject":"TA","teacher_id":"t_ta_trang","teacher_name":"Cô Trang (TA)"},"3":{"subject":"TV","teacher_id":"gvcn_5_3","teacher_name":"Cô Kim Anh (5.3)"},"4":{"subject":"TV","teacher_id":"gvcn_5_3","teacher_name":"Cô Kim Anh (5.3)","isCustom":true},"5":{"subject":"CLB Stem","teacher_id":"t_stem_3","teacher_name":"GV STEM (3)"},"6":{"subject":"Toán","teacher_id":"gvcn_5_3","teacher_name":"Cô Kim Anh (5.3)","isCustom":true},"7":{"subject":"GDTC","teacher_id":"t_gdtc_phong","teacher_name":"Thầy Phong (GDTC)"},"8":{"subject":"CLB KNS","teacher_id":"gvcn_5_3","teacher_name":"Cô Kim Anh (5.3)","isCustom":true}},"T6":{"1":{"subject":"TA(T-K)","teacher_id":"t_tatk_2","teacher_name":"GV TA-TK (2)"},"2":{"subject":"TA(T-K)","teacher_id":"t_tatk_2","teacher_name":"GV TA-TK (2)"},"3":{"subject":"TV","teacher_id":"gvcn_5_3","teacher_name":"Cô Kim Anh (5.3)","isCustom":true},"4":{"subject":"Toán","teacher_id":"gvcn_5_3","teacher_name":"Cô Kim Anh (5.3)","isCustom":true},"5":{"subject":"KH","teacher_id":"gvcn_5_3","teacher_name":"Cô Kim Anh (5.3)","isCustom":true},"6":{"subject":"LSĐL","teacher_id":"gvcn_5_3","teacher_name":"Cô Kim Anh (5.3)","isCustom":true},"7":{"subject":"CN","teacher_id":"gvcn_5_3","teacher_name":"Cô Kim Anh (5.3)","isCustom":true},"8":{"subject":"HĐTN(SHL)","teacher_id":"gvcn_5_3","teacher_name":"Cô Kim Anh (5.3)","isCustom":true}}},"5.4":{"T2":{"1":{"subject":"HĐTN(CC)","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)"},"2":{"subject":"TV","teacher_id":"gvcn_5_4","teacher_name":"Thầy Đang (5.4)","isCustom":true},"3":{"subject":"TA","teacher_id":"t_ta_tam","teacher_name":"Cô Tâm (TA)"},"4":{"subject":"TA","teacher_id":"t_ta_tam","teacher_name":"Cô Tâm (TA)","isCustom":true},"5":{"subject":"Toán","teacher_id":"gvcn_5_4","teacher_name":"Thầy Đang (5.4)","isCustom":true},"6":{"subject":"LSĐL","teacher_id":"gvcn_5_4","teacher_name":"Thầy Đang (5.4)","isCustom":true},"7":{"subject":"TH","teacher_id":"t_th_thai","teacher_name":"Thầy Thái (Tin học)","isCustom":true},"8":{"subject":"GDTC","teacher_id":"t_gdtc_phong","teacher_name":"Thầy Phong (GDTC)"}},"T3":{"1":{"subject":"TV","teacher_id":"gvcn_5_4","teacher_name":"Thầy Đang (5.4)"},"2":{"subject":"TV","teacher_id":"gvcn_5_4","teacher_name":"Thầy Đang (5.4)"},"3":{"subject":"Toán","teacher_id":"gvcn_5_4","teacher_name":"Thầy Đang (5.4)","isCustom":true},"4":{"subject":"KH","teacher_id":"gvcn_5_4","teacher_name":"Thầy Đang (5.4)","isCustom":true},"5":{"subject":"IC3","teacher_id":"t_ic3_2","teacher_name":"GV IC3 (2)","isCustom":true},"6":{"subject":"IC3","teacher_id":"t_ic3_2","teacher_name":"GV IC3 (2)","isCustom":true},"7":{"subject":"Tự học","teacher_id":"gvcn_5_4","teacher_name":"Thầy Đang (5.4)","isCustom":true},"8":{"subject":"CLB Toán TD","teacher_id":"gvcn_5_4","teacher_name":"Thầy Đang (5.4)","isCustom":true}},"T4":{"1":{"subject":"TV","teacher_id":"gvcn_5_4","teacher_name":"Thầy Đang (5.4)"},"2":{"subject":"TV","teacher_id":"gvcn_5_4","teacher_name":"Thầy Đang (5.4)"},"3":{"subject":"TA(BN)","teacher_id":"t_tabn_3","teacher_name":"GV TA-BN (3)"},"4":{"subject":"TA(BN)","teacher_id":"t_tabn_3","teacher_name":"GV TA-BN (3)"},"5":{"subject":"Toán","teacher_id":"gvcn_5_4","teacher_name":"Thầy Đang (5.4)"},"6":{"subject":"LSĐL","teacher_id":"gvcn_5_4","teacher_name":"Thầy Đang (5.4)","isCustom":true},"7":{"subject":"CN","teacher_id":"gvcn_5_4","teacher_name":"Thầy Đang (5.4)","isCustom":true},"8":{"subject":"HĐTN(CĐ)","teacher_id":"gvcn_5_4","teacher_name":"Thầy Đang (5.4)"}},"T5":{"1":{"subject":"TV","teacher_id":"gvcn_5_4","teacher_name":"Thầy Đang (5.4)","isCustom":true},"2":{"subject":"NT(ÂN)","teacher_id":"t_an_chau","teacher_name":"Cô Châu (Âm nhạc)"},"3":{"subject":"Toán","teacher_id":"gvcn_5_4","teacher_name":"Thầy Đang (5.4)","isCustom":true},"4":{"subject":"KH","teacher_id":"gvcn_5_4","teacher_name":"Thầy Đang (5.4)","isCustom":true},"5":{"subject":"TA","teacher_id":"t_ta_tam","teacher_name":"Cô Tâm (TA)"},"6":{"subject":"TA","teacher_id":"t_ta_tam","teacher_name":"Cô Tâm (TA)"},"7":{"subject":"NT(MT)","teacher_id":"gvcn_5_4","teacher_name":"Thầy Đang (5.4)","isCustom":true},"8":{"subject":"CLB Stem","teacher_id":"t_stem_2","teacher_name":"GV STEM (2)","isCustom":true}},"T6":{"1":{"subject":"TV","teacher_id":"gvcn_5_4","teacher_name":"Thầy Đang (5.4)","isCustom":true},"2":{"subject":"GDTC","teacher_id":"t_gdtc_phong","teacher_name":"Thầy Phong (GDTC)"},"3":{"subject":"TA(T-K)","teacher_id":"t_tatk_2","teacher_name":"GV TA-TK (2)"},"4":{"subject":"TA(T-K)","teacher_id":"t_tatk_2","teacher_name":"GV TA-TK (2)"},"5":{"subject":"HĐTN(SHL)","teacher_id":"gvcn_5_4","teacher_name":"Thầy Đang (5.4)","isCustom":true},"6":{"subject":"Toán","teacher_id":"gvcn_5_4","teacher_name":"Thầy Đang (5.4)","isCustom":true},"7":{"subject":"ĐĐ","teacher_id":"gvcn_5_4","teacher_name":"Thầy Đang (5.4)","isCustom":true},"8":{"subject":"CLB KNS","teacher_id":"gvcn_5_4","teacher_name":"Thầy Đang (5.4)","isCustom":true}}},"5.5":{"T2":{"1":{"subject":"HĐTN(CC)","teacher_id":"t_tpt_nhi","teacher_name":"Cô Yến Nhi (TPT)"},"2":{"subject":"Toán","teacher_id":"gvcn_5_5","teacher_name":"Cô Trâm (5.5)","isCustom":true},"3":{"subject":"TV","teacher_id":"gvcn_5_5","teacher_name":"Cô Trâm (5.5)"},"4":{"subject":"TV","teacher_id":"gvcn_5_5","teacher_name":"Cô Trâm (5.5)"},"5":{"subject":"ĐĐ","teacher_id":"gvcn_5_5","teacher_name":"Cô Trâm (5.5)","isCustom":true},"6":{"subject":"LSĐL","teacher_id":"gvcn_5_5","teacher_name":"Cô Trâm (5.5)"},"7":{"subject":"TA(BN)","teacher_id":"t_tabn_3","teacher_name":"GV TA-BN (3)"},"8":{"subject":"TA(BN)","teacher_id":"t_tabn_3","teacher_name":"GV TA-BN (3)"}},"T3":{"1":{"subject":"TV","teacher_id":"gvcn_5_5","teacher_name":"Cô Trâm (5.5)","isCustom":true},"2":{"subject":"Toán","teacher_id":"gvcn_5_5","teacher_name":"Cô Trâm (5.5)","isCustom":true},"3":{"subject":"NT(MT)","teacher_id":"gvcn_5_5","teacher_name":"Cô Trâm (5.5)","isCustom":true},"4":{"subject":"KH","teacher_id":"gvcn_5_5","teacher_name":"Cô Trâm (5.5)"},"5":{"subject":"TA","teacher_id":"t_ta_tam","teacher_name":"Cô Tâm (TA)"},"6":{"subject":"TA","teacher_id":"t_ta_tam","teacher_name":"Cô Tâm (TA)"},"7":{"subject":"HĐTN(CĐ)","teacher_id":"gvcn_5_5","teacher_name":"Cô Trâm (5.5)"},"8":{"subject":"NT(ÂN)","teacher_id":"gvcn_5_5","teacher_name":"Cô Trâm (5.5)"}},"T4":{"1":{"subject":"TA(T-K)","teacher_id":"t_tatk_2","teacher_name":"GV TA-TK (2)"},"2":{"subject":"TA(T-K)","teacher_id":"t_tatk_2","teacher_name":"GV TA-TK (2)"},"3":{"subject":"TV","teacher_id":"gvcn_5_5","teacher_name":"Cô Trâm (5.5)"},"4":{"subject":"TV","teacher_id":"gvcn_5_5","teacher_name":"Cô Trâm (5.5)","isCustom":true},"5":{"subject":"Toán","teacher_id":"gvcn_5_5","teacher_name":"Cô Trâm (5.5)","isCustom":true},"6":{"subject":"CLB Stem","teacher_id":"t_stem_3","teacher_name":"GV STEM (3)"},"7":{"subject":"GDTC","teacher_id":"gvcn_5_5","teacher_name":"Cô Trâm (5.5)"},"8":{"subject":"CLB Toán TD","teacher_id":"gvcn_5_5","teacher_name":"Cô Trâm (5.5)","isCustom":true}},"T5":{"1":{"subject":"TV","teacher_id":"gvcn_5_5","teacher_name":"Cô Trâm (5.5)","isCustom":true},"2":{"subject":"Toán","teacher_id":"gvcn_5_5","teacher_name":"Cô Trâm (5.5)","isCustom":true},"3":{"subject":"IC3","teacher_id":"t_ic3_2","teacher_name":"GV IC3 (2)","isCustom":true},"4":{"subject":"IC3","teacher_id":"t_ic3_2","teacher_name":"GV IC3 (2)","isCustom":true},"5":{"subject":"KH","teacher_id":"gvcn_5_5","teacher_name":"Cô Trâm (5.5)","isCustom":true},"6":{"subject":"LSĐL","teacher_id":"gvcn_5_5","teacher_name":"Cô Trâm (5.5)","isCustom":true},"7":{"subject":"Tự học","teacher_id":"gvcn_5_5","teacher_name":"Cô Trâm (5.5)"},"8":{"subject":"CLB KNS","teacher_id":"gvcn_5_5","teacher_name":"Cô Trâm (5.5)","isCustom":true}},"T6":{"1":{"subject":"TA","teacher_id":"t_ta_tam","teacher_name":"Cô Tâm (TA)"},"2":{"subject":"TA","teacher_id":"t_ta_tam","teacher_name":"Cô Tâm (TA)"},"3":{"subject":"TH","teacher_id":"t_th_thai","teacher_name":"Thầy Thái (Tin học)","isCustom":true},"4":{"subject":"TV","teacher_id":"gvcn_5_5","teacher_name":"Cô Trâm (5.5)","isCustom":true},"5":{"subject":"Toán","teacher_id":"gvcn_5_5","teacher_name":"Cô Trâm (5.5)","isCustom":true},"6":{"subject":"CN","teacher_id":"gvcn_5_5","teacher_name":"Cô Trâm (5.5)","isCustom":true},"7":{"subject":"HĐTN(SHL)","teacher_id":"gvcn_5_5","teacher_name":"Cô Trâm (5.5)"},"8":{"subject":"GDTC","teacher_id":"gvcn_5_5","teacher_name":"Cô Trâm (5.5)","isCustom":true}}}};
+
+// ============= STATE =============
+let schedule = {};
+let isAdmin = false;
+let selectedClass = "1.1";
+let selectedGrade = "all";
+let selectedTeacherFilter = "all";
+let selectedTeacherId = "t_ta_phuong";
+let editMode = false;
+let editState = {classId:"1.1",dayId:"T2",period:1};
+let masterGrade = "all";
+let masterSearch = "";
+
+
+
+// ============= INIT =============
+function init() {
+  // Set today's date in header — định dạng công văn hành chính, chữ "ngày" viết thường,
+  // lấy theo thời điểm thực tế mỗi lần trang được hiển thị (không hard-code).
+  const today = new Date();
+  const dateStr = `ngày ${today.getDate()} tháng ${today.getMonth()+1} năm ${today.getFullYear()}`;
+  const dateEl = document.getElementById('hdrDateVal');
+  if (dateEl) dateEl.textContent = dateStr;
+
+  // INITIAL_SCHEDULE is the flat class map: {"1.1":{...},...}
+  const defaultData = INITIAL_SCHEDULE;
+
+  const saved = localStorage.getItem(LOCAL_KEY);
+  if (saved) {
+    try {
+      const parsed = JSON.parse(saved);
+      // Only use localStorage if it has real data (not empty)
+      const hasData = parsed && Object.keys(parsed).length > 0 &&
+        Object.values(parsed).some(cls => Object.values(cls).some(day => Object.keys(day).length > 0));
+      schedule = hasData ? parsed : JSON.parse(JSON.stringify(defaultData));
+    } catch(e) { schedule = JSON.parse(JSON.stringify(defaultData)); }
+  } else {
+    schedule = JSON.parse(JSON.stringify(defaultData));
+  }
+  normalizeTeacherNames();
+
+  const adminSaved = sessionStorage.getItem('tkb_nak_admin');
+  if (adminSaved === 'true') { isAdmin = true; }
+
+  // Render all components
+  renderClassGrid();
+  renderScheduleTable();
+  renderStats();
+  renderLegend();
+  renderSubjectGrid();
+  fillTeacherDropdowns();
+  fillTeacherViewDropdown();
+  renderTeacherTable();
+  renderMasterMatrix();
+  updateAdminUI();
+}
+
+// Chuẩn hóa tên GV hiển thị trong MỌI ô về đúng dạng rút gọn (VD: "Cô Linh (1.1)"),
+// không để lọt tên đầy đủ (VD: "Trần Thị Diễm Linh") — chạy mỗi khi tải dữ liệu
+// (localStorage / dữ liệu gốc INITIAL_SCHEDULE / khôi phục gốc) để đảm bảo nhất
+// quán VĨNH VIỄN, không phụ thuộc dữ liệu nguồn (kể cả file JSON merge sau này
+// còn sót tên đầy đủ từ những lần lưu rất cũ) có sạch sẵn hay không.
+function normalizeTeacherNames() {
+  for (const cls of Object.values(schedule)) {
+    for (const day of Object.values(cls)) {
+      for (const cell of Object.values(day)) {
+        if (!cell || !cell.subject) continue;
+        let t = cell.teacher_id ? TEACHERS_CONFIG[cell.teacher_id] : null;
+        if (!t && cell.teacher_name) {
+          t = Object.values(TEACHERS_CONFIG).find(tc => tc.name === cell.teacher_name || tc.short === cell.teacher_name);
+        }
+        if (t) {
+          cell.teacher_name = t.short;
+          if (!cell.teacher_id) cell.teacher_id = t.id;
+        }
+      }
+    }
+  }
+}
+
+function saveSchedule() {
+  localStorage.setItem(LOCAL_KEY, JSON.stringify(schedule));
+  showToast('💾 Đã lưu thời khóa biểu!');
+}
+
+// ============= ĐỒNG BỘ GIỮA CÁC TAB/CỬA SỔ TRÌNH DUYỆT =============
+// Vấn đề: nếu Admin mở TKB trong 2 tab/cửa sổ khác nhau (VD: 1 tab xem
+// "Xem Theo Lớp", 1 tab khác xem "Xem Theo Giáo Viên"), sửa/xóa tiết ở
+// tab này KHÔNG tự cập nhật sang tab kia — vì `schedule` chỉ là biến JS
+// trong bộ nhớ, chỉ đọc lại từ localStorage lúc tải trang (init()).
+// Sự kiện 'storage' của trình duyệt chỉ bắn ra ở các tab KHÁC (không phải
+// tab vừa ghi) mỗi khi localStorage thay đổi -> dùng nó để tự làm mới.
+window.addEventListener('storage', function(e) {
+  if (e.key !== LOCAL_KEY || e.newValue === null) return;
+  try {
+    schedule = JSON.parse(e.newValue);
+  } catch (err) { return; }
+  const classPane = document.getElementById('view-class');
+  const teacherPane = document.getElementById('view-teacher');
+  const masterPane = document.getElementById('view-master');
+  if (classPane && !classPane.classList.contains('hidden')) { renderScheduleTable(); renderStats(); }
+  if (teacherPane && !teacherPane.classList.contains('hidden')) { renderTeacherTable(); }
+  if (masterPane && !masterPane.classList.contains('hidden')) { renderMasterMatrix(); }
+  showToast('🔄 Phát hiện thay đổi từ tab/cửa sổ khác — đã tự làm mới dữ liệu!');
+});
+
+// ============= TAB =============
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-pane,.view-pane').forEach(p => {
+    p.classList.add('hidden');
+  });
+  // Hide all tab views
+  ['view-class','view-teacher','view-master'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.add('hidden');
+  });
+  const pane = document.getElementById('view-'+tabId);
+  if (pane) pane.classList.remove('hidden');
+  
+  document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+  const activeTab = document.getElementById('tab-'+tabId);
+  if (activeTab) activeTab.classList.add('active');
+  
+  if (tabId === 'teacher') renderTeacherTable();
+  if (tabId === 'master') renderMasterMatrix();
+}
+
+// ============= GRADE FILTER =============
+function filterGrade(grade) {
+  selectedGrade = grade;
+  document.querySelectorAll('[id^="grade-"]').forEach(b => {
+    b.classList.toggle('active', b.id === 'grade-' + (grade === 'all' ? 'all' : grade));
+  });
+  renderClassGrid();
+}
+
+function filterMasterGrade(grade) {
+  masterGrade = grade;
+  document.querySelectorAll('[id^="mgrade-"]').forEach(b => {
+    b.classList.toggle('active', b.id === 'mgrade-' + (grade === 'all' ? 'all' : grade));
+  });
+  renderMasterMatrix();
+}
+
+function searchMaster(val) {
+  masterSearch = val.toLowerCase();
+  renderMasterMatrix();
+}
+
+// ============= CLASS GRID =============
+function renderClassGrid() {
+  const grid = document.getElementById('classGrid');
+  if (!grid) return;
+  const classes = Object.keys(CLASSES_CONFIG).filter(c =>
+    selectedGrade === 'all' || CLASSES_CONFIG[c].grade == selectedGrade
+  );
+  grid.innerHTML = classes.map(cId => {
+    const info = CLASSES_CONFIG[cId];
+    const isActive = cId === selectedClass;
+    return `<button class="class-btn${isActive?' active':''}" onclick="selectClass('${cId}')">Lớp ${cId}</button>`;
+  }).join('');
+}
+
+function selectClass(cId) {
+  selectedClass = cId;
+  renderClassGrid();
+  const cfg = CLASSES_CONFIG[cId] || {};
+  
+  const badge = document.getElementById('currentClassBadge');
+  if (badge) badge.textContent = 'LỚP ' + cId + ' (Khối ' + (cfg.grade || '') + ')';
+  const gvcn = document.getElementById('currentGVCN');
+  if (gvcn) gvcn.textContent = cfg.gvcnShort || '';
+  
+  const hdrClass = document.getElementById('hdrClass');
+  if (hdrClass) hdrClass.textContent = cId;
+  const hdrGVCN = document.getElementById('hdrGVCN');
+  if (hdrGVCN) hdrGVCN.textContent = cfg.gvcnName || '';
+  const hdrGradeBadge = document.getElementById('hdrGradeBadge');
+  if (hdrGradeBadge) hdrGradeBadge.textContent = 'Khối ' + (cfg.grade || '');
+  const sigGVCN = document.getElementById('sigGVCN');
+  if (sigGVCN) sigGVCN.textContent = cfg.gvcnName || '';
+  const statsClass = document.getElementById('statsClass');
+  if (statsClass) statsClass.textContent = cId;
+  
+  renderScheduleTable();
+  renderStats();
+}
+
+// ============= SCHEDULE TABLE =============
+function renderScheduleTable() {
+  const cls = schedule[selectedClass] || {};
+  const tbl = document.getElementById('scheduleTable');
+  if (!tbl) return;
+
+  const morningSlots  = TIME_SLOTS.filter(s => !s.isBreak && s.session === 'SÁNG');
+  const afternoonSlots = TIME_SLOTS.filter(s => !s.isBreak && s.session === 'CHIỀU');
+
+  // rowspan phải tính CẢ hàng break nằm trong session:
+  // Sáng: 4 tiết + 1 break_am = 5 hàng
+  // Chiều: 4 tiết + 1 break_pm = 5 hàng
+  const morningRowspan  = morningSlots.length + 1;
+  const afternoonRowspan = afternoonSlots.length + 1;
+
+  let html = `<thead><tr>
+    <th class="th-narrow" style="width:44px;text-align:center;">BUỔI</th>
+    <th class="th-narrow" style="width:52px;text-align:center;">TIẾT</th>
+    <th class="th-time"   style="text-align:center;">THỜI GIAN</th>
+    ${DAYS.map(d => `<th class="th-day">
+      <div class="day-name">${d.name}</div>
+      <div class="day-full">${d.fullName}</div>
+    </th>`).join('')}
+  </tr></thead><tbody>`;
+
+  // Track xem đã bắt đầu SÁNG / CHIỀU chưa
+  let morningOpen   = false;
+  let afternoonOpen = false;
+
+  TIME_SLOTS.forEach(slot => {
+    if (slot.isBreak) {
+      // break_am và break_pm nằm TRONG rowspan → colspan = 7 (bỏ cột BUỔI)
+      // lunch nằm NGOÀI rowspan        → colspan = 8 (toàn bộ)
+      const insideSession = slot.breakType === 'am' || slot.breakType === 'pm';
+      const span = insideSession ? 7 : 8;
+      const cfg = {
+        am:    {bg:'#f0fdf4',color:'#166534',icon:'☕',label:'RA CHƠI SÁNG',note:'Giải lao 35 phút'},
+        lunch: {bg:'#fff7ed',color:'#9a3412',icon:'🍱',label:'BÁN TRÚ & NGHỈ TRƯA',note:'Ăn trưa, nghỉ trưa học sinh'},
+        pm:    {bg:'#fef9c3',color:'#854d0e',icon:'⏸',label:'RA CHƠI CHIỀU',note:'Giải lao 30 phút'}
+      }[slot.breakType];
+      html += `<tr>
+        <td colspan="${span}" class="td-break"
+          style="background:${cfg.bg};color:${cfg.color};text-align:center;padding:7px;border:1px solid #e2e8f0;font-size:11px;font-weight:600;">
+          ${cfg.icon} <strong>${cfg.label}</strong> (${slot.time}) — ${cfg.note}
+        </td>
+      </tr>`;
+      return;
+    }
+
+    // Xác định đây có phải tiết đầu tiên của SÁNG/CHIỀU không
+    const isFirstMorning   = slot.session === 'SÁNG'  && !morningOpen;
+    const isFirstAfternoon = slot.session === 'CHIỀU' && !afternoonOpen;
+    if (isFirstMorning)   morningOpen   = true;
+    if (isFirstAfternoon) afternoonOpen = true;
+
+    let sessionTd = '';
+    if (isFirstMorning) {
+      sessionTd = `<td class="td-session td-morning" rowspan="${morningRowspan}">
+        <span class="sess-text">SÁNG</span>
+      </td>`;
+    } else if (isFirstAfternoon) {
+      sessionTd = `<td class="td-session td-afternoon" rowspan="${afternoonRowspan}">
+        <span class="sess-text">CHIỀU</span>
+      </td>`;
+    }
+
+    const dayCells = DAYS.map(d => {
+      const cell = cls[d.id]?.[slot.period] || null;
+      const subj = cell?.subject || '';
+      const tchr = cell?.teacher_name || '';
+      const isCustom = cell?.isCustom || false;
+      const col = subj && SUBJECT_COLORS[subj] ? SUBJECT_COLORS[subj] : null;
+      const clickAttr = editMode ? `onclick="openEdit('${selectedClass}','${d.id}',${slot.period})"` : '';
+      return `<td class="td-cell${editMode ? ' editable' : ''}" ${clickAttr}>
+        <div class="cell-inner" style="${col
+          ? `background:${col.bg};border-color:${col.border};color:${col.text};`
+          : 'border-color:#e2e8f0;background:#fafafa;color:#cbd5e1;'}">
+          ${isCustom ? '<div class="cell-custom-badge" title="Đã chỉnh sửa">✏️</div>' : ''}
+          ${col
+            ? `<span class="cell-icon">${col.icon}</span>
+               <div class="cell-text">${subj}
+                 ${tchr ? `<div style="font-size:9px;font-weight:500;opacity:.75;margin-top:1px;">${tchr}</div>` : ''}
+               </div>`
+            : `<span class="cell-empty">—</span>`}
+        </div>
+      </td>`;
+    }).join('');
+
+    html += `<tr>
+      ${sessionTd}
+      <td class="td-period">${slot.name}</td>
+      <td class="td-time">${slot.time}</td>
+      ${dayCells}
+    </tr>`;
+  });
+
+  html += '</tbody>';
+  tbl.innerHTML = html;
+}
+
+// ============= EDIT MODAL =============
+function openEdit(classId, dayId, period) {
+  if (!editMode || !isAdmin) return;
+  editState = {classId, dayId, period};
+  const cell = schedule[classId]?.[dayId]?.[period] || {};
+  
+  document.querySelectorAll('.subj-btn').forEach(b => {
+    b.classList.toggle('selected', b.dataset.subject === cell.subject);
+  });
+  
+  const sel = document.getElementById('teacherSelEdit');
+  if (sel) { fillTeacherDropdowns(); sel.value = cell.teacher_id || ''; }
+  
+  const sub = document.getElementById('editModalSub');
+  const dayName = DAYS.find(d => d.id === dayId)?.fullName || dayId;
+  if (sub) sub.textContent = `Lớp ${classId} • ${dayName} • Tiết ${period}`;
+  
+  document.getElementById('editModal').style.display = 'flex';
+}
+
+function closeEdit() {
+  document.getElementById('editModal').style.display = 'none';
+}
+
+function renderSubjectGrid() {
+  const grid = document.getElementById('subjGrid');
+  if (!grid) return;
+  grid.innerHTML = Object.entries(SUBJECT_COLORS).map(([code, info]) =>
+    `<button class="subj-btn" data-subject="${code}"
+      style="background:${info.bg};border:2px solid ${info.border};color:${info.text};padding:5px 10px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;transition:all .15s;"
+      onclick="pickSubject('${code}')">
+      ${info.icon} ${code}
+    </button>`
+  ).join('');
+}
+
+function pickSubject(code) {
+  document.querySelectorAll('.subj-btn').forEach(b => {
+    b.style.outline = b.dataset.subject === code ? '3px solid #2563eb' : 'none';
+    b.classList.toggle('selected', b.dataset.subject === code);
+  });
+  // Auto-suggest teacher (theo teacher_id — khớp chính xác 1-1 với TEACHERS_CONFIG)
+  const cfg = CLASSES_CONFIG[editState.classId];
+  if (!cfg) return;
+  let suggestedId = '';
+  if (code === 'TA') suggestedId = cfg.taTeacher;
+  else if (code === 'GDTC') suggestedId = cfg.gdtcTeacher;
+  else if (code === 'NT(ÂN)') suggestedId = cfg.anTeacher;
+  else if (code === 'TH') suggestedId = cfg.thTeacher;
+  else if (code === 'CDS') suggestedId = cfg.cdsTeacher;
+  else if (code === 'IC3') suggestedId = cfg.ic3Teacher;
+  else if (code === 'CLB Stem') suggestedId = cfg.stemTeacher;
+  else if (code === 'CLB KNS') suggestedId = cfg.knsTeacher;
+  else if (code === 'CLB Toán TD') suggestedId = cfg.toanTdTeacher;
+  else if (code === 'TA(BN)') suggestedId = cfg.tabnTeacher;
+  else if (code === 'TA(T-K)') suggestedId = cfg.tatkTeacher;
+  else if (['TV','Toán','ĐĐ','TNXH','KH','LSĐL','HĐTN(CC)','HĐTN(CĐ)','HĐTN(SHL)','CN','Tự học','NT(MT)'].includes(code)) {
+    suggestedId = cfg.gvcn;
+  }
+  // Môn liên kết không áp dụng cho khối này (VD: CDS ở Khối 3-5) -> không có suggestedId
+  // -> RESET về rỗng để bắt buộc chọn tay, tránh giữ lại giá trị cũ (GVCN) một cách âm thầm.
+  if (!suggestedId) {
+    const sel0 = document.getElementById('teacherSelEdit');
+    if (sel0) sel0.value = '';
+    return;
+  }
+  const sel = document.getElementById('teacherSelEdit');
+  if (sel && suggestedId) sel.value = suggestedId;
+}
+
+function saveCell() {
+  const {classId, dayId, period} = editState;
+  const selBtn = document.querySelector('.subj-btn.selected');
+  const subj = selBtn?.dataset?.subject;
+  const teacherId = document.getElementById('teacherSelEdit')?.value || '';
+  const teacherInfo = TEACHERS_CONFIG[teacherId];
+  if (!subj) { showToast('⚠️ Vui lòng chọn môn học!'); return; }
+  // Bắt buộc phải chọn GV trước khi lưu — tránh để lại ô "trống giáo viên"
+  // (từng xảy ra thật với môn NT(MT) khi auto-suggest chưa phủ hết môn học).
+  if (!teacherId || !teacherInfo) { showToast('⚠️ Vui lòng chọn giáo viên phụ trách trước khi lưu!'); return; }
+  if (!schedule[classId]) schedule[classId] = {};
+  if (!schedule[classId][dayId]) schedule[classId][dayId] = {};
+  // Lưu CẢ teacher_id (để so khớp chính xác 100% với GV bộ môn/trung tâm ở Tab 2)
+  // LẪN teacher_name dạng ngắn gọn (để hiển thị vừa trong ô lịch nhỏ) — tự động
+  // đồng bộ ngay lập tức, không cần bước riêng nào khác.
+  schedule[classId][dayId][period] = {
+    subject: subj,
+    teacher_id: teacherId,
+    teacher_name: teacherInfo ? teacherInfo.short : '',
+    isCustom: true
+  };
+  closeEdit();
+  renderScheduleTable();
+  renderStats();       // Bộ đếm số tiết của lớp đang chỉnh sửa cập nhật lại ngay
+  saveSchedule();
+  refreshTeacherViewIfOpen();
+  runRuleCheckAndNotify();
+}
+
+function clearCell() {
+  const {classId, dayId, period} = editState;
+  if (schedule[classId]?.[dayId]) delete schedule[classId][dayId][period];
+  closeEdit();
+  renderScheduleTable();
+  renderStats();       // Xóa tiết xong -> đếm lại đúng số tiết còn lại của lớp
+  saveSchedule();
+  refreshTeacherViewIfOpen();
+  runRuleCheckAndNotify();
+}
+
+// Nếu admin đang mở Tab 2 (Xem Theo Giáo Viên) thì render lại ngay để
+// phản ánh thay đổi vừa lưu ở Tab 1 (GV bộ môn / GV trung tâm / GVCN đều tự cập nhật).
+function refreshTeacherViewIfOpen() {
+  const teacherPane = document.getElementById('view-teacher');
+  if (teacherPane && !teacherPane.classList.contains('hidden')) {
+    renderTeacherTable();
+  }
+}
+
+function fillTeacherDropdowns() {
+  const sel = document.getElementById('teacherSelEdit');
+  if (!sel) return;
+  const teachers = Object.values(TEACHERS_CONFIG).sort((a,b) => a.name.localeCompare(b.name, 'vi'));
+  // value = teacher_id (khớp chính xác với TEACHERS_CONFIG, tránh trùng tên/lệch tên ngắn-dài)
+  sel.innerHTML = '<option value="">-- Chọn giáo viên --</option>' +
+    teachers.map(t => `<option value="${t.id}">${t.name}</option>`).join('');
+}
+
+// ============= STATS =============
+function renderStats() {
+  const cls = schedule[selectedClass] || {};
+  const counts = {};
+  DAYS.forEach(d => {
+    Object.values(cls[d.id] || {}).forEach(cell => {
+      if (cell.subject) counts[cell.subject] = (counts[cell.subject] || 0) + 1;
+    });
+  });
+  const total = Object.values(counts).reduce((a,b) => a+b, 0);
+  const el = document.getElementById('statsChips');
+  if (el) el.innerHTML = Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(([s,c]) => {
+    const info = SUBJECT_COLORS[s] || {bg:'#f1f5f9',border:'#e2e8f0',text:'#1e293b',icon:'📋'};
+    return `<span style="display:inline-flex;align-items:center;gap:4px;background:${info.bg};border:1px solid ${info.border};color:${info.text};padding:3px 10px;border-radius:999px;font-size:11px;font-weight:700;margin:2px;">${info.icon} ${s}: <b>${c}</b></span>`;
+  }).join('');
+  const tot = document.getElementById('statsTotal');
+  if (tot) tot.textContent = `Tổng cộng: ${total} tiết/tuần`;
+  const hdrTotal = document.getElementById('hdrTotal');
+  if (hdrTotal) hdrTotal.textContent = 'Lớp ' + selectedClass + ': ' + total + ' tiết/tuần';
+  const totalPeriods = document.getElementById('totalPeriods');
+  if (totalPeriods) totalPeriods.textContent = total + ' tiết/tuần';
+}
+
+// ============= LEGEND =============
+function renderLegend() {
+  const el = document.getElementById('legendGrid');
+  if (!el) return;
+  el.innerHTML = Object.entries(SUBJECT_COLORS).map(([code, info]) =>
+    `<span style="display:inline-flex;align-items:center;gap:5px;background:${info.bg};border:1px solid ${info.border};color:${info.text};padding:4px 12px;border-radius:10px;font-size:11px;font-weight:700;margin:3px;">
+      ${info.icon} <strong>${code}</strong> — ${info.name}
+    </span>`
+  ).join('');
+}
+
+// ============= TEACHER VIEW =============
+function filterTeacher(type) {
+  selectedTeacherFilter = type;
+  document.querySelectorAll('[id^="tf-"]').forEach(b => {
+    b.classList.toggle('active', b.id === 'tf-' + (type === 'all' ? 'all' : type === 'specialist' ? 'bomon' : type === 'partner' ? 'lienket' : 'gvcn'));
+  });
+  fillTeacherViewDropdown();
+}
+
+function fillTeacherViewDropdown() {
+  const sel = document.getElementById('teacherSelect');
+  if (!sel) return;
+  let teachers = Object.values(TEACHERS_CONFIG);
+  if (selectedTeacherFilter !== 'all') teachers = teachers.filter(t => t.type === selectedTeacherFilter);
+  teachers.sort((a,b) => a.name.localeCompare(b.name,'vi'));
+  sel.innerHTML = teachers.map(t => `<option value="${t.id}">${t.name} — ${t.short}</option>`).join('');
+  if (teachers.length > 0) { selectedTeacherId = teachers[0].id; sel.value = selectedTeacherId; }
+}
+
+function selectTeacher(id) {
+  selectedTeacherId = id;
+  renderTeacherTable();
+}
+
+function renderTeacherTable() {
+  const teacher = TEACHERS_CONFIG[selectedTeacherId];
+  if (!teacher) return;
+
+  const nameEl = document.getElementById('teacherName');
+  const infoEl = document.getElementById('teacherInfo');
+  if (nameEl) nameEl.textContent = teacher.name;
+  if (infoEl) {
+    const weeklyTotal = getTeacherWeeklyTotal(teacher);
+    infoEl.textContent = teacher.short + ' | ' + (teacher.assigned || '') + ' | ' + weeklyTotal + ' tiết/tuần';
+  }
+
+  const tbl = document.getElementById('teacherTable');
+  if (!tbl) return;
+
+  // Hiển thị banner cảnh báo trùng tiết cho đúng giáo viên đang xem
+  renderTeacherConflictBanner(teacher.name);
+
+  const morningSlots = TIME_SLOTS.filter(s => !s.isBreak && s.session === 'SÁNG');
+  const afternoonSlots = TIME_SLOTS.filter(s => !s.isBreak && s.session === 'CHIỀU');
+
+  let html = `<thead><tr style="background:#1e3a8a;color:#fff;">
+    <th style="padding:8px 4px;border:1px solid #2563eb;width:50px;">Ca</th>
+    <th style="padding:8px;border:1px solid #2563eb;min-width:95px;">Tiết</th>
+    ${DAYS.map(d=>`<th style="padding:8px;border:1px solid #2563eb;">${d.name}</th>`).join('')}
+  </tr></thead><tbody>`;
+
+  TIME_SLOTS.forEach(slot => {
+    if (slot.isBreak) {
+      html += `<tr><td colspan="7" style="text-align:center;color:#94a3b8;font-size:11px;padding:4px;background:#f8fafc;border:1px solid #e2e8f0;">⏸ ${slot.name}</td></tr>`;
+      return;
+    }
+    const isFirstMorning = slot.session === 'SÁNG' && slot.period === 1;
+    const isFirstAfternoon = slot.session === 'CHIỀU' && slot.period === 5;
+    let sessionTd = '';
+    if (isFirstMorning) sessionTd = `<td rowspan="${morningSlots.length + 1}" style="background:linear-gradient(180deg,#dbeafe,#bfdbfe);color:#1e3a8a;font-weight:900;font-size:11px;text-align:center;border:1px solid #bfdbfe;writing-mode:vertical-rl;">SÁNG</td>`;
+    else if (isFirstAfternoon) sessionTd = `<td rowspan="${afternoonSlots.length + 1}" style="background:linear-gradient(180deg,#fef3c7,#fde68a);color:#92400e;font-weight:900;font-size:11px;text-align:center;border:1px solid #fcd34d;writing-mode:vertical-rl;">CHIỀU</td>`;
+
+    const dayCells = DAYS.map(d => {
+      // Tìm TẤT CẢ các lớp mà GV này dạy cùng lúc slot này (để phát hiện trùng tiết)
+      // So khớp qua teacher_id — không còn phụ thuộc tên ngắn/dài hiển thị.
+      const matches = [];
+      for (const [cId, cls] of Object.entries(schedule)) {
+        const cell = cls[d.id]?.[slot.period];
+        if (cellMatchesTeacher(cell, teacher)) matches.push({classId: cId, subject: cell.subject});
+      }
+      if (matches.length === 0) {
+        return `<td style="padding:6px;border:1px solid #e2e8f0;text-align:center;color:#cbd5e1;min-width:90px;">—</td>`;
+      }
+      // Chào cờ (HĐTN(CC)) diễn ra đồng loạt toàn trường -> không tính trùng tiết
+      const isWholeSchool = matches.every(m => WHOLE_SCHOOL_SUBJECTS.includes(m.subject));
+      const isConflict = matches.length > 1 && !isWholeSchool;
+      const primary = matches[0];
+      const color = SUBJECT_COLORS[primary.subject] || {bg:'#dbeafe',border:'#93c5fd',text:'#1e3a8a'};
+      const classList = matches.map(m => m.classId).join(', ');
+      if (isConflict) {
+        return `<td class="cell-conflict" style="padding:6px;border:2px solid;text-align:center;min-width:90px;">
+          <div style="font-weight:700;font-size:11px;">${SUBJECT_COLORS[primary.subject]?.icon || ''} ${primary.subject}</div>
+          <div style="font-size:10px;opacity:.85;">Lớp ${classList}</div>
+          <div class="conflict-tag">⚠️ TRÙNG TIẾT!</div>
+        </td>`;
+      }
+      return `<td style="padding:6px;border:1px solid ${color.border};background:${color.bg};color:${color.text};text-align:center;min-width:90px;">
+        <div style="font-weight:700;font-size:11px;">${SUBJECT_COLORS[primary.subject]?.icon || ''} ${primary.subject}</div>
+        <div style="font-size:10px;opacity:.8;">${isWholeSchool ? `Toàn trường (${matches.length} lớp)` : 'Lớp ' + primary.classId}</div>
+      </td>`;
+    }).join('');
+
+    html += `<tr>${sessionTd}
+      <td style="background:#f8fafc;padding:5px 8px;border:1px solid #e2e8f0;">
+        <div style="font-weight:700;font-size:11px;color:#475569;">${slot.name}</div>
+        <div style="font-size:9px;color:#94a3b8;">${slot.time}</div>
+      </td>
+      ${dayCells}</tr>`;
+  });
+  tbl.innerHTML = html + '</tbody>';
+}
+
+// ============= KIỂM ĐỊNH QUY TẮC (Rule Engine) =============
+
+// Các môn diễn ra đồng loạt toàn trường theo thiết kế (không tính là "trùng tiết"):
+// HĐTN(CC) = Chào cờ đầu tuần — TPT phụ trách chung cho cả 29 lớp cùng lúc.
+const WHOLE_SCHOOL_SUBJECTS = ['HĐTN(CC)'];
+
+// So khớp 1 ô lịch với 1 giáo viên — ƯU TIÊN teacher_id (khớp chính xác 1-1,
+// không phụ thuộc tên hiển thị dài/ngắn). teacher_name chỉ dùng làm phương án
+// dự phòng cho dữ liệu cũ/thiếu id.
+function cellMatchesTeacher(cell, teacher) {
+  if (!cell || !teacher) return false;
+  if (cell.teacher_id && teacher.id) return cell.teacher_id === teacher.id;
+  if (cell.teacher_name) return cell.teacher_name === teacher.name || cell.teacher_name === teacher.short;
+  return false;
+}
+
+// Tính tổng số TIẾT (khung giờ) khác nhau trong tuần mà 1 GV đứng lớp.
+// Đếm theo (Thứ|Tiết) duy nhất — vì các môn dạy đồng loạt toàn trường
+// (VD: HĐTN(CC) Chào cờ, TPT phụ trách cùng lúc 29 lớp) chỉ tính là 1 tiết,
+// không phải 29 tiết, đúng với thực tế 1 GV chỉ đứng 1 tiết tại 1 thời điểm.
+function getTeacherWeeklyTotal(teacher) {
+  const slots = new Set();
+  for (const cls of Object.values(schedule)) {
+    for (const d of DAYS) {
+      const dayObj = cls[d.id];
+      if (!dayObj) continue;
+      for (const [period, cell] of Object.entries(dayObj)) {
+        if (cellMatchesTeacher(cell, teacher)) slots.add(d.id + '|' + period);
+      }
+    }
+  }
+  return slots.size;
+}
+
+// Khoá nhóm dùng khi quét trùng tiết: ưu tiên teacher_id, dự phòng teacher_name
+function teacherGroupKey(cell) {
+  if (cell.teacher_id) return 'id:' + cell.teacher_id;
+  if (cell.teacher_name) return 'name:' + cell.teacher_name;
+  return null;
+}
+
+// Quét toàn bộ schedule tìm các GV bị xếp dạy 2 lớp trở lên cùng lúc
+function findAllConflicts() {
+  const map = {}; // key: dayId|period|teacherKey -> {day, period, teacherName, classes:[]}
+  for (const [cId, cls] of Object.entries(schedule)) {
+    for (const d of DAYS) {
+      const dayObj = cls[d.id];
+      if (!dayObj) continue;
+      for (const [period, cell] of Object.entries(dayObj)) {
+        if (!cell) continue;
+        if (WHOLE_SCHOOL_SUBJECTS.includes(cell.subject)) continue;
+        const tKey = teacherGroupKey(cell);
+        if (!tKey) continue;
+        const key = d.id + '|' + period + '|' + tKey;
+        if (!map[key]) {
+          const displayName = (cell.teacher_id && TEACHERS_CONFIG[cell.teacher_id]?.name) || cell.teacher_name;
+          map[key] = { day: d.id, period, teacherName: displayName, classes: [] };
+        }
+        if (!map[key].classes.includes(cId)) map[key].classes.push(cId);
+      }
+    }
+  }
+  return Object.values(map).filter(v => v.classes.length > 1);
+}
+
+function getConflictsForTeacher(teacherName) {
+  return findAllConflicts().filter(c => c.teacherName === teacherName);
+}
+
+function periodLabel(period) {
+  const slot = TIME_SLOTS.find(s => String(s.period) === String(period));
+  return slot ? slot.name : 'Tiết ' + period;
+}
+function dayLabel(dayId) {
+  return DAYS.find(d => d.id === dayId)?.name || dayId;
+}
+
+function renderTeacherConflictBanner(teacherName) {
+  const el = document.getElementById('teacherConflictBanner');
+  if (!el) return;
+  const conflicts = getConflictsForTeacher(teacherName);
+  if (conflicts.length === 0) { el.innerHTML = ''; return; }
+  el.innerHTML = `<div class="conflict-banner">
+    <div class="cb-title">⚠️ CẢNH BÁO TRÙNG TIẾT GIẢNG DẠY (${conflicts.length} vị trí):</div>
+    <ul>
+      ${conflicts.map(c => `<li>Trùng <b>${periodLabel(c.period)} (${dayLabel(c.day)})</b>: Dạy cùng lúc tại các lớp: <b>${c.classes.join(', ')}</b></li>`).join('')}
+    </ul>
+  </div>`;
+}
+
+// Tập hợp toàn bộ lỗi quy tắc hiện có trong dữ liệu
+function checkRules() {
+  const issues = [];
+  findAllConflicts().forEach(c => {
+    issues.push(`<b>Trùng tiết giáo viên:</b> "${c.teacherName}" được xếp dạy cùng lúc ${dayLabel(c.day)} — ${periodLabel(c.period)} tại các lớp <b>${c.classes.join(', ')}</b>.`);
+  });
+  return issues;
+}
+
+// Chạy kiểm định + hiển thị kết quả (gọi mỗi khi Lưu)
+function runRuleCheckAndNotify() {
+  const issues = checkRules();
+  if (issues.length === 0) {
+    showToast('✅ Kiểm tra quy tắc: Dữ liệu ĐÚNG quy tắc!', 3500, 'ok');
+  } else {
+    showRuleWarningModal(issues);
+  }
+}
+
+function showRuleWarningModal(issues) {
+  const icon = document.getElementById('ruleModalIcon');
+  const sub = document.getElementById('ruleModalSub');
+  const body = document.getElementById('ruleModalBody');
+  if (icon) { icon.textContent = '⚠️'; icon.style.background = '#fef2f2'; }
+  if (sub) { sub.textContent = `⚠️ Dữ liệu CHƯA hợp lý — phát hiện ${issues.length} lỗi cần xử lý:`; sub.style.color = '#dc2626'; sub.style.fontWeight = '700'; }
+  if (body) {
+    body.innerHTML = `<ul class="rule-list">${issues.map(i => `<li><span class="ri">⚠️</span><span>${i}</span></li>`).join('')}</ul>`;
+  }
+  document.getElementById('ruleModal').style.display = 'flex';
+}
+
+function closeRuleModal() {
+  document.getElementById('ruleModal').style.display = 'none';
+}
+
+// ============= MASTER MATRIX =============
+function renderMasterMatrix() {
+  const classes = Object.keys(CLASSES_CONFIG).filter(c => {
+    if (masterGrade !== 'all' && CLASSES_CONFIG[c].grade != masterGrade) return false;
+    if (masterSearch && !c.toLowerCase().includes(masterSearch) && !CLASSES_CONFIG[c].gvcnName.toLowerCase().includes(masterSearch)) return false;
+    return true;
+  });
+  const tbl = document.getElementById('masterTable');
+  if (!tbl) return;
+  
+  const regularSlots = TIME_SLOTS.filter(s => !s.isBreak);
+  let headerCols = '<th style="background:#1e3a8a;color:#fff;padding:6px 8px;min-width:70px;position:sticky;left:0;z-index:2;border:1px solid #2563eb;">Lớp</th>';
+  DAYS.forEach(d => {
+    regularSlots.forEach(slot => {
+      headerCols += `<th style="background:#1e3a8a;color:#fff;padding:4px 6px;font-size:9px;min-width:65px;text-align:center;border:1px solid #2563eb;">${d.name}<br>${slot.name}</th>`;
+    });
+  });
+  
+  let bodyRows = '';
+  classes.forEach((cId, idx) => {
+    const cls = schedule[cId] || {};
+    const cfg = CLASSES_CONFIG[cId];
+    const rowBg = idx % 2 === 0 ? '#fff' : '#f8fafc';
+    bodyRows += `<tr style="background:${rowBg};">
+      <td style="position:sticky;left:0;z-index:1;background:${rowBg};padding:5px 8px;font-weight:800;font-size:11px;border:1px solid #e2e8f0;white-space:nowrap;">
+        Lớp ${cId}<br><span style="font-size:9px;font-weight:400;color:#64748b;">${cfg?.gvcnName?.split(' ').slice(-1)[0]||''}</span>
+      </td>`;
+    DAYS.forEach(d => {
+      regularSlots.forEach(slot => {
+        const cell = cls[d.id]?.[slot.period];
+        const subj = cell?.subject || '';
+        const color = subj && SUBJECT_COLORS[subj] ? SUBJECT_COLORS[subj] : null;
+        const style = color ? `background:${color.bg};border-color:${color.border};color:${color.text};` : 'background:#f8fafc;color:#cbd5e1;border-color:#e2e8f0;';
+        bodyRows += `<td style="padding:3px;border:1px solid #e2e8f0;${style}text-align:center;font-size:9px;font-weight:700;">
+          ${subj ? (SUBJECT_COLORS[subj]?.icon||'') + ' ' + subj : '—'}
+        </td>`;
+      });
+    });
+    bodyRows += '</tr>';
+  });
+  
+  tbl.innerHTML = `<thead><tr>${headerCols}</tr></thead><tbody>${bodyRows}</tbody>`;
+}
+
+// ============= ADMIN =============
+function openLogin() {
+  document.getElementById('loginModal').style.display = 'flex';
+  setTimeout(() => document.getElementById('passInput')?.focus(), 100);
+}
+
+function closeLogin() {
+  document.getElementById('loginModal').style.display = 'none';
+  const pi = document.getElementById('passInput'); if (pi) pi.value = '';
+  const pe = document.getElementById('passErr'); if (pe) pe.classList.add('hidden');
+}
+
+function doLogin() {
+  const pwd = document.getElementById('passInput')?.value || '';
+  if (pwd === ADMIN_PASS) {
+    isAdmin = true;
+    sessionStorage.setItem('tkb_nak_admin','true');
+    closeLogin();
+    updateAdminUI();
+    showToast('✅ Đăng nhập thành công! Chào mừng Admin!');
+    // Nếu đang chờ bật edit mode thì bật luôn
+    if (pendingActivateEditMode) {
+      pendingActivateEditMode = false;
+      setTimeout(() => toggleEditMode(), 400);
+    }
+  } else {
+    const pe = document.getElementById('passErr');
+    if (pe) pe.classList.remove('hidden');
+    pendingActivateEditMode = false;
+  }
+}
+
+function doLogout() {
+  isAdmin = false; editMode = false;
+  sessionStorage.removeItem('tkb_nak_admin');
+  updateAdminUI();
+  renderScheduleTable();
+  showToast('🚪 Đã đăng xuất');
+}
+
+function updateAdminUI() {
+  // Show/hide admin-only buttons
+  const adminIds = ['btnSync','btnPrint','btnReset','logoutBtn','btnUpload','btnUpdateBG','badgeAudit','btnSaveTKB','btnExportZip'];
+  adminIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.toggle('hidden', !isAdmin);
+  });
+  const loginBtn = document.getElementById('loginBtn');
+  if (loginBtn) loginBtn.style.display = isAdmin ? 'none' : '';
+}
+
+function toggleEditMode() {
+  if (!isAdmin) {
+    // Chưa đăng nhập → mở login trước, sau khi login sẽ tự bật
+    pendingActivateEditMode = true;
+    openLogin();
+    return;
+  }
+  editMode = !editMode;
+  const btn = document.getElementById('btnEditMode');
+  if (btn) {
+    btn.textContent = editMode ? '✅ Đang Sửa — Click Để Tắt' : '✏️ Bật Sửa Nhanh Từng Tiết';
+    btn.style.background = editMode ? '#059669' : '#4f46e5';
+  }
+  const hint = document.getElementById('editHint');
+  if (hint) hint.classList.toggle('hidden', !editMode);
+  renderScheduleTable();
+  showToast(editMode
+    ? '✏️ Chế độ sửa nhanh BẬT — Click vào ô tiết để chỉnh sửa!'
+    : '🔒 Đã tắt chế độ sửa nhanh');
+}
+
+let pendingActivateEditMode = false;
+
+// ============= EXPORT =============
+function exportJSON() {
+  const data = { version:"2.0", school:"Trường TH Nguyễn An Khương", year:"2026-2027", schedule, exported_at: new Date().toISOString() };
+  downloadFile('tkb_nak_2026-2027.json', JSON.stringify(data, null, 2), 'application/json');
+}
+
+// Tải file xuống — hoạt động đúng ở CẢ 2 môi trường:
+//  1) Claude Artifact: trang chạy trong khung bị chặn tải kiểu <a download> truyền
+//     thống (bấm nút không có phản ứng gì) -> BẮT BUỘC dùng API downloads chính thức
+//     của Claude (window.claude.use('downloads')), hiện hộp xác nhận cho người xem.
+//  2) Netlify / mở file cục bộ: window.claude không tồn tại -> dùng cách tải file
+//     kiểu Blob + thẻ <a> truyền thống như bình thường.
+async function downloadFile(filename, content, mimeType) {
+  mimeType = mimeType || 'application/json';
+
+  if (window.claude && typeof window.claude.use === 'function') {
+    try {
+      const downloads = await window.claude.use('downloads');
+      if (downloads) {
+        await downloads.save({ filename, data: content });
+        showToast('💾 Đã lưu file: ' + filename, 3000, 'ok');
+        return;
+      }
+      // downloads === null -> capability không khả dụng trên view này, rơi xuống dự phòng bên dưới
+    } catch (err) {
+      const code = err && err.code;
+      if (code === 'declined') { showToast('❌ Đã hủy tải file.', 3000, 'warn'); return; }
+      if (code === 'too_large') { showToast('⚠️ File quá lớn (>16MB) để tải!', 4000, 'warn'); return; }
+      if (code === 'rate_limited') { showToast('⚠️ Đang có yêu cầu tải khác, thầy đợi rồi thử lại nhé!', 4000, 'warn'); return; }
+      // Các mã lỗi khác (unavailable, not_granted...) -> thử phương án dự phòng bên dưới
+    }
+  }
+
+  try {
+    const blob = new Blob([content], { type: mimeType });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = filename; a.click();
+    URL.revokeObjectURL(url);
+    showToast('💾 Đã tải file: ' + filename, 3000, 'ok');
+  } catch (e) {
+    showToast('⚠️ Không thể tải file trên môi trường này.', 4000, 'warn');
+  }
+}
+
+// In / Xuất PDF — in TRỰC TIẾP trên trang hiện tại (không mở cửa sổ mới).
+// Đã thử cách mở cửa sổ mới (window.open) nhưng bị chặn ngay ở tầng khung
+// chứa Artifact (không phải do trình duyệt chặn pop-up) -> quay lại cách
+// gọi window.print() trực tiếp, dựa vào khối @media print đã tối ưu sẵn
+// (ẩn header/nav/nút bấm, gọn trong 1 trang A4 ngang, xem phần CSS phía trên).
+// Luôn hiển thị rõ hướng dẫn Ctrl+P làm phương án dự phòng chắc chắn hoạt
+// động — đây là phím tắt của trình duyệt, không trang web nào chặn được.
+function exportPDF() {
+  const teacherPane = document.getElementById('view-teacher');
+  const isTeacherView = teacherPane && !teacherPane.classList.contains('hidden');
+
+  const prevTitle = document.title;
+  let suggestedName = 'TKB_Lop_' + selectedClass;
+  if (isTeacherView) {
+    const t = TEACHERS_CONFIG[selectedTeacherId];
+    suggestedName = 'TKB_GV_' + (t ? t.name.replace(/\s+/g, '_') : 'GiaoVien');
+  }
+  document.title = suggestedName; // gợi ý tên file khi chọn "Save as PDF"
+
+  showToast('🖨️ Đang mở hộp thoại In... Nếu KHÔNG thấy hộp thoại, thầy bấm Ctrl+P (Cmd+P trên Mac) để in trang này nhé!', 5000, 'ok');
+
+  setTimeout(() => {
+    try { window.print(); }
+    catch (e) {
+      showToast('⚠️ Không tự mở được hộp thoại in. Thầy bấm Ctrl+P (Cmd+P trên Mac) ngay trên trang này để in nhé!', 6000, 'warn');
+    }
+    setTimeout(() => { document.title = prevTitle; }, 1000);
+  }, 300);
+}
+
+function saveTKB() { saveSchedule(); }
+function exportZip() { exportJSON(); }
+function printAll() { exportPDF(); }
+function resetToDefault() {
+  if (!confirm('Khôi phục toàn bộ thời khóa biểu về dữ liệu gốc?')) return;
+  schedule = JSON.parse(JSON.stringify(INITIAL_SCHEDULE));
+  normalizeTeacherNames();
+  localStorage.setItem(LOCAL_KEY, JSON.stringify(schedule));
+  renderScheduleTable(); renderStats();
+  showToast('↩️ Đã khôi phục về dữ liệu gốc!');
+}
+function openUpload() { showToast('📤 Tính năng Upload đang phát triển...'); }
+function exportExcel() { showToast('📥 Tính năng Xuất Excel đang phát triển...'); }
+function exportExcelTeacher() { showToast('📊 Tính năng Xuất báo giảng đang phát triển...'); }
+function exportAllTeachers() { showToast('📁 Tính năng xuất trọn bộ đang phát triển...'); }
+function updateBaoGiang() { showToast('🔄 Tính năng cập nhật lịch báo giảng đang phát triển...'); }
+function triggerSync() { showToast('🔄 Đồng bộ xong!'); }
+
+// ============= TOAST =============
+function showToast(msg, duration=3000, type='') {
+  const toast = document.getElementById('toast');
+  if (!toast) return;
+  toast.textContent = msg;
+  toast.classList.remove('hidden', 'toast-ok', 'toast-warn');
+  if (type === 'ok') toast.classList.add('toast-ok');
+  if (type === 'warn') toast.classList.add('toast-warn');
+  toast.style.opacity = '1';
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => {
+    toast.style.opacity = '0';
+    setTimeout(() => toast.classList.add('hidden'), 300);
+  }, duration);
+}
+
+// ============= STARTUP =============
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
