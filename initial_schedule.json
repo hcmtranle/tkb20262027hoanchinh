@@ -8,8 +8,9 @@
       },
       "2": {
         "subject": "Toán",
-        "teacher_name": "Trần Thị Diễm Linh",
-        "isCustom": true
+        "teacher_name": "Cô Linh (1.1)",
+        "isCustom": true,
+        "teacher_id": "gvcn_1_1"
       },
       "3": {
         "subject": "TA(BN)",
@@ -23,8 +24,9 @@
       },
       "5": {
         "subject": "TV",
-        "teacher_name": "Trần Thị Diễm Linh",
-        "isCustom": true
+        "teacher_name": "Cô Linh (1.1)",
+        "isCustom": true,
+        "teacher_id": "gvcn_1_1"
       },
       "6": {
         "subject": "TV",
@@ -33,8 +35,9 @@
       },
       "7": {
         "subject": "TNXH",
-        "teacher_name": "Trần Thị Diễm Linh",
-        "isCustom": true
+        "teacher_name": "Cô Linh (1.1)",
+        "isCustom": true,
+        "teacher_id": "gvcn_1_1"
       }
     },
     "T3": {
@@ -129,8 +132,9 @@
       },
       "3": {
         "subject": "TV",
-        "teacher_name": "Trần Thị Diễm Linh",
-        "isCustom": true
+        "teacher_name": "Cô Linh (1.1)",
+        "isCustom": true,
+        "teacher_id": "gvcn_1_1"
       },
       "4": {
         "subject": "HĐTN(CĐ)",
@@ -150,7 +154,7 @@
       },
       "7": {
         "subject": "CLB Stem",
-        "teacher_name": "GV Stem_1",
+        "teacher_name": "GV STEM (1)",
         "isCustom": true,
         "teacher_id": "t_stem_1"
       }
@@ -168,8 +172,9 @@
       },
       "3": {
         "subject": "Toán",
-        "teacher_name": "Trần Thị Diễm Linh",
-        "isCustom": true
+        "teacher_name": "Cô Linh (1.1)",
+        "isCustom": true,
+        "teacher_id": "gvcn_1_1"
       },
       "4": {
         "subject": "GDTC",
