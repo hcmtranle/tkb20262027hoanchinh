@@ -1116,8 +1116,8 @@ function renderTeacherTable() {
     const isFirstMorning = slot.session === 'SÁNG' && slot.period === 1;
     const isFirstAfternoon = slot.session === 'CHIỀU' && slot.period === 5;
     let sessionTd = '';
-    if (isFirstMorning) sessionTd = `<td rowspan="${morningSlots.length}" style="background:linear-gradient(180deg,#dbeafe,#bfdbfe);color:#1e3a8a;font-weight:900;font-size:11px;text-align:center;border:1px solid #bfdbfe;writing-mode:vertical-rl;">SÁNG</td>`;
-    else if (isFirstAfternoon) sessionTd = `<td rowspan="${afternoonSlots.length}" style="background:linear-gradient(180deg,#fef3c7,#fde68a);color:#92400e;font-weight:900;font-size:11px;text-align:center;border:1px solid #fcd34d;writing-mode:vertical-rl;">CHIỀU</td>`;
+    if (isFirstMorning) sessionTd = `<td rowspan="${morningSlots.length + 1}" style="background:linear-gradient(180deg,#dbeafe,#bfdbfe);color:#1e3a8a;font-weight:900;font-size:11px;text-align:center;border:1px solid #bfdbfe;writing-mode:vertical-rl;">SÁNG</td>`;
+    else if (isFirstAfternoon) sessionTd = `<td rowspan="${afternoonSlots.length + 1}" style="background:linear-gradient(180deg,#fef3c7,#fde68a);color:#92400e;font-weight:900;font-size:11px;text-align:center;border:1px solid #fcd34d;writing-mode:vertical-rl;">CHIỀU</td>`;
 
     const dayCells = DAYS.map(d => {
       // Tìm TẤT CẢ các lớp mà GV này dạy cùng lúc slot này (để phát hiện trùng tiết)
