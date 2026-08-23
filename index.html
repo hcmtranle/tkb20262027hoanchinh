@@ -360,15 +360,15 @@ footer strong{color:#475569;}
           <div class="sched-hdr-right">
             <div class="chxhcnvn">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
             <div class="doc-lap">Độc lập - Tự do - Hạnh phúc</div>
-            <div class="hdr-date" id="hdrDate">Đông Hưng Thuận, Ngày xuất: <span id="hdrDateVal"></span></div>
+            <div class="hdr-date" id="hdrDate">Đông Hưng Thuận, <span id="hdrDateVal"></span></div>
           </div>
         </div>
         <!-- Tiêu đề chính căn giữa -->
         <div class="class-title">🏫 THỜI KHÓA BIỂU — LỚP <span id="hdrClass">1.1</span></div>
         <div class="class-meta">
           <span class="badge" id="hdrGradeBadge">Khối 1</span>
-          <span>• Giáo viên chủ nhiệm: <strong id="hdrGVCN">Trần Thị Diễm Linh</strong> (<span id="hdrGVCNShort">Cô Linh (1.1)</span>)</span>
-          <span>• Tổng số: <strong id="hdrTotal" style="color:#4338ca;">35 tiết / tuần</strong></span>
+          <span>• Giáo viên chủ nhiệm: <strong id="hdrGVCN">Trần Thị Diễm Linh</strong></span>
+          <span>• <strong id="hdrTotal" style="color:#4338ca;">Lớp 1.1: 35 tiết/tuần</strong></span>
         </div>
       </div>
       
@@ -686,9 +686,10 @@ let masterSearch = "";
 
 // ============= INIT =============
 function init() {
-  // Set today's date in header
+  // Set today's date in header — định dạng công văn hành chính, chữ "ngày" viết thường,
+  // lấy theo thời điểm thực tế mỗi lần trang được hiển thị (không hard-code).
   const today = new Date();
-  const dateStr = `${today.getDate()}/${today.getMonth()+1}/${today.getFullYear()}`;
+  const dateStr = `ngày ${today.getDate()} tháng ${today.getMonth()+1} năm ${today.getFullYear()}`;
   const dateEl = document.getElementById('hdrDateVal');
   if (dateEl) dateEl.textContent = dateStr;
 
@@ -799,8 +800,6 @@ function selectClass(cId) {
   if (hdrClass) hdrClass.textContent = cId;
   const hdrGVCN = document.getElementById('hdrGVCN');
   if (hdrGVCN) hdrGVCN.textContent = cfg.gvcnName || '';
-  const hdrGVCNShort = document.getElementById('hdrGVCNShort');
-  if (hdrGVCNShort) hdrGVCNShort.textContent = cfg.gvcnShort || '';
   const hdrGradeBadge = document.getElementById('hdrGradeBadge');
   if (hdrGradeBadge) hdrGradeBadge.textContent = 'Khối ' + (cfg.grade || '');
   const sigGVCN = document.getElementById('sigGVCN');
@@ -1044,7 +1043,7 @@ function renderStats() {
   const tot = document.getElementById('statsTotal');
   if (tot) tot.textContent = `Tổng cộng: ${total} tiết/tuần`;
   const hdrTotal = document.getElementById('hdrTotal');
-  if (hdrTotal) hdrTotal.textContent = total + ' tiết / tuần';
+  if (hdrTotal) hdrTotal.textContent = 'Lớp ' + selectedClass + ': ' + total + ' tiết/tuần';
   const totalPeriods = document.getElementById('totalPeriods');
   if (totalPeriods) totalPeriods.textContent = total + ' tiết/tuần';
 }
@@ -1091,7 +1090,10 @@ function renderTeacherTable() {
   const nameEl = document.getElementById('teacherName');
   const infoEl = document.getElementById('teacherInfo');
   if (nameEl) nameEl.textContent = teacher.name;
-  if (infoEl) infoEl.textContent = teacher.short + ' | ' + (teacher.assigned || '');
+  if (infoEl) {
+    const weeklyTotal = getTeacherWeeklyTotal(teacher);
+    infoEl.textContent = teacher.short + ' | ' + (teacher.assigned || '') + ' | ' + weeklyTotal + ' tiết/tuần';
+  }
 
   const tbl = document.getElementById('teacherTable');
   if (!tbl) return;
@@ -1173,6 +1175,24 @@ function cellMatchesTeacher(cell, teacher) {
   if (cell.teacher_id && teacher.id) return cell.teacher_id === teacher.id;
   if (cell.teacher_name) return cell.teacher_name === teacher.name || cell.teacher_name === teacher.short;
   return false;
+}
+
+// Tính tổng số TIẾT (khung giờ) khác nhau trong tuần mà 1 GV đứng lớp.
+// Đếm theo (Thứ|Tiết) duy nhất — vì các môn dạy đồng loạt toàn trường
+// (VD: HĐTN(CC) Chào cờ, TPT phụ trách cùng lúc 29 lớp) chỉ tính là 1 tiết,
+// không phải 29 tiết, đúng với thực tế 1 GV chỉ đứng 1 tiết tại 1 thời điểm.
+function getTeacherWeeklyTotal(teacher) {
+  const slots = new Set();
+  for (const cls of Object.values(schedule)) {
+    for (const d of DAYS) {
+      const dayObj = cls[d.id];
+      if (!dayObj) continue;
+      for (const [period, cell] of Object.entries(dayObj)) {
+        if (cellMatchesTeacher(cell, teacher)) slots.add(d.id + '|' + period);
+      }
+    }
+  }
+  return slots.size;
 }
 
 // Khoá nhóm dùng khi quét trùng tiết: ưu tiên teacher_id, dự phòng teacher_name
