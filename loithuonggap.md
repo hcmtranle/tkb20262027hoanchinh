@@ -175,6 +175,18 @@ duyệt (đây là tùy chọn phía người dùng trong hộp thoại in, ngo�
 chỉ có thể hướng dẫn thầy tự tắt nếu muốn trang in hoàn toàn sạch (giống bài học #12 về
 `@page size`: trình duyệt luôn có tiếng nói cuối cùng).
 
+## 18. "Artifact và Netlify hiển thị khác nhau" — thường do thầy sửa tay trên Artifact nhưng chưa xuất JSON gửi Claude
+
+**Bối cảnh (v3.26, 2026-08-24):** thầy báo "Artifact và Netlify chưa hiển thị giống nhau".
+Nguyên nhân thực tế: Netlify build tĩnh từ GitHub (chỉ cập nhật khi Claude commit+push), còn
+Artifact hiển thị theo `localStorage` của trình duyệt thầy — nếu thầy tự sửa vài ô trực tiếp
+trên Artifact (qua "Sửa Nhanh") mà CHƯA xuất JSON gửi Claude, thì `localStorage` (Artifact) đã
+có thay đổi mới nhưng GitHub/Netlify vẫn ở bản cũ → 2 nơi lệch nhau. Đây KHÔNG phải lỗi merge
+của Claude, mà là hệ quả tất yếu của kiến trúc "Artifact = nháp cục bộ, GitHub = bản chính thức"
+đã ghi ở `dongbophienlamviec.md` mục 6. Cách xác nhận nhanh: so khớp JSON thầy mới xuất với
+`initial_schedule.json` hiện tại — nếu số ô lệch nhỏ và tập trung ở đúng chỗ thầy vừa chỉnh tay,
+đó chính là các ô chưa kịp đồng bộ, chỉ cần merge bình thường theo quy trình mục 5.
+
 ## 17. Ẩn 1 phần nội dung theo "chế độ" (VD: in nộp BGH vs in cho lớp) — dùng class trên `<body>` + `@media print`, đừng tạo 2 hàm render riêng
 
 Khi cần hiển thị khác nhau tùy lựa chọn của người dùng (ở đây: ẩn tên GV khi in nộp BGH), cách

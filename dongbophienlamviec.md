@@ -5,7 +5,7 @@
 > kỳ phiên Claude nào khác cùng tài khoản. Claude đọc xong sẽ nắm ngay bối cảnh, không cần
 > giải thích lại từ đầu.
 >
-> **Cập nhật lần cuối:** 2026-08-23 (phiên làm việc máy #1 — MacBook)
+> **Cập nhật lần cuối:** 2026-08-24 (phiên làm việc máy #1 — MacBook, thầy có mở song song máy #3)
 
 ---
 
@@ -20,15 +20,23 @@ thêm chỗ khác dù "tiện thể".
 
 ## 1. TRẠNG THÁI HIỆN TẠI
 
-- **Phiên bản đang chạy chính thức:** v3.25
+- **Phiên bản đang chạy chính thức:** v3.26
 - **3 nơi đã đồng bộ khớp nhau:**
-  - GitHub: `github.com/hcmtranle/tkb20262027hoanchinh` — commit `a9b105a`
-  - Artifact chính: `https://claude.ai/code/artifact/8552c45d-c843-4f04-aa02-ac0ed341b2b6` — đã publish lại bản mới nhất (v3.25)
+  - GitHub: `github.com/hcmtranle/tkb20262027hoanchinh` — commit `4c506f8`
+  - Artifact chính: `https://claude.ai/code/artifact/8552c45d-c843-4f04-aa02-ac0ed341b2b6` — đã publish lại bản mới nhất (v3.26)
   - Netlify: tự build lại từ GitHub (không cần thao tác gì thêm)
 - **Dữ liệu:** 29 lớp, 57 giáo viên, 1100 ô tiết học (con số "1098" ghi ở bản cũ của file này đã
   lỗi thời — v3.19 đã điền đủ lại 2 ô thiếu ở lớp 5.1, về đúng 1100)
 
 ## 2. NHỮNG GÌ ĐÃ HOÀN THÀNH (tóm tắt các đợt lớn, mới nhất trước)
+
+000. **v3.26 (2026-08-24, máy #1, thầy có mở song song máy #3 — đã kiểm tra `git status`/`git
+   fetch` trước khi thao tác, không có xung đột):** thầy báo "chiều qua update json chưa đúng,
+   Artifact và Netlify chưa hiển thị giống nhau". So khớp JSON thầy gửi với `initial_schedule.json`
+   hiện tại → chỉ lệch đúng **8 ô ở lớp 3.4** (chuyển Tiếng Anh từ Thứ 4 sang Thứ 2, hoán đổi
+   Toán/TV/ĐĐ để lấp chỗ trống Thứ 4). Không hồi quy tên GV, không thêm/xóa ô. Merge xong, kiểm
+   định đủ 8 tiêu chí (không lệch quota, không trùng GV/phòng máy...), push GitHub + publish lại
+   Artifact. → Netlify sẽ tự build lại từ GitHub sau vài phút, giờ 3 nơi khớp nhau.
 
 00. **v3.24 → v3.25 (2026-08-23, máy #1, sau lệnh "cố định code"):**
    - v3.24: GVCN lớp 2.6 và 3.6 tự đổi lịch dạy nội bộ (18 ô, chỉ trong cùng lớp/cùng GVCN,
