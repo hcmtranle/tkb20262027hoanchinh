@@ -446,10 +446,9 @@
         "teacher_name": "Cô Hân (1.3)"
       },
       "3": {
-        "subject": "TH",
-        "teacher_id": "t_pht_tao",
-        "teacher_name": "Thầy Tạo (PHT)",
-        "isCustom": true
+        "subject": "Toán",
+        "teacher_id": "gvcn_1_3",
+        "teacher_name": "Cô Hân (1.3)"
       },
       "4": {
         "subject": "NT(MT)",
@@ -570,9 +569,10 @@
         "teacher_name": "Cô Hân (1.3)"
       },
       "5": {
-        "subject": "Toán",
-        "teacher_id": "gvcn_1_3",
-        "teacher_name": "Cô Hân (1.3)"
+        "subject": "TH",
+        "teacher_id": "t_pht_tao",
+        "teacher_name": "Thầy Tạo (PHT)",
+        "isCustom": true
       },
       "6": {
         "subject": "TV",
@@ -2148,15 +2148,16 @@
     },
     "T6": {
       "1": {
-        "subject": "TH",
-        "teacher_id": "t_th_thai",
-        "teacher_name": "Thầy Thái (Tin học)",
+        "subject": "TV",
+        "teacher_id": "gvcn_2_5",
+        "teacher_name": "Cô Tịnh (2.5)",
         "isCustom": true
       },
       "2": {
-        "subject": "Toán",
+        "subject": "TV",
         "teacher_id": "gvcn_2_5",
-        "teacher_name": "Cô Tịnh (2.5)"
+        "teacher_name": "Cô Tịnh (2.5)",
+        "isCustom": true
       },
       "3": {
         "subject": "TA(T-K)",
@@ -2169,16 +2170,15 @@
         "teacher_name": "GV TA-TK (1)"
       },
       "5": {
-        "subject": "TV",
-        "teacher_id": "gvcn_2_5",
-        "teacher_name": "Cô Tịnh (2.5)",
+        "subject": "TH",
+        "teacher_id": "t_th_thai",
+        "teacher_name": "Thầy Thái (Tin học)",
         "isCustom": true
       },
       "6": {
-        "subject": "TV",
+        "subject": "Toán",
         "teacher_id": "gvcn_2_5",
-        "teacher_name": "Cô Tịnh (2.5)",
-        "isCustom": true
+        "teacher_name": "Cô Tịnh (2.5)"
       },
       "7": {
         "subject": "HĐTN(SHL)",
@@ -2583,9 +2583,9 @@
         "isCustom": true
       },
       "2": {
-        "subject": "TH",
-        "teacher_id": "t_th_thai",
-        "teacher_name": "Thầy Thái (Tin học)",
+        "subject": "Toán",
+        "teacher_id": "gvcn_3_1",
+        "teacher_name": "Cô Trúc (3.1)",
         "isCustom": true
       },
       "3": {
@@ -2599,27 +2599,27 @@
         "teacher_name": "GV TA-BN (2)"
       },
       "5": {
-        "subject": "Toán",
-        "teacher_id": "gvcn_3_1",
-        "teacher_name": "Cô Trúc (3.1)",
-        "isCustom": true
-      },
-      "6": {
         "subject": "TNXH",
         "teacher_id": "gvcn_3_1",
         "teacher_name": "Cô Trúc (3.1)",
         "isCustom": true
       },
-      "7": {
+      "6": {
         "subject": "HĐTN(SHL)",
         "teacher_id": "gvcn_3_1",
         "teacher_name": "Cô Trúc (3.1)",
         "isCustom": true
       },
-      "8": {
+      "7": {
         "subject": "Tự học",
         "teacher_id": "gvcn_3_1",
         "teacher_name": "Cô Trúc (3.1)",
+        "isCustom": true
+      },
+      "8": {
+        "subject": "TH",
+        "teacher_id": "t_th_thai",
+        "teacher_name": "Thầy Thái (Tin học)",
         "isCustom": true
       }
     }
@@ -4626,9 +4626,10 @@
         "isCustom": true
       },
       "8": {
-        "subject": "HĐTN(CĐ)",
-        "teacher_id": "gvcn_4_4",
-        "teacher_name": "Cô Minh Phương (4.4)"
+        "subject": "TH",
+        "teacher_id": "t_th_thai",
+        "teacher_name": "Thầy Thái (Tin học)",
+        "isCustom": true
       }
     },
     "T5": {
@@ -4663,10 +4664,9 @@
         "isCustom": true
       },
       "6": {
-        "subject": "TH",
-        "teacher_id": "t_th_thai",
-        "teacher_name": "Thầy Thái (Tin học)",
-        "isCustom": true
+        "subject": "HĐTN(CĐ)",
+        "teacher_id": "gvcn_4_4",
+        "teacher_name": "Cô Minh Phương (4.4)"
       },
       "7": {
         "subject": "TA(T-K)",
@@ -4890,26 +4890,26 @@
         "isCustom": true
       },
       "5": {
-        "subject": "TH",
-        "teacher_id": "t_th_thai",
-        "teacher_name": "Thầy Thái (Tin học)",
-        "isCustom": true
-      },
-      "6": {
         "subject": "CN",
         "teacher_id": "gvcn_4_5",
         "teacher_name": "Cô Dạ Thảo (4.5)",
         "isCustom": true
       },
-      "7": {
+      "6": {
         "subject": "ĐĐ",
         "teacher_id": "gvcn_4_5",
         "teacher_name": "Cô Dạ Thảo (4.5)"
       },
-      "8": {
+      "7": {
         "subject": "Tự học",
         "teacher_id": "gvcn_4_5",
         "teacher_name": "Cô Dạ Thảo (4.5)"
+      },
+      "8": {
+        "subject": "TH",
+        "teacher_id": "t_th_thai",
+        "teacher_name": "Thầy Thái (Tin học)",
+        "isCustom": true
       }
     },
     "T6": {
