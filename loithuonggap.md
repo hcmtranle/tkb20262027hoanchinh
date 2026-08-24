@@ -175,6 +175,28 @@ duyệt (đây là tùy chọn phía người dùng trong hộp thoại in, ngo�
 chỉ có thể hướng dẫn thầy tự tắt nếu muốn trang in hoàn toàn sạch (giống bài học #12 về
 `@page size`: trình duyệt luôn có tiếng nói cuối cùng).
 
+## 22. `git status` báo file vừa STAGED vừa UNSTAGED cùng lúc — dấu hiệu `.git/index` bị Drive đè từ máy khác
+
+**Bối cảnh (2026-08-24, sau khi thầy chuyển từ máy #3 sang máy #1/#2):** mở phiên mới, `git
+status` báo 5 file "Changes to be committed" (staged) VÀ "Changes not staged for commit"
+(unstaged) CÙNG LÚC — bất thường vì bình thường 1 file chỉ ở 1 trong 2 trạng thái tại 1 thời
+điểm (trừ khi sửa thêm sau khi đã `git add`). Nội dung staged còn cho thấy dữ liệu CŨ hơn cả
+HEAD hiện tại (như quay lại trước v3.26).
+
+**Nguyên nhân xác định:** file `.git/index` (vùng staging, khác với working tree) bị Google
+Drive đồng bộ đè từ 1 máy khác đang có 1 checkout/thao tác git cũ hơn — không phải do dữ liệu
+trên đĩa (working tree) bị hỏng.
+
+**Cách xử lý an toàn:**
+1. TRƯỚC KHI làm bất cứ gì, so sánh file trên đĩa với HEAD: `diff <(git show HEAD:file) file`.
+   Nếu khớp HEAD → working tree vẫn đúng, chỉ index bị lệch, an toàn để sửa.
+2. Chạy `git reset` (KHÔNG có `--hard`) để đưa index về khớp HEAD — lệnh này CHỈ đụng vào
+   index, không đụng working tree, nên không có rủi ro mất dữ liệu đang có trên đĩa.
+3. Kiểm tra lại `git status` sạch, rồi mới tiếp tục thao tác bình thường.
+
+**Tuyệt đối không** vội `git add -A && git commit` khi thấy trạng thái staged/unstaged lẫn lộn
+này — có thể vô tình commit dữ liệu CŨ đè lên bản mới nếu không kiểm tra kỹ trước.
+
 ## 21. `window.print()` bọc trong `setTimeout` có thể bị trình duyệt âm thầm bỏ qua — luôn gọi đồng bộ trong sự kiện click
 
 **Bối cảnh (v3.29):** nút "Xuất PDF"/"In" không tự mở hộp thoại in được, Thầy/Cô phải tự bấm

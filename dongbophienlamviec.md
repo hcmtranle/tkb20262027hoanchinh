@@ -20,15 +20,34 @@ thêm chỗ khác dù "tiện thể".
 
 ## 1. TRẠNG THÁI HIỆN TẠI
 
-- **Phiên bản đang chạy chính thức:** v3.29
+- **Phiên bản đang chạy chính thức:** v3.30
 - **3 nơi đã đồng bộ khớp nhau:**
-  - GitHub: `github.com/hcmtranle/tkb20262027hoanchinh` — commit `c4566d6`
-  - Artifact chính: `https://claude.ai/code/artifact/8552c45d-c843-4f04-aa02-ac0ed341b2b6` — đã publish lại bản mới nhất (v3.29)
+  - GitHub: `github.com/hcmtranle/tkb20262027hoanchinh` — commit `3a12e0a`
+  - Artifact chính: `https://claude.ai/code/artifact/8552c45d-c843-4f04-aa02-ac0ed341b2b6` — đã publish lại bản mới nhất (v3.30)
   - Netlify: tự build lại từ GitHub (không cần thao tác gì thêm)
 - **Dữ liệu:** 29 lớp, 57 giáo viên, 1100 ô tiết học (con số "1098" ghi ở bản cũ của file này đã
   lỗi thời — v3.19 đã điền đủ lại 2 ô thiếu ở lớp 5.1, về đúng 1100)
 
 ## 2. NHỮNG GÌ ĐÃ HOÀN THÀNH (tóm tắt các đợt lớn, mới nhất trước)
+
+0000000. **v3.30 (2026-08-24, phiên sau khi thầy chuyển từ máy #3 sang máy #1/#2):**
+   - **Sự cố git index bất thường trước khi làm việc:** `git status` báo có thay đổi vừa
+     STAGED vừa UNSTAGED trên cùng 5 file — dấu hiệu `.git/index` bị Drive đồng bộ đè từ máy
+     khác giữa chừng thao tác git. Đã xác minh file trên đĩa vẫn đúng HEAD (v3.29, không mất
+     dữ liệu), chỉ index bị lệch → `git reset` (không phải `--hard`) để đưa index về khớp HEAD,
+     an toàn, không đụng working tree. Xem thêm `loithuonggap.md` mục 22.
+   - Merge JSON thầy gửi (90 ô, 8 lớp: 2.4/3.4/4.1/4.2/4.4/4.5/4.6/5.1/5.2) — sắp lại xen kẽ
+     TH/IC3/TA giữa GV bộ môn và GV trung tâm.
+   - **Phát hiện 2 vi phạm, đã hỏi lại thầy trước khi merge (không tự ý merge/bỏ qua):**
+     (1) Ô CLB Toán TD lớp 5.2 (T2 tiết 8) bị gán GV trung tâm thay vì GVCN → thầy xác nhận sửa
+     lại thành GVCN (Thầy Trực) dạy, đúng nguyên tắc cũ.
+     (2) 5 khung giờ trùng phòng máy (3 lớp/slot, vượt 2 phòng) → thầy giải thích đây là **chủ
+     ý chấp nhận được**: 1 trong 3 lớp sẽ học LÝ THUYẾT tại lớp (không thực sự dùng phòng máy)
+     dù nhãn môn vẫn ghi TH/IC3 — do ràng buộc TKB không đủ chỗ xếp khác (1 ngày không thể vừa
+     có TA vừa IC3 chiếm 4 tiết, thêm CLB nữa GV hết chỗ dạy). **→ Từ nay:** vẫn PHẢI chạy kiểm định
+     và BÁO cho thầy khi phát hiện 3 lớp/slot dùng TH/IC3 (để thầy biết đang xảy ra ở đâu), nhưng
+     KHÔNG cần dừng lại chờ xác nhận từng lần nữa — có thể merge luôn kèm ghi chú, trừ khi số
+     lớp vượt quá 3/slot (bất thường hơn mức đã biết) thì vẫn nên hỏi lại.
 
 000000. **v3.29 (2026-08-24, máy #1) — thầy nhắc lại 2 chính sách + 1 yêu cầu sửa code cụ thể:**
    - Nhắc lại: **cố định code** (mục 0) + **không tự điều chỉnh số tiết TKB** cho đến khi thầy
