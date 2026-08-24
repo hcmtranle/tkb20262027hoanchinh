@@ -20,15 +20,24 @@ thêm chỗ khác dù "tiện thể".
 
 ## 1. TRẠNG THÁI HIỆN TẠI
 
-- **Phiên bản đang chạy chính thức:** v3.27
+- **Phiên bản đang chạy chính thức:** v3.28
 - **3 nơi đã đồng bộ khớp nhau:**
-  - GitHub: `github.com/hcmtranle/tkb20262027hoanchinh` — commit `d61c27c`
-  - Artifact chính: `https://claude.ai/code/artifact/8552c45d-c843-4f04-aa02-ac0ed341b2b6` — đã publish lại bản mới nhất (v3.27)
+  - GitHub: `github.com/hcmtranle/tkb20262027hoanchinh` — commit `1964c21`
+  - Artifact chính: `https://claude.ai/code/artifact/8552c45d-c843-4f04-aa02-ac0ed341b2b6` — đã publish lại bản mới nhất (v3.28)
   - Netlify: tự build lại từ GitHub (không cần thao tác gì thêm)
 - **Dữ liệu:** 29 lớp, 57 giáo viên, 1100 ô tiết học (con số "1098" ghi ở bản cũ của file này đã
   lỗi thời — v3.19 đã điền đủ lại 2 ô thiếu ở lớp 5.1, về đúng 1100)
 
 ## 2. NHỮNG GÌ ĐÃ HOÀN THÀNH (tóm tắt các đợt lớn, mới nhất trước)
+
+00000. **v3.28 (2026-08-24, máy #1, sau khi thầy "tạm đóng băng" rồi chủ động quay lại nhờ
+   tiếp):** thầy gửi JSON đổi tiết Tin học lớp 3.4 lần 1 → **phát hiện lỗi trùng phòng máy** (3
+   lớp cùng dùng phòng máy 1 slot, trong khi trường chỉ có 2 phòng) — đã BÁO LẠI thầy, KHÔNG
+   merge, hỏi hướng xử lý. Thầy tự chọn slot khác (Thứ 4 tiết 8) và gửi JSON lần 2 → kiểm định
+   lại đủ 8 tiêu chí (đặc biệt chú ý lại tiêu chí trùng phòng máy) → sạch, merge 8 ô ở lớp 3.4.
+   → Bài học: LUÔN kiểm tra kỹ tiêu chí (d) trùng Phòng máy 1&2 mỗi khi 1 ô đổi liên quan
+   TH/IC3, kể cả khi JSON chỉ động tới 1 lớp — vì có thể gây trùng với lớp khác đã có sẵn ở
+   đúng slot đó.
 
 0000. **v3.27 (2026-08-24, máy #1, thầy tiếp tục điều chỉnh khi mở song song máy #3):** thầy
    báo "Tab Xem Theo GV không tự cập nhật" khi đang mở 2 máy khác nhau — đã giải thích rõ đây là

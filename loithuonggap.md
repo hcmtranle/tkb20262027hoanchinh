@@ -175,6 +175,20 @@ duyệt (đây là tùy chọn phía người dùng trong hộp thoại in, ngo�
 chỉ có thể hướng dẫn thầy tự tắt nếu muốn trang in hoàn toàn sạch (giống bài học #12 về
 `@page size`: trình duyệt luôn có tiếng nói cuối cùng).
 
+## 20. Chuyển 1 tiết TH/IC3 sang slot mới — LUÔN kiểm tra lại tiêu chí (d) trùng phòng máy, kể cả khi JSON chỉ đụng 1 lớp
+
+**Bối cảnh (v3.28, 2026-08-24):** thầy gửi JSON đổi tiết Tin học lớp 3.4 sang 1 slot mới —
+nhìn qua tưởng chỉ ảnh hưởng lớp 3.4 (đúng như JSON diff chỉ hiện thay đổi ở 1 lớp), nhưng khi
+kiểm định tiêu chí (d) mới phát hiện slot mới đó ĐÃ CÓ SẴN 2 lớp khác (1.4-TH, 3.6-IC3) đang
+dùng phòng máy — cộng thêm 3.4 nữa thành 3 lớp, vượt quá 2 phòng máy hiện có của trường.
+
+**Bài học:** "diff JSON chỉ động 1 lớp" KHÔNG có nghĩa "an toàn, không ảnh hưởng lớp khác" —
+với các môn dùng TÀI NGUYÊN DÙNG CHUNG (phòng máy TH/IC3, GV bộ môn dạy nhiều lớp...), một thay
+đổi ở 1 lớp vẫn có thể tạo xung đột với dữ liệu CÓ SẴN ở lớp khác tại đúng slot đó. Vì vậy tiêu
+chí (d) (và (c) trùng GV) PHẢI luôn chạy kiểm định trên TOÀN BỘ 29 lớp sau merge, không chỉ xét
+riêng lớp vừa đổi. Khi phát hiện vi phạm: dừng lại, KHÔNG tự ý ghi đè, báo rõ cho thầy (nêu cụ
+thể slot nào, lớp nào đang xung đột) và hỏi hướng xử lý — không tự đoán slot thay thế.
+
 ## 19. "Tab Xem Theo GV không tự cập nhật" khi mở 2 máy khác nhau — giới hạn `localStorage`, không phải bug
 
 **Bối cảnh (2026-08-24):** thầy báo khi sửa 1 ô ở Tab "Xem Theo Lớp" trên máy #1, Tab "Xem Theo
