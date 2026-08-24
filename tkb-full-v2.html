@@ -553,7 +553,7 @@ footer strong{color:#475569;}
     <div class="modal-hdr">
       <div class="modal-title-wrap">
         <div class="modal-icon" style="background:#eff6ff;">🖨️</div>
-        <div><div class="modal-title">Chọn Hình Thức In</div><div class="modal-sub">Bạn muốn in Thời khóa biểu để nộp Ban Giám hiệu hay in cho lớp?</div></div>
+        <div><div class="modal-title">Chọn Hình Thức In</div><div class="modal-sub">Thầy/Cô muốn in Thời khóa biểu để nộp Ban Giám hiệu hay in cho lớp?</div></div>
       </div>
       <button class="modal-close" onclick="closePrintChoice()">×</button>
     </div>
@@ -1529,7 +1529,7 @@ async function downloadFile(filename, content, mimeType) {
       const code = err && err.code;
       if (code === 'declined') { showToast('❌ Đã hủy tải file.', 3000, 'warn'); return; }
       if (code === 'too_large') { showToast('⚠️ File quá lớn (>16MB) để tải!', 4000, 'warn'); return; }
-      if (code === 'rate_limited') { showToast('⚠️ Đang có yêu cầu tải khác, thầy đợi rồi thử lại nhé!', 4000, 'warn'); return; }
+      if (code === 'rate_limited') { showToast('⚠️ Đang có yêu cầu tải khác, Thầy/Cô đợi rồi thử lại nhé!', 4000, 'warn'); return; }
       // Các mã lỗi khác (unavailable, not_granted...) -> thử phương án dự phòng bên dưới
     }
   }
@@ -1581,15 +1581,21 @@ function doPrint(mode) {
   }
   document.title = suggestedName; // gợi ý tên file khi chọn "Save as PDF"
 
-  showToast('🖨️ Đang mở hộp thoại In... Nếu thấy khổ giấy đang DỌC, thầy đổi mục "Layout/Hướng giấy" sang NGANG (Landscape). Nếu thấy dòng tiêu đề/đường dẫn tự thêm ở đầu hoặc cuối trang, thầy tắt mục "Headers and footers" (Tiêu đề và chân trang) trong hộp thoại in để có trang in sạch hơn. Không thấy hộp thoại thì bấm Ctrl+P (Cmd+P trên Mac).', 8000, 'ok');
+  // QUAN TRỌNG: gọi window.print() NGAY LẬP TỨC, đồng bộ, trong đúng cùng thao tác click
+  // của Thầy/Cô — KHÔNG bọc trong setTimeout. Một số trình duyệt (đặc biệt trong khung hiển
+  // thị có giới hạn bảo mật) chỉ cho phép mở hộp thoại in khi lệnh gọi xảy ra trực tiếp từ
+  // sự kiện người dùng; nếu trì hoãn dù chỉ vài trăm mili-giây, trình duyệt có thể âm thầm bỏ
+  // qua lệnh mà không báo lỗi, khiến hộp thoại in không tự mở được (Thầy/Cô từng gặp).
+  try {
+    window.focus();
+    window.print();
+  } catch (e) {
+    showToast('⚠️ Không tự mở được hộp thoại in. Thầy/Cô bấm Ctrl+P (Cmd+P trên Mac) ngay trên trang này để in nhé!', 6000, 'warn');
+  }
 
-  setTimeout(() => {
-    try { window.print(); }
-    catch (e) {
-      showToast('⚠️ Không tự mở được hộp thoại in. Thầy bấm Ctrl+P (Cmd+P trên Mac) ngay trên trang này để in nhé!', 6000, 'warn');
-    }
-    setTimeout(() => { document.title = prevTitle; }, 1000);
-  }, 300);
+  showToast('🖨️ Nếu thấy khổ giấy đang DỌC, Thầy/Cô đổi mục "Layout/Hướng giấy" sang NGANG (Landscape). Nếu thấy dòng tiêu đề/đường dẫn tự thêm ở đầu hoặc cuối trang, Thầy/Cô tắt mục "Headers and footers" (Tiêu đề và chân trang) trong hộp thoại in để có trang in sạch hơn. Không thấy hộp thoại in hiện ra thì bấm Ctrl+P (Cmd+P trên Mac) ngay trên trang này.', 8000, 'ok');
+
+  setTimeout(() => { document.title = prevTitle; }, 1000);
 }
 
 function saveTKB() { saveSchedule(); }
