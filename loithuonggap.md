@@ -175,6 +175,20 @@ duyệt (đây là tùy chọn phía người dùng trong hộp thoại in, ngo�
 chỉ có thể hướng dẫn thầy tự tắt nếu muốn trang in hoàn toàn sạch (giống bài học #12 về
 `@page size`: trình duyệt luôn có tiếng nói cuối cùng).
 
+## 19. "Tab Xem Theo GV không tự cập nhật" khi mở 2 máy khác nhau — giới hạn `localStorage`, không phải bug
+
+**Bối cảnh (2026-08-24):** thầy báo khi sửa 1 ô ở Tab "Xem Theo Lớp" trên máy #1, Tab "Xem Theo
+GV" đang mở sẵn trên **máy #3** không tự thấy thay đổi. Đây KHÔNG phải lỗi code — cơ chế
+`window.addEventListener('storage', ...)` (tự làm mới khi có thay đổi từ tab/cửa sổ khác) và
+`refreshTeacherViewIfOpen()` (tự làm mới Tab GV ngay sau khi lưu 1 ô) đều **chỉ hoạt động trong
+CÙNG 1 trình duyệt, trên CÙNG 1 máy vật lý** — `localStorage` không đi qua mạng, 2 máy khác nhau
+luôn có 2 bản dữ liệu độc lập hoàn toàn tách biệt.
+
+**Cách xác nhận nhanh khi thầy báo hiện tượng tương tự:** hỏi ngay "2 tab đang mở trên cùng 1
+máy hay 2 máy khác nhau?" — nếu 2 máy khác nhau, đây luôn là giới hạn thiết kế (không sửa được
+bằng code), chỉ giải quyết được bằng quy trình xuất JSON → merge → publish → F5/Khôi Phục Gốc
+ở máy còn lại (xem `dongbophienlamviec.md` mục 6).
+
 ## 18. "Artifact và Netlify hiển thị khác nhau" — thường do thầy sửa tay trên Artifact nhưng chưa xuất JSON gửi Claude
 
 **Bối cảnh (v3.26, 2026-08-24):** thầy báo "Artifact và Netlify chưa hiển thị giống nhau".

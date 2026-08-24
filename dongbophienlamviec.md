@@ -20,15 +20,22 @@ thêm chỗ khác dù "tiện thể".
 
 ## 1. TRẠNG THÁI HIỆN TẠI
 
-- **Phiên bản đang chạy chính thức:** v3.26
+- **Phiên bản đang chạy chính thức:** v3.27
 - **3 nơi đã đồng bộ khớp nhau:**
-  - GitHub: `github.com/hcmtranle/tkb20262027hoanchinh` — commit `4c506f8`
-  - Artifact chính: `https://claude.ai/code/artifact/8552c45d-c843-4f04-aa02-ac0ed341b2b6` — đã publish lại bản mới nhất (v3.26)
+  - GitHub: `github.com/hcmtranle/tkb20262027hoanchinh` — commit `d61c27c`
+  - Artifact chính: `https://claude.ai/code/artifact/8552c45d-c843-4f04-aa02-ac0ed341b2b6` — đã publish lại bản mới nhất (v3.27)
   - Netlify: tự build lại từ GitHub (không cần thao tác gì thêm)
 - **Dữ liệu:** 29 lớp, 57 giáo viên, 1100 ô tiết học (con số "1098" ghi ở bản cũ của file này đã
   lỗi thời — v3.19 đã điền đủ lại 2 ô thiếu ở lớp 5.1, về đúng 1100)
 
 ## 2. NHỮNG GÌ ĐÃ HOÀN THÀNH (tóm tắt các đợt lớn, mới nhất trước)
+
+0000. **v3.27 (2026-08-24, máy #1, thầy tiếp tục điều chỉnh khi mở song song máy #3):** thầy
+   báo "Tab Xem Theo GV không tự cập nhật" khi đang mở 2 máy khác nhau — đã giải thích rõ đây là
+   giới hạn kỹ thuật (localStorage không đồng bộ qua mạng giữa 2 máy vật lý), không phải lỗi
+   code, xem thêm `loithuonggap.md` mục 19. Sau đó thầy gửi JSON mới (gửi trùng 2 lần, nội dung
+   giống hệt nhau — chỉ merge 1 lần): 7 ô đổi ở lớp 4.1 và 5.2 (hoán đổi Toán/KH/GDTC/TH của 4.1,
+   GDTC/Toán/NT(MT) của 5.2). Kiểm định đủ 8 tiêu chí, không lệch quota, không hồi quy tên GV.
 
 000. **v3.26 (2026-08-24, máy #1, thầy có mở song song máy #3 — đã kiểm tra `git status`/`git
    fetch` trước khi thao tác, không có xung đột):** thầy báo "chiều qua update json chưa đúng,
