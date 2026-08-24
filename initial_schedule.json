@@ -3891,24 +3891,27 @@
         "teacher_name": "Cô Huế (4.1)"
       },
       "2": {
-        "subject": "Toán",
-        "teacher_id": "gvcn_4_1",
-        "teacher_name": "Cô Huế (4.1)"
-      },
-      "3": {
-        "subject": "KH",
-        "teacher_id": "gvcn_4_1",
-        "teacher_name": "Cô Huế (4.1)"
-      },
-      "4": {
-        "subject": "GDTC",
-        "teacher_id": "t_gdtc_phong",
-        "teacher_name": "Thầy Phong (GDTC)"
-      },
-      "5": {
         "subject": "TH",
         "teacher_id": "t_th_thai",
         "teacher_name": "Thầy Thái (Tin học)",
+        "isCustom": true
+      },
+      "3": {
+        "subject": "Toán",
+        "teacher_id": "gvcn_4_1",
+        "teacher_name": "Cô Huế (4.1)",
+        "isCustom": true
+      },
+      "4": {
+        "subject": "KH",
+        "teacher_id": "gvcn_4_1",
+        "teacher_name": "Cô Huế (4.1)",
+        "isCustom": true
+      },
+      "5": {
+        "subject": "GDTC",
+        "teacher_id": "t_gdtc_phong",
+        "teacher_name": "Thầy Phong (GDTC)",
         "isCustom": true
       },
       "6": {
@@ -5525,12 +5528,13 @@
         "teacher_name": "Thầy Trực (5.2)"
       },
       "3": {
-        "subject": "GDTC",
-        "teacher_id": "t_gdtc_phong",
-        "teacher_name": "Thầy Phong (GDTC)"
+        "subject": "Toán",
+        "teacher_id": "gvcn_5_2",
+        "teacher_name": "Thầy Trực (5.2)",
+        "isCustom": true
       },
       "4": {
-        "subject": "Toán",
+        "subject": "NT(MT)",
         "teacher_id": "gvcn_5_2",
         "teacher_name": "Thầy Trực (5.2)",
         "isCustom": true
@@ -5637,9 +5641,9 @@
         "isCustom": true
       },
       "7": {
-        "subject": "NT(MT)",
-        "teacher_id": "gvcn_5_2",
-        "teacher_name": "Thầy Trực (5.2)",
+        "subject": "GDTC",
+        "teacher_id": "t_gdtc_phong",
+        "teacher_name": "Thầy Phong (GDTC)",
         "isCustom": true
       },
       "8": {
