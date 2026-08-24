@@ -20,17 +20,31 @@ thêm chỗ khác dù "tiện thể".
 
 ## 1. TRẠNG THÁI HIỆN TẠI
 
-- **Phiên bản đang chạy chính thức:** v3.28
+- **Phiên bản đang chạy chính thức:** v3.29
 - **3 nơi đã đồng bộ khớp nhau:**
-  - GitHub: `github.com/hcmtranle/tkb20262027hoanchinh` — commit `1964c21`
-  - Artifact chính: `https://claude.ai/code/artifact/8552c45d-c843-4f04-aa02-ac0ed341b2b6` — đã publish lại bản mới nhất (v3.28)
+  - GitHub: `github.com/hcmtranle/tkb20262027hoanchinh` — commit `c4566d6`
+  - Artifact chính: `https://claude.ai/code/artifact/8552c45d-c843-4f04-aa02-ac0ed341b2b6` — đã publish lại bản mới nhất (v3.29)
   - Netlify: tự build lại từ GitHub (không cần thao tác gì thêm)
 - **Dữ liệu:** 29 lớp, 57 giáo viên, 1100 ô tiết học (con số "1098" ghi ở bản cũ của file này đã
   lỗi thời — v3.19 đã điền đủ lại 2 ô thiếu ở lớp 5.1, về đúng 1100)
 
 ## 2. NHỮNG GÌ ĐÃ HOÀN THÀNH (tóm tắt các đợt lớn, mới nhất trước)
 
-00000. **v3.28 (2026-08-24, máy #1, sau khi thầy "tạm đóng băng" rồi chủ động quay lại nhờ
+000000. **v3.29 (2026-08-24, máy #1) — thầy nhắc lại 2 chính sách + 1 yêu cầu sửa code cụ thể:**
+   - Nhắc lại: **cố định code** (mục 0) + **không tự điều chỉnh số tiết TKB** cho đến khi thầy
+     gửi JSON nhờ cập nhật — cả 2 đã có sẵn từ trước, chỉ ghi nhận lại.
+   - SỬA CODE (có yêu cầu cụ thể): nút In A4 không tự mở hộp thoại in được, phải Ctrl+P thủ
+     công. **Nguyên nhân xác định:** lệnh `window.print()` bị bọc trong `setTimeout(...,300)`
+     — một số trình duyệt/khung hiển thị chỉ cho phép mở hộp thoại in khi lệnh gọi xảy ra TRỰC
+     TIẾP, ĐỒNG BỘ trong thao tác click của người dùng; trì hoãn dù ngắn cũng có thể bị âm thầm
+     bỏ qua. **Đã sửa:** gọi `window.print()` ngay lập tức trong `doPrint()`, bỏ hẳn
+     `setTimeout` bọc quanh nó (đã kiểm tra bằng cách giả lập `window.print` và xác nhận được
+     gọi đồng bộ). Xem thêm `loithuonggap.md` mục 21.
+   - Đổi toàn bộ thông báo (toast, modal) địa chỉ người dùng từ "Thầy" → "**Thầy/Cô**" vì app
+     dùng cho nhiều người dùng (không chỉ 1 thầy) — đã rà soát hết, không còn chỗ nào sót
+     (không đụng tới tên riêng GV như "Thầy Thái", "Thầy Tiến"... trong dữ liệu).
+
+0000000. **v3.28 (2026-08-24, máy #1, sau khi thầy "tạm đóng băng" rồi chủ động quay lại nhờ
    tiếp):** thầy gửi JSON đổi tiết Tin học lớp 3.4 lần 1 → **phát hiện lỗi trùng phòng máy** (3
    lớp cùng dùng phòng máy 1 slot, trong khi trường chỉ có 2 phòng) — đã BÁO LẠI thầy, KHÔNG
    merge, hỏi hướng xử lý. Thầy tự chọn slot khác (Thứ 4 tiết 8) và gửi JSON lần 2 → kiểm định

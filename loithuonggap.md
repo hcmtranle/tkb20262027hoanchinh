@@ -175,6 +175,26 @@ duyệt (đây là tùy chọn phía người dùng trong hộp thoại in, ngo�
 chỉ có thể hướng dẫn thầy tự tắt nếu muốn trang in hoàn toàn sạch (giống bài học #12 về
 `@page size`: trình duyệt luôn có tiếng nói cuối cùng).
 
+## 21. `window.print()` bọc trong `setTimeout` có thể bị trình duyệt âm thầm bỏ qua — luôn gọi đồng bộ trong sự kiện click
+
+**Bối cảnh (v3.29):** nút "Xuất PDF"/"In" không tự mở hộp thoại in được, Thầy/Cô phải tự bấm
+Ctrl+P mới in được. Code cũ gọi `window.print()` bên trong `setTimeout(..., 300)` (delay 300ms
+sau khi bấm nút) — nhiều trình duyệt/khung hiển thị (đặc biệt trong sandbox như Artifact) chỉ
+cho phép các API cần "user activation" (in, mở popup...) chạy khi được gọi TRỰC TIẾP, ĐỒNG BỘ,
+trong cùng 1 tick với sự kiện click gốc. Một khi đã trì hoãn qua `setTimeout`/`Promise` dù chỉ
+vài trăm mili-giây, "user activation" có thể bị coi là hết hạn ở 1 số trình duyệt/khung, khiến
+lệnh bị bỏ qua HOÀN TOÀN MÀ KHÔNG BÁO LỖI GÌ (không throw exception, `catch` không bắt được).
+
+**Cách xác nhận:** giả lập `window.print = () => { window.__called = true }` trước khi bấm nút,
+rồi kiểm tra `window.__called` ngay sau lệnh gọi hàm xử lý — nếu `true` ngay lập tức (không cần
+đợi timeout trôi qua) nghĩa là đã gọi đồng bộ, đúng yêu cầu.
+
+**Quy tắc:** bất kỳ API nào cần "user gesture" (`window.print()`, `window.open()`,
+`navigator.clipboard.writeText()`, xin quyền camera/mic...) PHẢI được gọi trực tiếp trong hàm
+xử lý sự kiện `onclick`, không qua `setTimeout`/`await` trước đó. Việc hiển thị toast hướng dẫn
+hay đổi `document.title` (không cần user gesture) vẫn có thể làm trước/sau tùy ý, chỉ riêng
+lệnh gọi API nhạy cảm là phải đứng đầu, không trì hoãn.
+
 ## 20. Chuyển 1 tiết TH/IC3 sang slot mới — LUÔN kiểm tra lại tiêu chí (d) trùng phòng máy, kể cả khi JSON chỉ đụng 1 lớp
 
 **Bối cảnh (v3.28, 2026-08-24):** thầy gửi JSON đổi tiết Tin học lớp 3.4 sang 1 slot mới —
