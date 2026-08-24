@@ -175,6 +175,23 @@ duyệt (đây là tùy chọn phía người dùng trong hộp thoại in, ngo�
 chỉ có thể hướng dẫn thầy tự tắt nếu muốn trang in hoàn toàn sạch (giống bài học #12 về
 `@page size`: trình duyệt luôn có tiếng nói cuối cùng).
 
+## 23. Quy trình mới đã dùng thành công: Claude tự sửa `initial_schedule.json` trực tiếp theo lời nhắn của thầy — không cần JSON — khi giá trị đã biết chính xác 100%
+
+**Bối cảnh (v3.31):** thầy nhờ Claude *chỉ đọc/quét/đề xuất* (không tự sửa), Claude đề xuất
+phương án cụ thể (bảng hoán đổi từng ô), thầy "thống nhất" và chỉnh chi tiết bằng lời nhắn text
+thuần (không gửi file JSON). Vì phương án đã đủ chi tiết (biết chính xác lớp nào, ô nào, giá
+trị mới là gì), Claude áp dụng trực tiếp vào `initial_schedule.json` mà KHÔNG cần thầy thao tác
+tay trên Artifact rồi xuất JSON gửi lại — rút ngắn 1 vòng lặp không cần thiết.
+
+**Khi nào dùng cách này (không qua JSON):** chỉ khi TOÀN BỘ giá trị ô cần đổi đã rõ ràng, không
+mơ hồ (đã biết chính xác lớp/ngày/tiết/môn/GV mới) — ví dụ qua đề xuất trước đó đã được thầy
+duyệt cụ thể. Nếu thầy mô tả chung chung ("đổi vài chỗ cho hợp lý hơn") thì vẫn nên xin JSON
+như thường, vì tự đoán giá trị dễ sai.
+
+**Vẫn phải làm đủ:** mô phỏng thử trong bộ nhớ (chưa ghi file) → kiểm định đủ 8 tiêu chí → chỉ
+ghi file thật khi kiểm định sạch → rồi mới commit/push/publish như quy trình chuẩn. Không được
+bỏ qua bước kiểm định chỉ vì đây là lệnh trực tiếp từ thầy thay vì từ JSON.
+
 ## 22. `git status` báo file vừa STAGED vừa UNSTAGED cùng lúc — dấu hiệu `.git/index` bị Drive đè từ máy khác
 
 **Bối cảnh (2026-08-24, sau khi thầy chuyển từ máy #3 sang máy #1/#2):** mở phiên mới, `git

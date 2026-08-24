@@ -20,15 +20,32 @@ thêm chỗ khác dù "tiện thể".
 
 ## 1. TRẠNG THÁI HIỆN TẠI
 
-- **Phiên bản đang chạy chính thức:** v3.30
+- **Phiên bản đang chạy chính thức:** v3.31
 - **3 nơi đã đồng bộ khớp nhau:**
-  - GitHub: `github.com/hcmtranle/tkb20262027hoanchinh` — commit `3a12e0a`
-  - Artifact chính: `https://claude.ai/code/artifact/8552c45d-c843-4f04-aa02-ac0ed341b2b6` — đã publish lại bản mới nhất (v3.30)
+  - GitHub: `github.com/hcmtranle/tkb20262027hoanchinh` — commit `548cdaf`
+  - Artifact chính: `https://claude.ai/code/artifact/8552c45d-c843-4f04-aa02-ac0ed341b2b6` — đã publish lại bản mới nhất (v3.31)
   - Netlify: tự build lại từ GitHub (không cần thao tác gì thêm)
 - **Dữ liệu:** 29 lớp, 57 giáo viên, 1100 ô tiết học (con số "1098" ghi ở bản cũ của file này đã
   lỗi thời — v3.19 đã điền đủ lại 2 ô thiếu ở lớp 5.1, về đúng 1100)
 
 ## 2. NHỮNG GÌ ĐÃ HOÀN THÀNH (tóm tắt các đợt lớn, mới nhất trước)
+
+00000000. **v3.31 (2026-08-24) — hết sạch trùng phòng máy, KHÔNG qua JSON, Claude tự thực hiện
+   trực tiếp theo lệnh chat của thầy:**
+   - Thầy nhờ Claude **chỉ đọc/quét** (không tự sửa) và đề xuất cách dùng hết công suất phòng
+     máy mà ít xáo trộn nhất (do đã in TKB 20+ lần). Claude quét toàn bộ 40 khung giờ, tìm ra
+     đúng 5 khung bị 3 lớp/slot (vượt 2 phòng), đề xuất 5 cặp hoán đổi tối thiểu (2 ô/lớp) nội
+     bộ trong từng lớp — không đụng lớp khác.
+   - Thầy thống nhất nhưng chỉnh **thứ tự cụ thể** cho 3/5 lớp (4.5, 2.5, 3.1) thành dạng
+     **xoay vòng nhiều ô** thay vì chỉ hoán đổi 2 ô đơn giản (để thứ tự môn học trong ngày mượt
+     hơn) — Claude tính lại chính xác theo đúng thứ tự thầy nhắn, mô phỏng thử + kiểm định đủ
+     8 tiêu chí trước khi ghi file thật.
+   - Quy trình: thầy nhờ đề xuất → Claude chỉ đề xuất (chưa sửa gì) → thầy thống nhất + chỉnh
+     chi tiết bằng lời nhắn → Claude tự áp dụng trực tiếp vào `initial_schedule.json` (không
+     cần thầy xuất JSON, vì giá trị đã biết chính xác 100% qua lời nhắn) → kiểm định → commit/
+     push/publish như quy trình chuẩn.
+   - Kết quả: **hết sạch cả 5 khung giờ trùng phòng máy**, chỉ đổi 5/29 lớp, không lệch quota,
+     không trùng GV.
 
 0000000. **v3.30 (2026-08-24, phiên sau khi thầy chuyển từ máy #3 sang máy #1/#2):**
    - **Sự cố git index bất thường trước khi làm việc:** `git status` báo có thay đổi vừa
