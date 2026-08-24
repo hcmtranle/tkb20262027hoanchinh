@@ -3135,9 +3135,9 @@
     },
     "T3": {
       "1": {
-        "subject": "TH",
-        "teacher_id": "t_th_thai",
-        "teacher_name": "Thầy Thái (Tin học)",
+        "subject": "TV",
+        "teacher_id": "gvcn_3_4",
+        "teacher_name": "Cô Uyên (3.4)",
         "isCustom": true
       },
       "2": {
@@ -3158,13 +3158,13 @@
         "isCustom": true
       },
       "5": {
-        "subject": "TV",
+        "subject": "Toán",
         "teacher_id": "gvcn_3_4",
         "teacher_name": "Cô Uyên (3.4)",
         "isCustom": true
       },
       "6": {
-        "subject": "Toán",
+        "subject": "CN",
         "teacher_id": "gvcn_3_4",
         "teacher_name": "Cô Uyên (3.4)",
         "isCustom": true
@@ -3221,9 +3221,9 @@
         "isCustom": true
       },
       "8": {
-        "subject": "Tự học",
-        "teacher_id": "gvcn_3_4",
-        "teacher_name": "Cô Uyên (3.4)",
+        "subject": "TH",
+        "teacher_id": "t_th_thai",
+        "teacher_name": "Thầy Thái (Tin học)",
         "isCustom": true
       }
     },
@@ -3285,14 +3285,16 @@
         "teacher_name": "Cô Trang (TA)"
       },
       "3": {
-        "subject": "Toán",
+        "subject": "TV",
         "teacher_id": "gvcn_3_4",
-        "teacher_name": "Cô Uyên (3.4)"
+        "teacher_name": "Cô Uyên (3.4)",
+        "isCustom": true
       },
       "4": {
-        "subject": "CN",
+        "subject": "Toán",
         "teacher_id": "gvcn_3_4",
-        "teacher_name": "Cô Uyên (3.4)"
+        "teacher_name": "Cô Uyên (3.4)",
+        "isCustom": true
       },
       "5": {
         "subject": "NT(MT)",
@@ -3300,15 +3302,16 @@
         "teacher_name": "Cô Uyên (3.4)"
       },
       "6": {
-        "subject": "TV",
+        "subject": "HĐTN(SHL)",
         "teacher_id": "gvcn_3_4",
         "teacher_name": "Cô Uyên (3.4)",
         "isCustom": true
       },
       "7": {
-        "subject": "HĐTN(SHL)",
+        "subject": "Tự học",
         "teacher_id": "gvcn_3_4",
-        "teacher_name": "Cô Uyên (3.4)"
+        "teacher_name": "Cô Uyên (3.4)",
+        "isCustom": true
       },
       "8": {
         "subject": "CLB Toán TD",
