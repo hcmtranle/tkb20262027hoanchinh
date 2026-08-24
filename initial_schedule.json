@@ -3121,15 +3121,16 @@
         "teacher_name": "GV STEM (2)"
       },
       "7": {
-        "subject": "ĐĐ",
-        "teacher_id": "gvcn_3_4",
-        "teacher_name": "Cô Uyên (3.4)",
+        "subject": "TA",
+        "teacher_id": "t_ta_trang",
+        "teacher_name": "Cô Trang (TA)",
         "isCustom": true
       },
       "8": {
-        "subject": "Tự học",
-        "teacher_id": "gvcn_3_4",
-        "teacher_name": "Cô Uyên (3.4)"
+        "subject": "TA",
+        "teacher_id": "t_ta_trang",
+        "teacher_name": "Cô Trang (TA)",
+        "isCustom": true
       }
     },
     "T3": {
@@ -3163,15 +3164,16 @@
         "isCustom": true
       },
       "6": {
-        "subject": "TV",
+        "subject": "Toán",
         "teacher_id": "gvcn_3_4",
         "teacher_name": "Cô Uyên (3.4)",
         "isCustom": true
       },
       "7": {
-        "subject": "Toán",
+        "subject": "ĐĐ",
         "teacher_id": "gvcn_3_4",
-        "teacher_name": "Cô Uyên (3.4)"
+        "teacher_name": "Cô Uyên (3.4)",
+        "isCustom": true
       },
       "8": {
         "subject": "Tự học",
@@ -3213,22 +3215,24 @@
         "teacher_name": "GV TA-TK (1)"
       },
       "7": {
-        "subject": "TA",
-        "teacher_id": "t_ta_trang",
-        "teacher_name": "Cô Trang (TA)",
+        "subject": "HĐTN(CĐ)",
+        "teacher_id": "gvcn_3_4",
+        "teacher_name": "Cô Uyên (3.4)",
         "isCustom": true
       },
       "8": {
-        "subject": "TA",
-        "teacher_id": "t_ta_trang",
-        "teacher_name": "Cô Trang (TA)"
+        "subject": "Tự học",
+        "teacher_id": "gvcn_3_4",
+        "teacher_name": "Cô Uyên (3.4)",
+        "isCustom": true
       }
     },
     "T5": {
       "1": {
-        "subject": "Toán",
+        "subject": "TV",
         "teacher_id": "gvcn_3_4",
-        "teacher_name": "Cô Uyên (3.4)"
+        "teacher_name": "Cô Uyên (3.4)",
+        "isCustom": true
       },
       "2": {
         "subject": "GDTC",
@@ -3241,7 +3245,7 @@
         "teacher_name": "Cô Châu (Âm nhạc)"
       },
       "4": {
-        "subject": "HĐTN(CĐ)",
+        "subject": "Toán",
         "teacher_id": "gvcn_3_4",
         "teacher_name": "Cô Uyên (3.4)",
         "isCustom": true
