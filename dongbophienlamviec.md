@@ -20,15 +20,22 @@ thêm chỗ khác dù "tiện thể".
 
 ## 1. TRẠNG THÁI HIỆN TẠI
 
-- **Phiên bản đang chạy chính thức:** v3.31
+- **Phiên bản đang chạy chính thức:** v3.32
 - **3 nơi đã đồng bộ khớp nhau:**
-  - GitHub: `github.com/hcmtranle/tkb20262027hoanchinh` — commit `548cdaf`
-  - Artifact chính: `https://claude.ai/code/artifact/8552c45d-c843-4f04-aa02-ac0ed341b2b6` — đã publish lại bản mới nhất (v3.31)
+  - GitHub: `github.com/hcmtranle/tkb20262027hoanchinh` — commit `aa06191`
+  - Artifact chính: `https://claude.ai/code/artifact/8552c45d-c843-4f04-aa02-ac0ed341b2b6` — đã publish lại bản mới nhất (v3.32)
   - Netlify: tự build lại từ GitHub (không cần thao tác gì thêm)
 - **Dữ liệu:** 29 lớp, 57 giáo viên, 1100 ô tiết học (con số "1098" ghi ở bản cũ của file này đã
   lỗi thời — v3.19 đã điền đủ lại 2 ô thiếu ở lớp 5.1, về đúng 1100)
 
 ## 2. NHỮNG GÌ ĐÃ HOÀN THÀNH (tóm tắt các đợt lớn, mới nhất trước)
+
+000000000. **v3.32 (2026-08-25):** thầy nhờ điều chỉnh thêm 1 lớp (1.3) — chiều Thứ 6 đổi thứ
+   tự thành TV-HĐTN(SHL)-Tin học (xoay vòng nội bộ, sáng giữ nguyên). Cùng đợt: thầy nói
+   **"hy vọng đây là lần sửa cuối của Học kỳ 1, Học kỳ 2 sẽ khác"** — xem thêm ghi chú mốc học
+   kỳ trong bộ nhớ Claude (`tkb-du-an-tong-quan.md`). Cũng hỏi lại về nút In không hoạt động
+   trên Win/Mac — thầy xác nhận **đã in được bình thường rồi** (fix v3.29 vẫn ổn), không cần
+   sửa gì thêm.
 
 00000000. **v3.31 (2026-08-24) — hết sạch trùng phòng máy, KHÔNG qua JSON, Claude tự thực hiện
    trực tiếp theo lệnh chat của thầy:**
