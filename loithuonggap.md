@@ -175,6 +175,21 @@ duyệt (đây là tùy chọn phía người dùng trong hộp thoại in, ngo�
 chỉ có thể hướng dẫn thầy tự tắt nếu muốn trang in hoàn toàn sạch (giống bài học #12 về
 `@page size`: trình duyệt luôn có tiếng nói cuối cùng).
 
+## 25. Khi câu lệnh của thầy không khớp dữ liệu thực tế (VD nhầm GV/lớp tham chiếu) — hỏi lại ngay, đừng đoán; thầy có thể tự tính lại và gửi thẳng JSON
+
+**Bối cảnh (v3.35-v3.36):** thầy nhắn "Lớp 3.6 em chuyển thành GV-TA(BN)_2 (dưới lớp 2.4)" —
+tra dữ liệu thấy 2 điểm không khớp: lớp 3.6 vốn đã dùng đúng GV TA-BN (2) rồi (không cần đổi
+GV), còn lớp 2.4 lại đang dùng GV TA-BN (1) khác hẳn. Câu lệnh mơ hồ đến mức không thể suy luận
+an toàn ý thầy muốn dời sang slot nào. Đã dùng `AskUserQuestion` hỏi lại rõ, nêu đúng dữ liệu
+tra được kèm 2-3 phương án cụ thể, thay vì tự chọn 1 phương án rồi làm liều.
+
+**Kết quả:** thầy không trả lời trực tiếp câu hỏi mà tự tính toán lại phương án (không đụng
+Âm nhạc, không đụng TA(BN)) rồi gửi thẳng 1 file JSON đầy đủ toàn trường. Khi nhận JSON như vậy,
+**luôn diff với `initial_schedule.json` hiện tại trước** (không đọc thủ công file lớn) để xác
+định đúng phạm vi thầy thực sự đổi — ở đây diff cho thấy JSON chỉ khác đúng 11 ô ở 2 lớp (3.4,
+3.6), 27 lớp còn lại y hệt, khớp với lời thầy dặn "chỉ cập nhật 2 lớp 3 thôi". Diff-trước-khi-
+đọc còn giúp phát hiện ngay nếu thầy gửi nhầm file cũ hoặc file có thay đổi ngoài ý muốn.
+
 ## 24. Khi thầy tự chốt phương án dời GV bộ môn/liên kết — vẫn PHẢI tự kiểm tra chéo lịch GV, đừng tin tưởng tuyệt đối
 
 **Bối cảnh (v3.34):** thầy tự đề xuất cụ thể dời TA(BN) lớp 3.6 sang Thứ 2 tiết 5-6. Khi kiểm

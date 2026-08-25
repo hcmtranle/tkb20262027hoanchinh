@@ -5,7 +5,7 @@
 > kỳ phiên Claude nào khác cùng tài khoản. Claude đọc xong sẽ nắm ngay bối cảnh, không cần
 > giải thích lại từ đầu.
 >
-> **Cập nhật lần cuối:** 2026-08-24 (phiên làm việc máy #1 — MacBook, thầy có mở song song máy #3)
+> **Cập nhật lần cuối:** 2026-08-25 (phiên làm việc máy #1 — MacBook)
 
 ---
 
@@ -20,15 +20,34 @@ thêm chỗ khác dù "tiện thể".
 
 ## 1. TRẠNG THÁI HIỆN TẠI
 
-- **Phiên bản đang chạy chính thức:** v3.34
+- **Phiên bản đang chạy chính thức:** v3.36
 - **3 nơi đã đồng bộ khớp nhau:**
-  - GitHub: `github.com/hcmtranle/tkb20262027hoanchinh` — commit `33cc808`
-  - Artifact chính: `https://claude.ai/code/artifact/8552c45d-c843-4f04-aa02-ac0ed341b2b6` — đã publish lại bản mới nhất (v3.34)
+  - GitHub: `github.com/hcmtranle/tkb20262027hoanchinh` — commit `29ac255`
+  - Artifact chính: `https://claude.ai/code/artifact/8552c45d-c843-4f04-aa02-ac0ed341b2b6` — đã publish lại bản mới nhất (v3.36)
   - Netlify: tự build lại từ GitHub (không cần thao tác gì thêm)
 - **Dữ liệu:** 29 lớp, 57 giáo viên, 1100 ô tiết học (con số "1098" ghi ở bản cũ của file này đã
   lỗi thời — v3.19 đã điền đủ lại 2 ô thiếu ở lớp 5.1, về đúng 1100)
 
 ## 2. NHỮNG GÌ ĐÃ HOÀN THÀNH (tóm tắt các đợt lớn, mới nhất trước)
+
+000000000000. **v3.35 + v3.36 (2026-08-25) — Hoàn tất nốt 2 lớp 3.4 và 3.6 còn treo từ v3.34:**
+   - **v3.35 — Lớp 3.4 (Tin học):** thầy chốt dời TH sang Thứ Hai tiết 3 (không dùng tiết 7 vì
+     tiết 7 đã bị TA chiếm từ v3.34 và Thầy Thái cũng bận tiết 7 dạy 5.4). Hoán đổi TH(Thứ 3
+     tiết 1) ↔ TV(Thứ Hai tiết 3) — Cô Uyên (GVCN) nhận lại TV, Thầy Thái nhận TH đúng slot
+     rảnh. Đã kiểm định: phòng máy tiết 3 Thứ Hai chỉ có 5.2(IC3)+3.4(TH) = 2 lớp, không vượt.
+   - **Lớp 3.6 — vướng mắc "chuyển GV-TA(BN)_2 (dưới lớp 2.4)":** câu lệnh của thầy không khớp
+     dữ liệu thực tế (2.4 dùng GV TA-BN (1), không phải (2); lớp 3.6 vốn đã dùng đúng GV
+     TA-BN (2) rồi) — đã hỏi lại thầy, thầy tự tính toán lại và gửi JSON trực tiếp ở v3.36.
+   - **v3.36 — Lớp 3.4 + 3.6 (theo JSON `tkb_nak_2026-2027 (258).json`):**
+     - Lớp 3.4: hoán vị TV/Toán/HĐTN(CĐ) giữa Thứ 3 và Thứ 5 (né hẳn Âm nhạc — tránh đúng điểm
+       trùng GV Cô Châu mà Claude đã báo cáo trước đó khi mô phỏng thứ tự gốc thầy đưa).
+     - Lớp 3.6: dời TA(T-K) từ Thứ 4 tiết 7-8 sang Thứ 2 tiết 5-6 (GV TA-TK (1) rảnh hoàn toàn ở
+       đó), giải quyết dứt điểm "4 tiết TA/ngày" ở Thứ 4 (từng có TA(BN)+TA(T-K) cùng ngày).
+       Giữ nguyên TA(BN) như thầy dặn ("Lớp 3.6 để nguyên đó thầy xem").
+     - Đã so khớp: JSON thầy gửi chỉ khác đúng 11 ô ở 2 lớp 3.4/3.6, 27 lớp còn lại y hệt bản
+       cũ — kiểm định đủ 8 tiêu chí sạch, không hồi quy, không trùng GV/phòng máy.
+   - **Kết quả:** toàn bộ chuỗi rà soát "TA/TH/IC3 cùng ngày" và "4 tiết TA/ngày" khởi đầu từ
+     phản ánh của GV lớp 3 (v3.34) coi như đã xử lý xong các điểm thầy chốt cụ thể.
 
 00000000000. **v3.34 (2026-08-25) — GV lớp 3 phản ánh "1 ngày vừa TA vừa TH/IC3", phát hiện thêm
    vấn đề "4 tiết TA liền/ngày" (3.4, 3.6, 5.2):**
