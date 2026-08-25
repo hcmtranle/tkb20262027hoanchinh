@@ -569,20 +569,20 @@
         "teacher_name": "Cô Hân (1.3)"
       },
       "5": {
-        "subject": "TH",
-        "teacher_id": "t_pht_tao",
-        "teacher_name": "Thầy Tạo (PHT)",
-        "isCustom": true
-      },
-      "6": {
         "subject": "TV",
         "teacher_id": "gvcn_1_3",
         "teacher_name": "Cô Hân (1.3)"
       },
-      "7": {
+      "6": {
         "subject": "HĐTN(SHL)",
         "teacher_id": "gvcn_1_3",
         "teacher_name": "Cô Hân (1.3)"
+      },
+      "7": {
+        "subject": "TH",
+        "teacher_id": "t_pht_tao",
+        "teacher_name": "Thầy Tạo (PHT)",
+        "isCustom": true
       }
     }
   },
