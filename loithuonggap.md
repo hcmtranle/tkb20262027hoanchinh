@@ -175,6 +175,24 @@ duyệt (đây là tùy chọn phía người dùng trong hộp thoại in, ngo�
 chỉ có thể hướng dẫn thầy tự tắt nếu muốn trang in hoàn toàn sạch (giống bài học #12 về
 `@page size`: trình duyệt luôn có tiếng nói cuối cùng).
 
+## 24. Khi thầy tự chốt phương án dời GV bộ môn/liên kết — vẫn PHẢI tự kiểm tra chéo lịch GV, đừng tin tưởng tuyệt đối
+
+**Bối cảnh (v3.34):** thầy tự đề xuất cụ thể dời TA(BN) lớp 3.6 sang Thứ 2 tiết 5-6. Khi kiểm
+tra lại, phát hiện GV đó (t_tabn_2) **đang dạy lớp KHÁC (3.2) đúng slot Thứ 2 tiết 5-6** — nếu
+làm theo sẽ tạo trùng GV thật. Thầy không có đủ thông tin lịch dạy TOÀN TRƯỜNG của từng GV liên
+kết (họ dạy nhiều lớp khác nhau) nên khó tự kiểm tra hết bằng mắt.
+
+**Quy tắc:** dù thầy đã "chốt" rất cụ thể (ngày/tiết/lớp rõ ràng), vẫn LUÔN tự kiểm tra lại lịch
+GV liên quan trên TOÀN TRƯỜNG trước khi ghi file — không tự tin phương án của thầy chắc chắn đã
+loại trừ hết xung đột, vì thầy không có công cụ tra cứu lịch toàn trường theo GV như mình.
+
+**Bài học kỹ thuật đi kèm:** khi tự động tìm slot thay thế cho 1 ô cần dời, phải kiểm tra AN
+TOÀN THEO CẢ 2 CHIỀU của phép hoán đổi — không chỉ "ô đang muốn đưa đến có phù hợp cho GV mới
+không", mà còn "môn đang bị đẩy NGƯỢC LẠI vị trí cũ có làm GV của nó (nếu là GV bộ môn, không
+phải GVCN) trùng lịch nơi khác không". Cách an toàn tuyệt đối: chỉ hoán đổi với ô do CHÍNH
+GVCN lớp đó dạy (GVCN chỉ có đúng 1 lớp, không bao giờ tự trùng lịch với ai) — nếu không đủ chỗ
+GVCN mới cân nhắc phương án phức tạp hơn kèm kiểm tra chéo kỹ hơn.
+
 ## 23. Quy trình mới đã dùng thành công: Claude tự sửa `initial_schedule.json` trực tiếp theo lời nhắn của thầy — không cần JSON — khi giá trị đã biết chính xác 100%
 
 **Bối cảnh (v3.31):** thầy nhờ Claude *chỉ đọc/quét/đề xuất* (không tự sửa), Claude đề xuất

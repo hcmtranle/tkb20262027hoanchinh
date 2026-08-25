@@ -20,15 +20,32 @@ thêm chỗ khác dù "tiện thể".
 
 ## 1. TRẠNG THÁI HIỆN TẠI
 
-- **Phiên bản đang chạy chính thức:** v3.33
+- **Phiên bản đang chạy chính thức:** v3.34
 - **3 nơi đã đồng bộ khớp nhau:**
-  - GitHub: `github.com/hcmtranle/tkb20262027hoanchinh` — commit `4c16eaf`
-  - Artifact chính: `https://claude.ai/code/artifact/8552c45d-c843-4f04-aa02-ac0ed341b2b6` — đã publish lại bản mới nhất (v3.33)
+  - GitHub: `github.com/hcmtranle/tkb20262027hoanchinh` — commit `33cc808`
+  - Artifact chính: `https://claude.ai/code/artifact/8552c45d-c843-4f04-aa02-ac0ed341b2b6` — đã publish lại bản mới nhất (v3.34)
   - Netlify: tự build lại từ GitHub (không cần thao tác gì thêm)
 - **Dữ liệu:** 29 lớp, 57 giáo viên, 1100 ô tiết học (con số "1098" ghi ở bản cũ của file này đã
   lỗi thời — v3.19 đã điền đủ lại 2 ô thiếu ở lớp 5.1, về đúng 1100)
 
 ## 2. NHỮNG GÌ ĐÃ HOÀN THÀNH (tóm tắt các đợt lớn, mới nhất trước)
+
+00000000000. **v3.34 (2026-08-25) — GV lớp 3 phản ánh "1 ngày vừa TA vừa TH/IC3", phát hiện thêm
+   vấn đề "4 tiết TA liền/ngày" (3.4, 3.6, 5.2):**
+   - Rà soát toàn trường: 18 lớp có TA+TH cùng ngày, 5 lớp TA+IC3 cùng ngày, 3 lớp có TA dồn
+     4 tiết/ngày (2 buổi TA khác nhau xếp liền nhau). Đề xuất phương án minh bạch (13/18 giải
+     quyết an toàn tuyệt đối bằng cách chỉ hoán đổi với ô do GVCN dạy) — **CHƯA ÁP DỤNG**, chỉ
+     đề xuất, chờ thầy quyết định.
+   - Thầy tự chốt chi tiết cho 3 lớp (3.4, 3.1, 3.6) qua lời nhắn — đã áp dụng **3.4** (hoán
+     đổi TA Thứ 4 tiết 7-8 ↔ ĐĐ/Tự học Thứ 2 tiết 7-8) và **3.1** (xoay vòng TA(T-K) Thứ 4
+     tiết 1-2 ↔ CN/CLB KNS Thứ 2 tiết 7-8, cộng dồn chuyển TV/Toán/HĐTN(CĐ)/Tự học nội bộ
+     Thứ 4). Đã kiểm định đủ 8 tiêu chí sạch.
+   - **Lớp 3.6: PHÁT HIỆN & DỪNG LẠI** — yêu cầu của thầy (dời TA(BN) vào Thứ 2 tiết 5-6) sẽ
+     làm GV t_tabn_2 **trùng lịch thật sự** với lớp 3.2 đang học đúng slot đó. Chưa áp dụng,
+     đã báo lại thầy để chọn slot khác.
+   - **Lớp 3.4 — phần Tin học:** thầy muốn dời TH sang Thứ Hai nhưng để "em xem và đề xuất
+     sau" — đã tính: Thầy Thái chỉ rảnh Thứ Hai tiết 3 (bận tiết 2,4,7), đề xuất hoán đổi
+     TH(Thứ 3 tiết 1) ↔ TV(Thứ Hai tiết 3) — **CHƯA ÁP DỤNG**, chờ thầy xác nhận.
 
 0000000000. **v3.33 (2026-08-25):** thầy báo lớp 1.3 "còn chưa hợp lý" ngay sau v3.32 — sửa lại
    Thứ 2 (HĐTN(CC)-Toán-ÂN-GDTC-TV-TV-TNXH) và Thứ 5 (TV-TV-TV-TNXH-ĐĐ-HĐTN(CĐ)-CLB Toán TD),
