@@ -20,15 +20,20 @@ thêm chỗ khác dù "tiện thể".
 
 ## 1. TRẠNG THÁI HIỆN TẠI
 
-- **Phiên bản đang chạy chính thức:** v3.32
+- **Phiên bản đang chạy chính thức:** v3.33
 - **3 nơi đã đồng bộ khớp nhau:**
-  - GitHub: `github.com/hcmtranle/tkb20262027hoanchinh` — commit `aa06191`
-  - Artifact chính: `https://claude.ai/code/artifact/8552c45d-c843-4f04-aa02-ac0ed341b2b6` — đã publish lại bản mới nhất (v3.32)
+  - GitHub: `github.com/hcmtranle/tkb20262027hoanchinh` — commit `4c16eaf`
+  - Artifact chính: `https://claude.ai/code/artifact/8552c45d-c843-4f04-aa02-ac0ed341b2b6` — đã publish lại bản mới nhất (v3.33)
   - Netlify: tự build lại từ GitHub (không cần thao tác gì thêm)
 - **Dữ liệu:** 29 lớp, 57 giáo viên, 1100 ô tiết học (con số "1098" ghi ở bản cũ của file này đã
   lỗi thời — v3.19 đã điền đủ lại 2 ô thiếu ở lớp 5.1, về đúng 1100)
 
 ## 2. NHỮNG GÌ ĐÃ HOÀN THÀNH (tóm tắt các đợt lớn, mới nhất trước)
+
+0000000000. **v3.33 (2026-08-25):** thầy báo lớp 1.3 "còn chưa hợp lý" ngay sau v3.32 — sửa lại
+   Thứ 2 (HĐTN(CC)-Toán-ÂN-GDTC-TV-TV-TNXH) và Thứ 5 (TV-TV-TV-TNXH-ĐĐ-HĐTN(CĐ)-CLB Toán TD),
+   các ngày khác giữ nguyên. Chỉ 3 ô đổi (hoán vị Toán/ĐĐ/TV giữa Thứ 2 và Thứ 5), kiểm định đủ
+   8 tiêu chí sạch.
 
 000000000. **v3.32 (2026-08-25):** thầy nhờ điều chỉnh thêm 1 lớp (1.3) — chiều Thứ 6 đổi thứ
    tự thành TV-HĐTN(SHL)-Tin học (xoay vòng nội bộ, sáng giữ nguyên). Cùng đợt: thầy nói
