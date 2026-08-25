@@ -3134,7 +3134,7 @@
     },
     "T3": {
       "1": {
-        "subject": "TV",
+        "subject": "Toán",
         "teacher_id": "gvcn_3_4",
         "teacher_name": "Cô Uyên (3.4)",
         "isCustom": true
@@ -3169,9 +3169,10 @@
         "isCustom": true
       },
       "7": {
-        "subject": "Toán",
+        "subject": "HĐTN(CĐ)",
         "teacher_id": "gvcn_3_4",
-        "teacher_name": "Cô Uyên (3.4)"
+        "teacher_name": "Cô Uyên (3.4)",
+        "isCustom": true
       },
       "8": {
         "subject": "Tự học",
@@ -3226,9 +3227,10 @@
     },
     "T5": {
       "1": {
-        "subject": "Toán",
+        "subject": "TV",
         "teacher_id": "gvcn_3_4",
-        "teacher_name": "Cô Uyên (3.4)"
+        "teacher_name": "Cô Uyên (3.4)",
+        "isCustom": true
       },
       "2": {
         "subject": "GDTC",
@@ -3241,7 +3243,7 @@
         "teacher_name": "Cô Châu (Âm nhạc)"
       },
       "4": {
-        "subject": "HĐTN(CĐ)",
+        "subject": "Toán",
         "teacher_id": "gvcn_3_4",
         "teacher_name": "Cô Uyên (3.4)",
         "isCustom": true
@@ -3571,15 +3573,15 @@
         "isCustom": true
       },
       "5": {
-        "subject": "TNXH",
-        "teacher_id": "gvcn_3_6",
-        "teacher_name": "Cô Thảo (3.6)",
+        "subject": "TA(T-K)",
+        "teacher_id": "t_tatk_1",
+        "teacher_name": "GV TA-TK (1)",
         "isCustom": true
       },
       "6": {
-        "subject": "CN",
-        "teacher_id": "gvcn_3_6",
-        "teacher_name": "Cô Thảo (3.6)",
+        "subject": "TA(T-K)",
+        "teacher_id": "t_tatk_1",
+        "teacher_name": "GV TA-TK (1)",
         "isCustom": true
       },
       "7": {
@@ -3679,14 +3681,16 @@
         "teacher_name": "GV TA-BN (2)"
       },
       "7": {
-        "subject": "TA(T-K)",
-        "teacher_id": "t_tatk_1",
-        "teacher_name": "GV TA-TK (1)"
+        "subject": "TNXH",
+        "teacher_id": "gvcn_3_6",
+        "teacher_name": "Cô Thảo (3.6)",
+        "isCustom": true
       },
       "8": {
-        "subject": "TA(T-K)",
-        "teacher_id": "t_tatk_1",
-        "teacher_name": "GV TA-TK (1)"
+        "subject": "Tự học",
+        "teacher_id": "gvcn_3_6",
+        "teacher_name": "Cô Thảo (3.6)",
+        "isCustom": true
       }
     },
     "T5": {
@@ -3709,7 +3713,7 @@
         "isCustom": true
       },
       "4": {
-        "subject": "TNXH",
+        "subject": "ĐĐ",
         "teacher_id": "gvcn_3_6",
         "teacher_name": "Cô Thảo (3.6)",
         "isCustom": true
@@ -3726,7 +3730,7 @@
         "isCustom": true
       },
       "7": {
-        "subject": "Tự học",
+        "subject": "CN",
         "teacher_id": "gvcn_3_6",
         "teacher_name": "Cô Thảo (3.6)",
         "isCustom": true
@@ -3764,7 +3768,7 @@
         "isCustom": true
       },
       "5": {
-        "subject": "ĐĐ",
+        "subject": "TNXH",
         "teacher_id": "gvcn_3_6",
         "teacher_name": "Cô Thảo (3.6)",
         "isCustom": true
