@@ -404,7 +404,7 @@
         "teacher_name": "Cô Yến Nhi (TPT)"
       },
       "2": {
-        "subject": "ĐĐ",
+        "subject": "Toán",
         "teacher_id": "gvcn_1_3",
         "teacher_name": "Cô Hân (1.3)"
       },
@@ -521,7 +521,7 @@
         "teacher_name": "Cô Hân (1.3)"
       },
       "3": {
-        "subject": "Toán",
+        "subject": "TV",
         "teacher_id": "gvcn_1_3",
         "teacher_name": "Cô Hân (1.3)"
       },
@@ -531,7 +531,7 @@
         "teacher_name": "Cô Hân (1.3)"
       },
       "5": {
-        "subject": "TV",
+        "subject": "ĐĐ",
         "teacher_id": "gvcn_1_3",
         "teacher_name": "Cô Hân (1.3)"
       },
